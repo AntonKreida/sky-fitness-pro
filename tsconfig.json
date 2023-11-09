@@ -22,5 +22,9 @@
   },
   "include": [
     "src"
-  ]
+  ],
+  "files": [
+    "module.d.ts",
+  ],
+  "extends": "./tsconfig.paths.json",
 }

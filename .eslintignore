@@ -1,0 +1,16 @@
+# dependencies
+node_modules
+
+# public & assets
+public
+
+# craco
+craco.config.js
+
+#ts
+tsconfig.json
+tsconfig-paths.json
+
+#stylelint
+.stylelintrc.js
+
