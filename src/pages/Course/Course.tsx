@@ -1,6 +1,4 @@
 import React from 'react';
-
-
 import { ReactComponent as BannerYoga } from '@assets/images/bannerYoga.svg';
 import { ReactComponent as HandPhone } from '@assets/images/handPhone.svg';
 import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
