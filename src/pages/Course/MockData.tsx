@@ -5,12 +5,12 @@ import { ReactComponent as BannerStepAirobic } from '@assets/images/bannerStepAi
 import { ReactComponent as BannerStretching } from '@assets/images/bannerStretching.svg';
 
 
-export interface Ifitting {
+interface Ifitting {
   number: number;
   text: string;
 }
 
-export interface ICourse {
+interface ICourse {
   _id: string;
   img: object;
   description: string;

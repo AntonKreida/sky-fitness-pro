@@ -6,7 +6,7 @@ import { ReactComponent as HandPhone } from '@assets/images/handPhone.svg';
 import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
 
 import * as S from './Course.styled';
-import { MockData } from './mockData'; // в этом файле моковые данные для всех инфо-страничек, оттуда же берем картинки как компоненты
+import { MockData } from './MockData';
 
 
 export const Course = () => {
