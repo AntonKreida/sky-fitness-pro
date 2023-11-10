@@ -1,15 +1,15 @@
-import { Course } from './pages/Course/Course';
+import { BrowserRouter } from 'react-router-dom';
+
 import { GlobalStyle } from './style/global/global';
 import './style/fonts/font.css';
+import { AppRouter } from './router';
 
 
 const App = () => (
-  <div>
+  <BrowserRouter>
     <GlobalStyle />
-    <Course />
-  </div>
-
-
+    <AppRouter />
+  </BrowserRouter>
 );
 
 export default App;

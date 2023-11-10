@@ -11,6 +11,7 @@ import { MockData } from './MockData';
 
 export const Course = () => {
   const pageNumber = 0;
+  console.log(MockData[pageNumber].img);
 
   return (
     <S.CourseMain>
