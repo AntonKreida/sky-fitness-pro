@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         color: rgb(0, 0, 0);
         font-size: 1.5rem;
         line-height: 2rem;
+        overflow-x: hidden;
     }
 
     * {

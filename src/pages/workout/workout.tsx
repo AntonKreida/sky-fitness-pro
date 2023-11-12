@@ -1,1 +1,6 @@
-export const Workout = () => <div />;
+import { MainContent } from '@components/';
+
+
+export const Workout = () => (
+  <MainContent />
+);
