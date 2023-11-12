@@ -44,9 +44,6 @@
             "@redux/": [
                 "./src/redux"
             ],
-            "@routers/": [
-                "./src/routers"
-            ]
         }
     },
 }

@@ -3,13 +3,14 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
 
-    html,
-    body{
+    html {
         font-family: Stratos-Regular;
         background: rgb(250, 250, 250); 
     }
 
     body {
+        height: 100vh;
+        width: 100vw;
         color: rgb(0, 0, 0);
         font-size: 1.5rem;
         line-height: 2rem;
@@ -51,9 +52,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     #root {
-        min-height: 100vh;
-        display: flex;
-        flex-flow: column;
-        align-items: center;
+        height: 100%;
+        width: 100%;
     }
 `;

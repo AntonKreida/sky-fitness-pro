@@ -1,7 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { AppRouter } from '@routers/';
-
+import { AppRouter } from './router';
 import './style/fonts/font.css';
 import { GlobalStyle } from './style/global/global';
 
