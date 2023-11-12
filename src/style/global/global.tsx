@@ -4,8 +4,7 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyle = createGlobalStyle`
 
     html,
-    body
-    {
+    body{
         font-family: Stratos-Regular;
         background: rgb(250, 250, 250); 
     }

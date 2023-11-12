@@ -1,15 +1,13 @@
-import React from 'react';
 import { ReactComponent as BannerYoga } from '@assets/images/bannerYoga.svg';
 import { ReactComponent as HandPhone } from '@assets/images/handPhone.svg';
 import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
 
-import * as S from './Course.styled';
-import { MockData } from './MockData';
+import * as S from './course.styled';
+import { MockData } from './lib';
 
 
 export const Course = () => {
   const pageNumber = 0;
-  console.log(MockData[pageNumber].img);
 
   return (
     <S.CourseMain>

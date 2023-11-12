@@ -22,6 +22,7 @@ module.exports = {
           '@api': './src/api',
           '@utils': './src/utils',
           '@redux': './src/redux',
+          '@routers': './src/routers',
         },
       },
     },

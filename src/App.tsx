@@ -1,8 +1,9 @@
 import { BrowserRouter } from 'react-router-dom';
 
-import { GlobalStyle } from './style/global/global';
+import { AppRouter } from '@routers/';
+
 import './style/fonts/font.css';
-import { AppRouter } from './router';
+import { GlobalStyle } from './style/global/global';
 
 
 const App = () => (
