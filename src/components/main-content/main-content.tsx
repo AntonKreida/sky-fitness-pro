@@ -35,6 +35,25 @@ export const MainContent = () => (
           <Styled.MainContentExerciseItem>Третье упражнение</Styled.MainContentExerciseItem>
         </Styled.MainContentExerciseList>
       </Styled.MainContentExercisesWrapper>
+
+      <Styled.MainContentProgressWrapper>
+        <Styled.MainContentProgressTitle>
+          Мои прогресс по тренировке:
+        </Styled.MainContentProgressTitle>
+
+        <Styled.MainContentProgressBarsWrapper>
+          <Styled.MainContentProgressBarItem>
+            <Styled.MainContentProgressBarName>
+              Наклонны:
+            </Styled.MainContentProgressBarName>
+            <Styled.MainContentProgressBarStrip>
+              <Styled.MainContentProgressBarValue />
+            </Styled.MainContentProgressBarStrip>
+          </Styled.MainContentProgressBarItem>
+        </Styled.MainContentProgressBarsWrapper>
+
+      </Styled.MainContentProgressWrapper>
+
     </Styled.MainContentWorkoutWrapper>
 
   </Styled.MainContentWrapper>
