@@ -15,7 +15,9 @@ export const HomePage = () => {
     }
   };
 
-console.log(CardsData);
+  const Card = () => {
+    alert('hi');
+  };
 
   return (
     <S.HomePage>
@@ -37,7 +39,10 @@ console.log(CardsData);
       </S.DescriptionContainer>
       <S.CardsContainer>
         { CardsData.map((card) => (
-          <S.CardImage key={ card._id } src={ card.path } />
+          <S.CardContainer key={ card._id } onClick={ Card }>
+            <S.CardImage src={ card.path } />
+            <S.CardTitle>{ card.title }</S.CardTitle>
+          </S.CardContainer>
         )) }
       </S.CardsContainer>
       <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>

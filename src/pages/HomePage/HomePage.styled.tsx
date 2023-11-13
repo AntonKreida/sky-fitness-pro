@@ -83,28 +83,15 @@ export const LoginButton = styled.button`
 `;
 
 export const CardsContainer = styled.div`
-  /* width: 1154px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 37px; */
-
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
-// export const CardContainer = styled.div`
-//     width: 360px;
-//     height: 480px;
-// `;
+export const CardContainer = styled.div`
+    position: relative;
+    cursor: pointer;
+`;
 
-// export const Card = styled.div`
-//   width: 360px;
-//   height: 480px;
-//   border-radius: 30px;
-//   background-color: rgba(255, 255, 255, 1);
-//   box-shadow: -10px 10px 15.998822212219238px 0px rgba(0, 0, 0, 0.1);
-//   box-shadow: 10px -10px 16px 0px rgba(0, 0, 0, 0.1);
-// `;
 
 export const CardImage = styled.img``;
 
@@ -113,6 +100,9 @@ export const CardTitle = styled.h1`
     font-weight: 800;
     line-height: 36.9px;
     letter-spacing: -0.5px;
+    position: absolute;
+    top: 55px;
+    left: 55px;
 `;
 
 export const Anchor = styled.button`
