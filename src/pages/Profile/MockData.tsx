@@ -4,7 +4,7 @@ import CardBodyflex from '../../assets/images/card-bodyflex.png';
 
 
 export const USER_NAME = 'Сергей';
-export const LOGIN = 'Логин: sergey.petrov96';
+export const LOGIN = 'Логин: sergey.petrov966';
 export const PASSWORD = 'Пароль: 4fkhdj880d';
 export const COURSES = [
   {
