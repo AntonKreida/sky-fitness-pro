@@ -14,6 +14,20 @@ export const GlobalStyle = createGlobalStyle`
         color: rgb(0, 0, 0);
         font-size: 1.5rem;
         line-height: 2rem;
+        scrollbar-width: 0;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #fff;
+            border-radius: 5px;
+        }
     }
 
     * {
