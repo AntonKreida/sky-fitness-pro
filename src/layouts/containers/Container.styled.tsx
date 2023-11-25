@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 
-const mixinMiniContainer = css`
+export const ContainerAuth = styled.div`
     width: 366px;
     min-height: 401px;
     margin-top: 100px;
@@ -11,13 +11,8 @@ const mixinMiniContainer = css`
     display: flex;
     flex-direction: column;
     align-items: center;
-`;
-
-export const ContainerAuth = styled.div`
-    ${mixinMiniContainer}
     gap: 20px;
 `;
-export const ContainerChangeData = styled.div`
-    ${mixinMiniContainer}
+export const ContainerChangeData = styled(ContainerAuth)`
     gap: 10px;
 `;
