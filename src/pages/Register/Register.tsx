@@ -1,7 +1,7 @@
-import { FormAuth } from '../../components/forms/FormAuth';
-import { ContainerAuth } from '../../layouts/containers/ContainerAuth';
-import { Wrapper } from '../../layouts/wrapper/Wrapper';
-import { ReactComponent as Logo } from '../../assets/images/logoBlack.svg';
+import { FormAuth } from '@/components/forms';
+import { ContainerAuth } from '@/layouts/containers';
+import { Wrapper } from '@/layouts/wrapper';
+import { ReactComponent as Logo } from '@/assets/images/logoBlack.svg';
 
 
 export const Register = () => (

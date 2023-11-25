@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 
+import { Login } from '@/pages/Login';
+import { Register } from '@/pages/Register';
+import { ChangeDataLogin, ChangeDataPassword } from '@/pages/ChangeData';
+
 import { Course } from './pages/Course/Course';
 import { HomePage } from './pages/HomePage/HomePage';
-import { Login } from './pages/Login/Login';
-import { Register } from './pages/Register/Register';
-import { ChangeDataLogin } from './pages/ChangeData/ChangeDataLogin';
-import { ChangeDataPassword } from './pages/ChangeData/ChangeDataPassword';
 
 
 export const AppRouter = () => (

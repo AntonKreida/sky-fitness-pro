@@ -1,9 +1,10 @@
-import { Wrapper } from '../../layouts/wrapper/Wrapper';
-import { ContainerChangeData } from '../../layouts/containers/ContainerChangeData';
-import { ReactComponent as Logo } from '../../assets/images/logoBlack.svg';
-import { FormAuth } from '../../components/forms/FormAuth';
-import { Input } from '../../shared/input/Input';
-import { Button } from '../../shared/button/Button';
+import { Wrapper } from '@/layouts/wrapper';
+import { ContainerChangeData } from '@/layouts/containers';
+import { ReactComponent as Logo } from '@/assets/images/logoBlack.svg';
+import { FormAuth } from '@/components/forms';
+import { Input } from '@/shared/input';
+import { Button } from '@/shared/button';
+
 import { ChangeDataText } from './ChangeData.styled';
 
 
