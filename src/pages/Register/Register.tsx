@@ -1,7 +1,7 @@
-import { FormAuth } from '@/components/forms';
-import { ContainerAuth } from '@/layouts/containers';
-import { Wrapper } from '@/layouts/wrapper';
-import { ReactComponent as Logo } from '@/assets/images/logoBlack.svg';
+import { FormAuth } from '@components/';
+import { ContainerAuth, Wrapper } from '@layouts/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { Input, Button } from '@shared/';
 
 
 export const Register = () => (
@@ -9,11 +9,11 @@ export const Register = () => (
     <ContainerAuth>
       <Logo />
       <FormAuth>
-        <input className="input" placeholder="Логин" type="text" />
-        <input className="input" placeholder="Пароль" type="password" />
-        <input className="input" placeholder="Повторите пароль" type="password" />
+        <Input placeholder="Логин" type="text" onChange={ (e) => console.log(e.target.value) } />
+        <Input placeholder="Пароль" type="password" onChange={ (e) => console.log(e.target.value) } />
+        <Input placeholder="Повторите пароль" type="password" onChange={ (e) => console.log(e.target.value) } />
       </FormAuth>
-      <button className="button" type="button">Зарегистрироваться</button>
+      <Button text="Зарегистрироваться" type="button" onClick={ (e) => console.log(`Click to ${e.target}`) } />
     </ContainerAuth>
   </Wrapper>
 );

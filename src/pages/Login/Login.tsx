@@ -1,7 +1,7 @@
-import { Wrapper } from '@/layouts/wrapper';
-import { ContainerAuth } from '@/layouts/containers';
-import { FormAuth } from '@/components/forms';
-import { ReactComponent as Logo } from '@/assets/images/logoBlack.svg';
+import { Button, Input } from '@shared/';
+import { FormAuth } from '@components/';
+import { ContainerAuth, Wrapper } from '@layouts/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
 
 import { ButtonReg } from './ui';
 
@@ -11,10 +11,10 @@ export const Login = () => (
     <ContainerAuth>
       <Logo />
       <FormAuth>
-        <input className="input" placeholder="Логин" type="text" />
-        <input className="input" placeholder="Пароль" type="password" />
+        <Input placeholder="Логин" type="text" onChange={ (e) => console.log(e.target.value) } />
+        <Input placeholder="Пароль" type="password" onChange={ (e) => console.log(e.target.value) } />
       </FormAuth>
-      <button type="button">Войти</button>
+      <Button text="Войти" type="button" onClick={ (e) => console.log(`Click to ${e.target}`) } />
       <ButtonReg />
     </ContainerAuth>
   </Wrapper>

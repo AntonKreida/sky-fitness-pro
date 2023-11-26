@@ -1,6 +1,14 @@
 import styled from 'styled-components';
 
 
+export const Container = styled.div`
+    width: 1160px;
+    margin: 0 auto;
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 75px;
+`;
 export const ContainerAuth = styled.div`
     width: 366px;
     min-height: 401px;
