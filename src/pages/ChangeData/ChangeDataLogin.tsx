@@ -1,10 +1,7 @@
-import { Input } from '@shared/input/Input';
-
-import { Wrapper } from '@/layouts/wrapper';
-import { ContainerChangeData } from '@/layouts/containers';
-import { ReactComponent as Logo } from '@/assets/images/logoBlack.svg';
-import { FormAuth } from '@/components/forms';
-import { Button } from '@/shared/button';
+import { Button, Input } from '@shared/';
+import { FormAuth } from '@components/';
+import { Wrapper, ContainerChangeData } from '@layouts/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
 
 import { ChangeDataText } from './ChangeData.styled';
 

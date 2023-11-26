@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ReactComponent as LogoWhite } from '@assets/images/logoWhite.svg';
 import { ReactComponent as SaleSticker } from '@assets/images/saleSticker.svg';
 
