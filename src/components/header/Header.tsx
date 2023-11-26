@@ -1,7 +1,8 @@
 import { FC } from 'react';
 
-import { ReactComponent as Logo } from '../../assets/images/logoBlack.svg';
-import { ReactComponent as HeaderArrow } from '../../assets/icons/profile-opener.svg';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { ReactComponent as HeaderArrow } from '@assets/icons/profile-opener.svg';
+
 import * as S from './Header.styled';
 
 

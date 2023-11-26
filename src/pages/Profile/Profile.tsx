@@ -1,7 +1,6 @@
-import { Wrapper } from '@/layouts/wrapper';
-import { Container } from '@/layouts/containers';
-import { Header } from '@/components/header';
-import { Button, ButtonGo } from '@/shared/button';
+import { Wrapper, Container } from '@layouts/';
+import { Header } from '@components/';
+import { Button, ButtonGo } from '@shared/';
 
 import * as S from './Profile.styled';
 import * as Mock from './MockData';

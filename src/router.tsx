@@ -1,10 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { Course } from './pages/Course/Course';
-import { HomePage } from './pages/HomePage/HomePage';
-import { Login } from './pages/Login/Login';
-import { Register } from './pages/Register/Register';
-import { Profile } from './pages/Profile/Profile';
+import {
+  Course,
+  HomePage,
+  Login,
+  Register,
+  ChangeDataLogin,
+  ChangeDataPassword,
+  Profile
+} from '@pages/';
 
 
 export const AppRouter = () => (
@@ -13,6 +17,8 @@ export const AppRouter = () => (
     <Route index element={ <HomePage /> } path="/sky-fitness-pro" />
     <Route element={ <Login /> } path="/sky-fitness-pro/login" />
     <Route element={ <Register /> } path="/sky-fitness-pro/register" />
+    <Route element={ <ChangeDataLogin /> } path="/sky-fitness-pro/change-login" />
+    <Route element={ <ChangeDataPassword /> } path="/sky-fitness-pro/change-password" />
     <Route element={ <Profile /> } path="/sky-fitness-pro/profile" />
   </Routes>
 );

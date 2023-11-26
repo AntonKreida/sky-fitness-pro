@@ -1,10 +1,9 @@
-import { Button } from '../../shared/button/Button';
-import { Input } from '../../shared/input/Input';
-import { FormAuth } from '../../components/forms/FormAuth';
-import { ContainerAuth } from '../../layouts/containers/ContainerAuth';
-import { Wrapper } from '../../layouts/wrapper/Wrapper';
-import { ReactComponent as Logo } from '../../assets/images/logoBlack.svg';
-import { ButtonReg } from './ui/ButtonToReg';
+import { Button, Input } from '@shared/';
+import { FormAuth } from '@components/';
+import { ContainerAuth, Wrapper } from '@layouts/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+
+import { ButtonReg } from './ui';
 
 
 export const Login = () => (

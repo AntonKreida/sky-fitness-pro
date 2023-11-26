@@ -21,3 +21,6 @@ export const ContainerAuth = styled.div`
     align-items: center;
     gap: 20px;
 `;
+export const ContainerChangeData = styled(ContainerAuth)`
+    gap: 10px;
+`;

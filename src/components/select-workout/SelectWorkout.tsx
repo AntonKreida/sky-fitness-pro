@@ -1,6 +1,7 @@
-import { ReactComponent as IconStatusOk } from '../../assets/icons/status-ok.svg';
+import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
+
 import * as S from './SelectWorkout.styled';
-import { WORKOUTS } from './MockData';
+import { WORKOUTS } from './lib/MockData';
 
 
 export const SelectWorkout = () => (
