@@ -1,3 +1,5 @@
+import { Button } from '../../shared/button/Button';
+import { Input } from '../../shared/input/Input';
 import { FormAuth } from '../../components/forms/FormAuth';
 import { ContainerAuth } from '../../layouts/containers/ContainerAuth';
 import { Wrapper } from '../../layouts/wrapper/Wrapper';
@@ -10,10 +12,10 @@ export const Login = () => (
     <ContainerAuth>
       <Logo />
       <FormAuth>
-        <input className="input" placeholder="Логин" type="text" />
-        <input className="input" placeholder="Пароль" type="password" />
+        <Input placeholder="Логин" type="text" onChange={ (e) => console.log(e.target.value) } />
+        <Input placeholder="Пароль" type="password" onChange={ (e) => console.log(e.target.value) } />
       </FormAuth>
-      <button type="button">Войти</button>
+      <Button text="Войти" type="button" onClick={ (e) => console.log(`Click to ${e.target}`) } />
       <ButtonReg />
     </ContainerAuth>
   </Wrapper>
