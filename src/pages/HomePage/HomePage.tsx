@@ -1,11 +1,18 @@
 import { ReactComponent as LogoWhite } from '@assets/images/logoWhite.svg';
 import { ReactComponent as SaleSticker } from '@assets/images/saleSticker.svg';
 
+import { useGetAllCoursesQuery } from '../../store/course-api/coursesApi';
 import { CardsData } from './cardsData';
 import * as S from './HomePage.styled';
 
 
 export const HomePage = () => {
+  const { data, isLoading, error } = useGetAllCoursesQuery(5);
+  console.log(data);
+
+  const allCourses = [];
+
+
   const scrollToTop = () => {
     const header = document.getElementById('header');
     if (header) {
@@ -36,14 +43,14 @@ export const HomePage = () => {
         </S.SaleStickerContainer>
       </S.DescriptionContainer>
       <S.CardsContainer>
-        { CardsData.map((card) => (
-          <S.CardContainer key={ card._id } onClick={ Card }>
-            <S.CardImage src={ card.path } />
-            <S.CardTitle>{ card.title }</S.CardTitle>
+        {CardsData.map((card) => (
+          <S.CardContainer key={card._id} onClick={Card}>
+            <S.CardImage src={card.path} />
+            <S.CardTitle>{card.title}</S.CardTitle>
           </S.CardContainer>
-        )) }
+        ))}
       </S.CardsContainer>
-      <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>
+      <S.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </S.Anchor>
     </S.HomePage>
   );
 };
