@@ -1,16 +1,41 @@
 import { ReactComponent as LogoWhite } from '@assets/images/logoWhite.svg';
 import { ReactComponent as SaleSticker } from '@assets/images/saleSticker.svg';
+import cardAerobic from '@assets/images/card-aerobics.png';
+import cardBodyflex from '@assets/images/card-bodyflex.png';
+import cardDancingFit from '@assets/images/card-dancingfit.png';
+import cardStretching from '@assets/images/card-stretching.png';
+import cardYoga from '@assets/images/card-yoga.png';
 
-import { useGetAllCoursesQuery } from '../../store/course-api/coursesApi';
-import { CardsData } from './cardsData';
 import * as S from './HomePage.styled';
+import { CardsData } from './cardsData';
+import { useGetAllCoursesQuery } from '../../store/course-api/coursesApi';
 
 
 export const HomePage = () => {
-  const { data, isLoading, error } = useGetAllCoursesQuery(5);
-  console.log(data);
+  const { data, isLoading } = useGetAllCoursesQuery(5);
 
-  const allCourses = [];
+  const allCourses: any[] = [];
+  if (data) {
+    const keys = Object.keys(data);
+    keys.forEach((key: any) => allCourses.push(data[key]));
+  }
+
+  const handleImg = (card: string) => {
+    switch (card) {
+      case 'kfpq8e':
+        return cardStretching;
+      case 'q02a6i':
+        return cardBodyflex;
+      case 'ab1c3f':
+        return cardYoga;
+      case 'ypox9r':
+        return cardDancingFit;
+      case '6i67sm':
+        return cardAerobic;
+      default:
+        return null;
+    }
+  };
 
 
   const scrollToTop = () => {
@@ -42,14 +67,19 @@ export const HomePage = () => {
           <S.SaleStickerTitle>Измени своё <br /> тело за полгода</S.SaleStickerTitle>
         </S.SaleStickerContainer>
       </S.DescriptionContainer>
-      <S.CardsContainer>
-        {CardsData.map((card) => (
-          <S.CardContainer key={card._id} onClick={Card}>
-            <S.CardImage src={card.path} />
-            <S.CardTitle>{card.title}</S.CardTitle>
-          </S.CardContainer>
-        ))}
-      </S.CardsContainer>
+      {isLoading
+        ? <S.Paragraph>Loading...</S.Paragraph>
+        : (
+          <S.CardsContainer>
+            {allCourses?.map((card) => (
+              <S.CardContainer key={card._id} onClick={Card}>
+                <S.CardImage alt="fitness" src={handleImg(card._id)} />
+                <S.CardTitle>{card.nameRU}</S.CardTitle>
+              </S.CardContainer>
+            ))}
+          </S.CardsContainer>
+        )}
+
       <S.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </S.Anchor>
     </S.HomePage>
   );

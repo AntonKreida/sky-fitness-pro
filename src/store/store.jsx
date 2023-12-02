@@ -11,5 +11,3 @@ export const store = configureStore({
     coursesApi.middleware
   ),
 });
-
-// export type TypeRootState = ReturnType<typeof store.getState>;
