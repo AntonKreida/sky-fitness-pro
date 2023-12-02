@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import { ReactComponent as LogoWhite } from '@assets/images/logoWhite.svg';
 import { ReactComponent as SaleSticker } from '@assets/images/saleSticker.svg';
 import cardAerobic from '@assets/images/card-aerobics.png';
@@ -7,11 +9,11 @@ import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 
 import * as S from './HomePage.styled';
-import { CardsData } from './cardsData';
 import { useGetAllCoursesQuery } from '../../store/course-api/coursesApi';
 
 
 export const HomePage = () => {
+  const navigate = useNavigate();
   const { data, isLoading } = useGetAllCoursesQuery(5);
 
   const allCourses: any[] = [];
@@ -22,15 +24,15 @@ export const HomePage = () => {
 
   const handleImg = (card: string) => {
     switch (card) {
-      case 'kfpq8e':
+      case 'Стретчинг':
         return cardStretching;
-      case 'q02a6i':
+      case 'Бодифлекс':
         return cardBodyflex;
-      case 'ab1c3f':
+      case 'Йога':
         return cardYoga;
-      case 'ypox9r':
+      case 'Танцевальный фитнес':
         return cardDancingFit;
-      case '6i67sm':
+      case 'Степ-аэробика':
         return cardAerobic;
       default:
         return null;
@@ -43,10 +45,6 @@ export const HomePage = () => {
     if (header) {
       header.scrollIntoView({ behavior: 'smooth' });
     }
-  };
-
-  const Card = () => {
-    alert('hi');
   };
 
   return (
@@ -72,8 +70,13 @@ export const HomePage = () => {
         : (
           <S.CardsContainer>
             {allCourses?.map((card) => (
-              <S.CardContainer key={card._id} onClick={Card}>
-                <S.CardImage alt="fitness" src={handleImg(card._id)} />
+              <S.CardContainer
+                key={card._id}
+                onClick={() => {
+                  navigate(`/sky-fitness-pro/course/${card._id}`);
+                }}
+              >
+                <S.CardImage alt="fitness" src={handleImg(card.nameRU)} />
                 <S.CardTitle>{card.nameRU}</S.CardTitle>
               </S.CardContainer>
             ))}
