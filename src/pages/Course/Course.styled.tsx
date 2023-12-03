@@ -45,6 +45,9 @@ export const CourseContainer = styled.div`
     padding: 140px 0px;
 `;
 
+export const CourseImage = styled.img``;
+
+
 export const CourseBanner = styled.div`
     position: relative;
     border-radius: 30px;
