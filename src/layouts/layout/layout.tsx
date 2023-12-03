@@ -1,10 +1,13 @@
 import { Outlet } from 'react-router-dom';
 
-import * as Styled from './styled.layout';
+import { Header } from '@components/';
+
+import * as Styled from './layout.styled';
 
 
 export const Layout = () => (
   <Styled.LayoutWrapper>
+    <Header />
     <Outlet />
   </Styled.LayoutWrapper>
 );

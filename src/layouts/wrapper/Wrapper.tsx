@@ -17,9 +17,9 @@ export const Wrapper: FC<IWrapperProps> = ({ children }) => (
         <Logo />
       </NavLink>
     </S.CourseLogo>
-    <S.CourseBtnEnterConteiner>
+    <S.CourseBtnEnterContainer>
       <S.CourseBtnEnter type="submit">Войти</S.CourseBtnEnter>
-    </S.CourseBtnEnterConteiner>
+    </S.CourseBtnEnterContainer>
     { children }
   </S.Wrapper>
 );

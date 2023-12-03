@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
+import { ReactComponent as Arrow } from '@assets/icons/profile-opener.svg';
+
 
 export const Header = styled.header`
     display: flex;
@@ -26,3 +29,7 @@ export const HeaderInfoName = styled.p`
     line-height: 32px;
     letter-spacing: -0.1px;
 `;
+
+export const HeaderLogo = styled(Logo)``;
+
+export const HeaderArrow = styled(Arrow)``;

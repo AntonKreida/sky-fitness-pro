@@ -1,24 +1,22 @@
 import { FC } from 'react';
-
-import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
-import { ReactComponent as HeaderArrow } from '@assets/icons/profile-opener.svg';
+import { NavLink } from 'react-router-dom';
 
 import * as S from './header.styled';
 
 
 interface IHeader {
-  name: string;
+  name?: string;
 }
 
-export const Header: FC<IHeader> = ({ name }) => (
+export const Header: FC<IHeader> = ({ name = 'username' }) => (
   <S.Header>
-    <Logo />
+    <NavLink to="/sky-fitness-pro">
+      <S.HeaderLogo />
+    </NavLink>
     <S.HeaderInfo>
       <S.HeaderInfoAva />
       <S.HeaderInfoName>{ name }</S.HeaderInfoName>
-      <div>
-        <HeaderArrow />
-      </div>
+      <S.HeaderArrow />
     </S.HeaderInfo>
   </S.Header>
 );
