@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as LogoWhite } from '@assets/images/logo-white.svg';
 import { ReactComponent as SaleSticker } from '@assets/images/sale-sticker.svg';
 import cardBodyFlex from '@assets/images/card-body-flex.png';
 import cardAerobic from '@assets/images/card-aerobics.png';

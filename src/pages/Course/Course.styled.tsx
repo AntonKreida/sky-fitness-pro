@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 
-export const CourseMain = styled.div`
-    `;
-
 export const CourseLogo = styled.div`
     position: absolute;
     top: 2rem;
@@ -38,11 +35,10 @@ export const CourseBtnEnter = styled.button`
 `;
 
 export const CourseContainer = styled.div`
-    height: 100%;
-    width: 1160px;
     display: flex;
     flex-flow: column;
-    padding: 140px 0px;
+    height: 100%;
+    width: 100%;
 `;
 
 export const CourseImage = styled.img``;
