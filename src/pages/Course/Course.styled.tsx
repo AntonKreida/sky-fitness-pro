@@ -7,7 +7,7 @@ export const CourseLogo = styled.div`
     left: 5rem;
 `;
 
-export const CourseBtnEnterConteiner = styled.div`
+export const CourseBtnEnterContainer = styled.div`
     position: absolute;
     top: 2rem;
     right: 5rem;
