@@ -49,12 +49,6 @@ export const HomePage = () => {
 
   return (
     <S.HomePage>
-      <S.HeaderContainer id="header">
-        <S.LogoContainer>
-          <LogoWhite />
-        </S.LogoContainer>
-        <S.LoginButton> Войти </S.LoginButton>
-      </S.HeaderContainer>
       <S.DescriptionContainer>
         <S.DescriptionText>
           <S.Paragraph>Онлайн-тренировки для занятий дома</S.Paragraph>

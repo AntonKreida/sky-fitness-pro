@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
+import { ReactComponent as LogoHomePage } from '@assets/icons/logo-home-page.svg';
 import { ReactComponent as Arrow } from '@assets/icons/profile-opener.svg';
 
 
@@ -30,6 +31,7 @@ export const HeaderInfoName = styled.p`
     letter-spacing: -0.1px;
 `;
 
-export const HeaderLogo = styled(Logo)``;
+export const LogoDefault = styled(Logo)``;
+export const HomePageLogo = styled(LogoHomePage)``;
 
 export const HeaderArrow = styled(Arrow)``;

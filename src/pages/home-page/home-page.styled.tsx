@@ -2,9 +2,7 @@ import styled from 'styled-components';
 
 
 export const HomePage = styled.div`
-  width: 100vw;
   background-color: #271a58;
-  min-height: 100vh;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -21,13 +19,13 @@ export const HeaderContainer = styled.div`
 `;
 
 export const DescriptionContainer = styled.div`
-  width: 1154px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 `;
 
 export const DescriptionText = styled.div`
-  width: 830px;
+  width: 100%;
 `;
 
 export const Paragraph = styled.p`
@@ -85,6 +83,7 @@ export const LoginButton = styled.button`
 export const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  width: 100%;
 `;
 
 export const CardContainer = styled.div`

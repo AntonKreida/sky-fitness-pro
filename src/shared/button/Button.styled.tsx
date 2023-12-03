@@ -48,3 +48,12 @@ export const ButtonGo = styled.button`
         background: #ebffab;
     }
 `;
+
+export const ButtonHeader = styled.button`
+    border-radius: 46px;
+    color: #FFF;
+    font-size: 16px;
+    background: #140D40;
+    padding: 5px 16px;
+    border: none;
+`;

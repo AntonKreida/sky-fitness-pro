@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 
-export const LayoutWrapper = styled.div`
+export const LayoutWrapper = styled.div<{$homePage: boolean}>`
     display: flex;
     flex-direction: column;
-    height: 100%;
+    gap: 35px;
     width: 100%;
     padding: 35px 140px 60px 140px;
-    overflow: hidden;
+    background: ${({ $homePage }) => ($homePage ? 'rgba(39, 26, 88, 1)' : 'rgb(255, 255, 255)')};
 `;
