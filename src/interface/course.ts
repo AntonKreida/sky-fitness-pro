@@ -8,3 +8,7 @@ export interface ICourse {
   order: number;
   workouts: string[];
 }
+
+export interface ICourseData {
+  [key: string]: ICourse;
+}

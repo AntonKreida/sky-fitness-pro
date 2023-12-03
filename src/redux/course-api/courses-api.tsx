@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { ICourse } from '@interface/';
+import { ICourseData } from '@interface/';
 
 
 export const coursesApi = createApi({
@@ -10,7 +10,7 @@ export const coursesApi = createApi({
       'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app/',
   }),
   endpoints: (builder) => ({
-    getAllCourses: builder.query<ICourse[], number>({
+    getAllCourses: builder.query<ICourseData, number>({
       query: () => 'courses.json',
     }),
   }),

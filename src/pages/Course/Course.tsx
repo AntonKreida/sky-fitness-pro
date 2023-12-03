@@ -1,5 +1,7 @@
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
+import { ICourse } from '@interface/';
 import { useGetAllCoursesQuery } from '@redux/';
 import { ReactComponent as HandPhone } from '@assets/images/hand-phone.svg';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
@@ -17,14 +19,21 @@ export const Course = () => {
 
   const { data } = useGetAllCoursesQuery(5);
 
-  const allCourses: any[] = [];
-  if (data) {
-    const keys = Object.keys(data);
-    keys.forEach((key: any) => allCourses.push(data[key]));
-  }
+  const [allCourses, setAllCourses] = useState<ICourse[]>([]);
+
+
+  useEffect(() => {
+    if (data) {
+      const keys = Object.keys(data);
+
+      keys.forEach((key: keyof typeof data) => {
+        setAllCourses((prev) => prev.concat(data[key]));
+      });
+    }
+  }, [data]);
+
 
   const coursePage = allCourses.filter((el) => el._id === pageId)[0];
-
   const handleImg = (name: string) => {
     switch (name) {
       case 'Стретчинг':

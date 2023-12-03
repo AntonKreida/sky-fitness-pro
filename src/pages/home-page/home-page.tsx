@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import { ReactComponent as SaleSticker } from '@assets/images/sale-sticker.svg';
 import cardBodyFlex from '@assets/images/card-body-flex.png';
@@ -7,6 +8,7 @@ import cardDancingFit from '@assets/images/card-dancing-fit.png';
 import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
+import { ICourse } from '@/interface';
 
 import * as S from './home-page.styled';
 
@@ -15,11 +17,18 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllCoursesQuery(5);
 
-  const allCourses: any[] = [];
-  if (data) {
-    const keys = Object.keys(data);
-    keys.forEach((key: any) => allCourses.push(data[key]));
-  }
+  const [allCourses, setAllCourses] = useState<ICourse[]>([]);
+
+
+  useEffect(() => {
+    if (data) {
+      const keys = Object.keys(data);
+
+      keys.forEach((key: keyof typeof data) => {
+        setAllCourses((prev) => prev.concat(data[key]));
+      });
+    }
+  }, [data]);
 
   const handleImg = (card: string) => {
     switch (card) {
