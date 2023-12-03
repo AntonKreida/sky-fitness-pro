@@ -1,19 +1,18 @@
 import { useParams } from 'react-router-dom';
-import { FC } from 'react';
 
-import BannerYoga from '@assets/images/bannerYoga.svg';
-import bannerStretching from '@assets/images/bannerStretching.svg';
-import bannerBodyFlex from '@assets/images/bannerBodyFlex.svg';
-import bannerDanceFitness from '@assets/images/bannerDanceFitness.svg';
-import bannerStepAirobic from '@assets/images/bannerStepAirobic.svg';
-import { ReactComponent as HandPhone } from '@assets/images/handPhone.svg';
+import { useGetAllCoursesQuery } from '@redux/';
+import { Wrapper } from '@layouts/';
+import { ReactComponent as HandPhone } from '@assets/images/hand-phone.svg';
+import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
+import BannerYoga from '@assets/images/banner-yoga.svg';
+import bannerStretching from '@assets/images/banner-stretching.svg';
+import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
+import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 
-import { Wrapper } from '../../layouts/wrapper/Wrapper';
-import { useGetAllCoursesQuery } from '../../store/course-api';
 import * as S from './course.styled';
 
 
-export const Course: FC = () => {
+export const Course = () => {
   const params = useParams();
   const pageId = params.id;
 
@@ -38,7 +37,7 @@ export const Course: FC = () => {
       case 'Танцевальный фитнес':
         return bannerDanceFitness;
       case 'Степ-аэробика':
-        return bannerStepAirobic;
+        return bannerStepAerobic;
       default:
         return null;
     }
@@ -73,7 +72,10 @@ export const Course: FC = () => {
 
           <S.CourseFooter>
             <HandPhone />
-            <S.CourseFooterText>Оставьте заявку на пробное занятие, мы свяжемся с вами, поможем с выбором направления и тренера, с которым тренировки принесут здоровье и радость!</S.CourseFooterText>
+            <S.CourseFooterText>Оставьте заявку на пробное занятие,
+              мы свяжемся с вами, поможем с выбором направления и тренера,
+              с которым тренировки принесут здоровье и радость!
+            </S.CourseFooterText>
             <S.CourseFooterBtn type="submit" onClick={ () => alert('You are registered!') }>Записаться на тренировку</S.CourseFooterBtn>
 
           </S.CourseFooter>

@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
-import { ReactComponent as LogoWhite } from '@assets/images/logoWhite.svg';
-import { ReactComponent as SaleSticker } from '@assets/images/saleSticker.svg';
+import { ReactComponent as LogoWhite } from '@assets/images/logo-white.svg';
+import { ReactComponent as SaleSticker } from '@assets/images/sale-sticker.svg';
+import cardBodyFlex from '@assets/images/card-body-flex.png';
 import cardAerobic from '@assets/images/card-aerobics.png';
-import cardBodyflex from '@assets/images/card-bodyflex.png';
-import cardDancingFit from '@assets/images/card-dancingfit.png';
+import cardDancingFit from '@assets/images/card-dancing-fit.png';
 import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
+import { useGetAllCoursesQuery } from '@redux/';
 
 import * as S from './home-page.styled';
-import { useGetAllCoursesQuery } from '../../store/course-api/coursesApi';
 
 
 export const HomePage = () => {
@@ -27,7 +27,7 @@ export const HomePage = () => {
       case 'Стретчинг':
         return cardStretching;
       case 'Бодифлекс':
-        return cardBodyflex;
+        return cardBodyFlex;
       case 'Йога':
         return cardYoga;
       case 'Танцевальный фитнес':
@@ -65,25 +65,25 @@ export const HomePage = () => {
           <S.SaleStickerTitle>Измени своё <br /> тело за полгода</S.SaleStickerTitle>
         </S.SaleStickerContainer>
       </S.DescriptionContainer>
-      {isLoading
+      { isLoading
         ? <S.Paragraph>Loading...</S.Paragraph>
         : (
           <S.CardsContainer>
-            {allCourses?.map((card) => (
+            { allCourses?.map((card) => (
               <S.CardContainer
-                key={card._id}
-                onClick={() => {
+                key={ card._id }
+                onClick={ () => {
                   navigate(`/sky-fitness-pro/course/${card._id}`);
-                }}
+                } }
               >
-                <S.CardImage alt="fitness" src={handleImg(card.nameRU)} />
-                <S.CardTitle>{card.nameRU}</S.CardTitle>
+                <S.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
+                <S.CardTitle>{ card.nameRU }</S.CardTitle>
               </S.CardContainer>
-            ))}
+            )) }
           </S.CardsContainer>
-        )}
+        ) }
 
-      <S.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </S.Anchor>
+      <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>
     </S.HomePage>
   );
 };

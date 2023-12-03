@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 
-import * as S from './Wrapper.styled';
+import * as S from './wrapper.styled';
 
 
 interface IWrapperProps {
@@ -20,6 +20,6 @@ export const Wrapper: FC<IWrapperProps> = ({ children }) => (
     <S.CourseBtnEnterConteiner>
       <S.CourseBtnEnter type="submit">Войти</S.CourseBtnEnter>
     </S.CourseBtnEnterConteiner>
-    {children}
+    { children }
   </S.Wrapper>
 );

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import * as S from './Container.styled';
+import * as S from './container.styled';
 
 
 interface IContainer {

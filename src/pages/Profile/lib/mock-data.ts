@@ -1,6 +1,6 @@
-import CardYoga from '../../assets/images/card-yoga.png';
-import CardStretching from '../../assets/images/card-stretching.png';
-import CardBodyflex from '../../assets/images/card-bodyflex.png';
+import CardBodyFlex from '@assets/images/card-body-flex.png';
+import CardYoga from '@assets/images/card-yoga.png';
+import CardStretching from '@assets/images/card-stretching.png';
 
 
 export const USER_NAME = 'Сергей';
@@ -20,6 +20,6 @@ export const COURSES = [
   {
     id: 3,
     name: 'Бодифлекс',
-    img: CardBodyflex
+    img: CardBodyFlex
   },
 ];

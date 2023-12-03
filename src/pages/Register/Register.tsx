@@ -1,6 +1,6 @@
 import { FormAuth } from '@components/';
 import { ContainerAuth, Wrapper } from '@layouts/';
-import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { Input, Button } from '@shared/';
 
 

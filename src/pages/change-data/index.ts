@@ -1,2 +1,2 @@
-export * from './ChangeDataLogin';
-export * from './ChangeDataPassword';
+export * from './change-data-login';
+export * from './change-data-password';

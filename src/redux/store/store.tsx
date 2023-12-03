@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import { coursesApi } from './course-api/coursesApi';
+import { coursesApi } from '../course-api/courses-api';
 
 
 export const store = configureStore({
