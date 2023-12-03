@@ -1,15 +1,24 @@
-import { Link } from 'react-router-dom';
+import { FC } from 'react';
 
-import { Button } from '@shared/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { ReactComponent as HeaderArrow } from '@assets/icons/profile-opener.svg';
 
-import * as Styled from './styled.header';
+import * as S from './header.styled';
 
 
-export const Header = () => (
-  <Styled.HeaderWrapper>
-    <Link to="/sky-fitness-pro">
-      <Styled.HeaderLogo />
-    </Link>
-    <Button text="Войти" />
-  </Styled.HeaderWrapper>
+interface IHeader {
+  name: string;
+}
+
+export const Header: FC<IHeader> = ({ name }) => (
+  <S.Header>
+    <Logo />
+    <S.HeaderInfo>
+      <S.HeaderInfoAva />
+      <S.HeaderInfoName>{ name }</S.HeaderInfoName>
+      <div>
+        <HeaderArrow />
+      </div>
+    </S.HeaderInfo>
+  </S.Header>
 );

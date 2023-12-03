@@ -15,6 +15,20 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 1.5rem;
         line-height: 2rem;
         overflow-x: hidden;
+        scrollbar-width: 0;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background-color: #fff;
+            border-radius: 5px;
+        }
     }
 
     * {
