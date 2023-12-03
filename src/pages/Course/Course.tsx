@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 
 import { useGetAllCoursesQuery } from '@redux/';
-import { Wrapper } from '@layouts/';
 import { ReactComponent as HandPhone } from '@assets/images/hand-phone.svg';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
 import BannerYoga from '@assets/images/banner-yoga.svg';
