@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
+import { Container } from '@layouts/';
 import { ReactComponent as SaleSticker } from '@assets/images/sale-sticker.svg';
 import cardBodyFlex from '@assets/images/card-body-flex.png';
 import cardAerobic from '@assets/images/card-aerobics.png';
@@ -49,14 +50,14 @@ export const HomePage = () => {
 
 
   const scrollToTop = () => {
-    const header = document.getElementById('header');
-    if (header) {
-      header.scrollIntoView({ behavior: 'smooth' });
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   };
 
   return (
-    <S.HomePage>
+    <Container>
       <S.DescriptionContainer>
         <S.DescriptionText>
           <S.Paragraph>Онлайн-тренировки для занятий дома</S.Paragraph>
@@ -86,6 +87,6 @@ export const HomePage = () => {
         ) }
 
       <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>
-    </S.HomePage>
+    </Container>
   );
 };
