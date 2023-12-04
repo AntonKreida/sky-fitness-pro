@@ -1,1 +1,1 @@
-export * from './SelectWorkout';
+export * from './select-workout';
