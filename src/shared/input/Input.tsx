@@ -1,7 +1,7 @@
 import { FC, HTMLProps } from 'react';
 
 
-import * as S from './Input.styled';
+import * as S from './input.styled';
 
 
 interface IInputProps extends HTMLProps<HTMLInputElement> {

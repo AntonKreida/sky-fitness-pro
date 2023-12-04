@@ -6,6 +6,8 @@ import { ReactComponent as Arrow } from '@assets/icons/profile-opener.svg';
 
 
 export const Header = styled.header`
+    width: 1160px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;

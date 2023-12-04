@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ButtonHeader } from '@shared/';
 
@@ -11,13 +11,21 @@ interface IHeaderProps {
   name?: string;
 }
 
-export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => (
-  <S.Header>
-    <NavLink to="/sky-fitness-pro/">
-      { currentLocation === '/sky-fitness-pro/' ? <S.HomePageLogo /> : <S.LogoDefault /> }
-    </NavLink>
-    <S.HeaderInfo>
-      <ButtonHeader text="Войти" type="button" />
-    </S.HeaderInfo>
-  </S.Header>
-);
+export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => {
+  const navigate = useNavigate();
+
+  const goToAuth = () => {
+    navigate('/sky-fitness-pro/login', { replace: true });
+  };
+
+  return (
+    <S.Header>
+      <NavLink to="/sky-fitness-pro/">
+        { currentLocation === '/sky-fitness-pro/' ? <S.HomePageLogo /> : <S.LogoDefault /> }
+      </NavLink>
+      <S.HeaderInfo>
+        <ButtonHeader text="Войти" type="button" onClick={ goToAuth } />
+      </S.HeaderInfo>
+    </S.Header>
+  );
+};

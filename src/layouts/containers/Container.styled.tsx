@@ -14,6 +14,7 @@ export const ContainerAuth = styled.div`
     min-height: 401px;
     margin-top: 100px;
     padding-top: 33px;
+    padding-bottom: 47px;
     border-radius: 12px;
     background: #fff;
     display: flex;
