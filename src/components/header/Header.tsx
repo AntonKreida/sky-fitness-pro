@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ButtonHeader } from '@shared/';
 
-import * as S from './header.styled';
+import * as Styled from './header.styled';
 
 
 interface IHeaderProps {
@@ -19,13 +19,13 @@ export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => {
   };
 
   return (
-    <S.Header>
+    <Styled.Header>
       <NavLink to="/sky-fitness-pro/">
-        { currentLocation === '/sky-fitness-pro/' ? <S.HomePageLogo /> : <S.LogoDefault /> }
+        { currentLocation === '/sky-fitness-pro/' ? <Styled.HomePageLogo /> : <Styled.LogoDefault /> }
       </NavLink>
-      <S.HeaderInfo>
+      <Styled.HeaderInfo>
         <ButtonHeader text="Войти" type="button" onClick={ goToAuth } />
-      </S.HeaderInfo>
-    </S.Header>
+      </Styled.HeaderInfo>
+    </Styled.Header>
   );
 };
