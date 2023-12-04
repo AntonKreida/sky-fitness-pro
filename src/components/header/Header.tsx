@@ -20,8 +20,8 @@ export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => {
 
   return (
     <Styled.Header>
-      <NavLink to="/sky-fitness-pro/">
-        { currentLocation === '/sky-fitness-pro/' ? <Styled.HomePageLogo /> : <Styled.LogoDefault /> }
+      <NavLink to="/sky-fitness-pro">
+        { currentLocation === '/sky-fitness-pro' ? <Styled.HomePageLogo /> : <Styled.LogoDefault /> }
       </NavLink>
       <Styled.HeaderInfo>
         <ButtonHeader text="Войти" type="button" onClick={ goToAuth } />
