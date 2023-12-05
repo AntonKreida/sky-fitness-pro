@@ -22,7 +22,7 @@ export const AppRouter = () => (
     </Route>
     <Route element={<Layout />} path="/sky-fitness-pro">
       <Route index element={<HomePage />} />
-      <Route element={<Course />} path="course/:idCourse" />
+      <Route element={<Course />} path=":id" />
       <Route element={<Profile />} path="profile" />
     </Route>
   </Routes>

@@ -59,25 +59,25 @@ export const HomePage = () => {
           <S.SaleStickerTitle>Измени своё <br /> тело за полгода</S.SaleStickerTitle>
         </S.SaleStickerContainer>
       </S.DescriptionContainer>
-      { isLoading
+      {isLoading
         ? <S.Paragraph>Loading...</S.Paragraph>
         : (
           <S.CardsContainer>
-            { allCourses?.map((card) => (
+            {allCourses?.map((card) => (
               <S.CardContainer
-                key={ card._id }
-                onClick={ () => {
-                  navigate(`/sky-fitness-pro/course/${card._id}`);
-                } }
+                key={card._id}
+                onClick={() => {
+                  navigate(`/sky-fitness-pro/${card._id}`);
+                }}
               >
-                <S.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
-                <S.CardTitle>{ card.nameRU }</S.CardTitle>
+                <S.CardImage alt="fitness" src={handleImg(card.nameRU)} />
+                <S.CardTitle>{card.nameRU}</S.CardTitle>
               </S.CardContainer>
-            )) }
+            ))}
           </S.CardsContainer>
-        ) }
+        )}
 
-      <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>
+      <S.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </S.Anchor>
     </Container>
   );
 };
