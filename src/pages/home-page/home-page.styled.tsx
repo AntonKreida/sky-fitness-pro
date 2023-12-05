@@ -1,23 +1,6 @@
 import styled from 'styled-components';
 
 
-export const HomePage = styled.div`
-  background-color: #271a58;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-`;
-
-export const HeaderContainer = styled.div`
-  width: 1154px;
-  padding: 30px 0 35px 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-`;
-
 export const DescriptionContainer = styled.div`
   width: 100%;
   display: flex;
@@ -105,6 +88,7 @@ export const CardTitle = styled.h1`
 `;
 
 export const Anchor = styled.button`
+  align-self: center;
   width: 147px;
   height: 48px;
   border: none;
