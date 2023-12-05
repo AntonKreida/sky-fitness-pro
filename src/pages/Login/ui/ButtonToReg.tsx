@@ -7,7 +7,7 @@ export const ButtonReg = () => {
   const navigate = useNavigate();
 
   return (
-    <S.ButtonToReg type="button" onClick={ () => navigate('/sky-fitness-pro/register') }>
+    <S.ButtonToReg type="button" onClick={() => navigate('/sky-fitness-pro/register')}>
       Зарегистрироваться
     </S.ButtonToReg>
   );

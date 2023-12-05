@@ -1,7 +1,7 @@
 import { FC, HTMLProps } from 'react';
 
 
-import * as S from './button.styled';
+import * as S from './Button.styled';
 
 
 interface IButtonHeaderProps extends HTMLProps<HTMLButtonElement> {
@@ -10,5 +10,5 @@ interface IButtonHeaderProps extends HTMLProps<HTMLButtonElement> {
 }
 
 export const ButtonHeader: FC<IButtonHeaderProps> = ({ text, type, onClick }) => (
-  <S.ButtonHeader type={ type } onClick={ onClick }>{ text }</S.ButtonHeader>
+  <S.ButtonHeader type={type} onClick={onClick}>{text}</S.ButtonHeader>
 );

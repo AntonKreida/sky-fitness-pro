@@ -8,7 +8,7 @@ import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 
-import * as S from './course.styled';
+import * as S from './Course.styled';
 
 
 export const Course = () => {
@@ -45,26 +45,26 @@ export const Course = () => {
   return (
     <S.CourseContainer>
       <S.CourseBanner>
-        <S.CourseTitle>{ coursePage?.nameRU }</S.CourseTitle>
-        { /* <S.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} /> */ }
+        <S.CourseTitle>{coursePage?.nameRU}</S.CourseTitle>
+        { /* <S.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} /> */}
       </S.CourseBanner>
 
       <S.CourseText>Подойдет для вас, если:</S.CourseText>
       <S.CourseAllPoints>
-        { coursePage?.fitting.map((item: string, index: number) => (
-          <S.CoursePoint key={ item }>
-            <S.CourseBullet>{ index + 1 }</S.CourseBullet>
-            <S.CoursePointText>{ item }</S.CoursePointText>
+        {coursePage?.fitting.map((item: string, index: number) => (
+          <S.CoursePoint key={item}>
+            <S.CourseBullet>{index + 1}</S.CourseBullet>
+            <S.CoursePointText>{item}</S.CoursePointText>
           </S.CoursePoint>
-        )) }
+        ))}
       </S.CourseAllPoints>
 
       <S.CourseText>Направления:</S.CourseText>
       <S.CourseDirection>
-        { coursePage?.directions.map((item: string) => <S.CourseDirPoint key={ item }>{ item }</S.CourseDirPoint>) }
+        {coursePage?.directions.map((item: string) => <S.CourseDirPoint key={item}>{item}</S.CourseDirPoint>)}
       </S.CourseDirection>
 
-      <S.CourseInfo>{ coursePage?.description }</S.CourseInfo>
+      <S.CourseInfo>{coursePage?.description}</S.CourseInfo>
 
       <S.CourseFooter>
         <HandPhone />
@@ -72,7 +72,7 @@ export const Course = () => {
           мы свяжемся с вами, поможем с выбором направления и тренера,
           с которым тренировки принесут здоровье и радость!
         </S.CourseFooterText>
-        <S.CourseFooterBtn type="submit" onClick={ () => alert('You are registered!') }>Записаться на тренировку</S.CourseFooterBtn>
+        <S.CourseFooterBtn type="submit" onClick={() => alert('You are registered!')}>Записаться на тренировку</S.CourseFooterBtn>
 
       </S.CourseFooter>
     </S.CourseContainer>

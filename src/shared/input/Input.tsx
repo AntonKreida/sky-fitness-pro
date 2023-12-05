@@ -1,6 +1,6 @@
 import { FC, HTMLProps } from 'react';
 
-import * as Styled from './input.styled';
+import * as Styled from './Input.styled';
 
 
 interface IInputProps extends HTMLProps<HTMLInputElement> {
@@ -11,8 +11,8 @@ interface IInputProps extends HTMLProps<HTMLInputElement> {
 
 export const Input: FC<IInputProps> = ({ type, placeholder, onChange }) => (
   <Styled.Input
-    placeholder={ placeholder }
-    type={ type }
-    onChange={ onChange }
+    placeholder={placeholder}
+    type={type}
+    onChange={onChange}
   />
 );

@@ -1,3 +1,3 @@
-export * from './button';
-export * from './button-go';
-export * from './button-header';
+export * from './Button';
+export * from './Button-go';
+export * from './Button-header';
