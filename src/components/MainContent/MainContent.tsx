@@ -1,4 +1,4 @@
-import * as Styled from './styled.main-content';
+import * as Styled from './MainContent.styled';
 
 
 export const MainContent = () => (

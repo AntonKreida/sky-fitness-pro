@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import * as S from './form.styled';
+import * as S from './Form.styled';
 
 
 interface IFormAuth {
@@ -8,5 +8,5 @@ interface IFormAuth {
 }
 
 export const FormAuth: FC<IFormAuth> = ({ children }) => (
-  <S.FormAuth>{ children }</S.FormAuth>
+  <S.FormAuth>{children}</S.FormAuth>
 );

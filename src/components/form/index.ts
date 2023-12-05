@@ -1,1 +1,1 @@
-export * from './form-auth';
+export * from './FormAuth';

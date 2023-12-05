@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 
 interface ISelectProps {
-  $color: string;
+    $color: string;
 }
 
 export const Select = styled.div`

@@ -46,7 +46,7 @@ export const Course = () => {
     <Styled.CourseContainer>
       <Styled.CourseBanner>
         <Styled.CourseTitle>{coursePage?.nameRU}</Styled.CourseTitle>
-        <Styled.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} />
+        { /* <Styled.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} /> */}
       </Styled.CourseBanner>
 
       <Styled.CourseText>Подойдет для вас, если:</Styled.CourseText>

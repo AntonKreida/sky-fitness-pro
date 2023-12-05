@@ -1,5 +1,4 @@
 import { Container } from '@layouts/';
-import { Header } from '@components/';
 import { Button, ButtonGo } from '@shared/';
 
 import * as S from './Profile.styled';

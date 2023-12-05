@@ -9,7 +9,7 @@ import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
 
-import * as S from './home-page.styled';
+import * as S from './Home-page.styled';
 
 
 export const HomePage = () => {
