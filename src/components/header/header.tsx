@@ -14,7 +14,7 @@ interface IHeaderProps {
 export const Header: FC<IHeaderProps> = ({ name = 'username', currentLocation }) => (
   <S.Header>
     <NavLink to="/sky-fitness-pro/">
-      { currentLocation === '/sky-fitness-pro/' ? <S.HomePageLogo /> : <S.LogoDefault /> }
+      { currentLocation === '/sky-fitness-pro' ? <S.HomePageLogo /> : <S.LogoDefault /> }
     </NavLink>
     <S.HeaderInfo>
       <ButtonHeader text="Войти" type="button" />
