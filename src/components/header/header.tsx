@@ -1,23 +1,24 @@
 import { FC } from 'react';
-import { NavLink } from 'react-router-dom';
 
-import { ButtonHeader } from '@shared/';
+import { ReactComponent as Logo } from '@assets/images/logoBlack.svg';
+import { ReactComponent as HeaderArrow } from '@assets/icons/profile-opener.svg';
 
-import * as S from './header.styled';
+import * as S from './Header.styled';
 
 
-interface IHeaderProps {
-  currentLocation?: string;
-  name?: string;
+interface IHeader {
+  name: string;
 }
 
-export const Header: FC<IHeaderProps> = ({ name = 'username', currentLocation }) => (
+export const Header: FC<IHeader> = ({ name }) => (
   <S.Header>
-    <NavLink to="/sky-fitness-pro/">
-      { currentLocation === '/sky-fitness-pro/' ? <S.HomePageLogo /> : <S.LogoDefault /> }
-    </NavLink>
+    <Logo />
     <S.HeaderInfo>
-      <ButtonHeader text="Войти" type="button" />
+      <S.HeaderInfoAva />
+      <S.HeaderInfoName>{ name }</S.HeaderInfoName>
+      <div>
+        <HeaderArrow />
+      </div>
     </S.HeaderInfo>
   </S.Header>
 );
