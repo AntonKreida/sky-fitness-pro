@@ -8,7 +8,6 @@ import * as Mock from './lib/mock-data';
 
 export const Profile = () => (
   <Container>
-    <Header name={Mock.USER_NAME} />
     <S.Profile>
       <S.ProfileTitle>Мой профиль</S.ProfileTitle>
       <S.ProfileInfo>
