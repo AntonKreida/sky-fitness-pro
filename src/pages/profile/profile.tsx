@@ -2,37 +2,37 @@ import { Container } from '@layouts/';
 import { Header } from '@components/';
 import { Button, ButtonGo } from '@shared/';
 
-import * as S from './profile.styled';
+import * as Styled from './profile.styled';
 import * as Mock from './lib/mock-data';
 
 
 export const Profile = () => (
   <Container>
     <Header name={ Mock.USER_NAME } />
-    <S.Profile>
-      <S.ProfileTitle>Мой профиль</S.ProfileTitle>
-      <S.ProfileInfo>
-        <S.ProfileText>{ Mock.LOGIN }</S.ProfileText>
-        <S.ProfileText>{ Mock.PASSWORD }</S.ProfileText>
-      </S.ProfileInfo>
-      <S.ProfileButtons>
+    <Styled.Profile>
+      <Styled.ProfileTitle>Мой профиль</Styled.ProfileTitle>
+      <Styled.ProfileInfo>
+        <Styled.ProfileText>{ Mock.LOGIN }</Styled.ProfileText>
+        <Styled.ProfileText>{ Mock.PASSWORD }</Styled.ProfileText>
+      </Styled.ProfileInfo>
+      <Styled.ProfileButtons>
         <Button text="Редактировать логин" type="button" onClick={ () => console.log('Click change login') } />
         <Button text="Редактировать пароль" type="button" onClick={ () => console.log('Click change password') } />
-      </S.ProfileButtons>
-    </S.Profile>
-    <S.ProfileCourses>
-      <S.ProfileTitle>Мои курсы</S.ProfileTitle>
-      <S.ProfileCoursesList>
+      </Styled.ProfileButtons>
+    </Styled.Profile>
+    <Styled.ProfileCourses>
+      <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
+      <Styled.ProfileCoursesList>
         { Mock.COURSES.map(({ id, name, img }) => (
-          <S.ProfileCourseItem key={ String(id) }>
-            <S.ProfileCourseItemTitle>{ name }</S.ProfileCourseItemTitle>
-            <S.ProfileCourseItemImg alt="Card" src={ img } />
-            <S.ProfileCourseItemButton>
+          <Styled.ProfileCourseItem key={ String(id) }>
+            <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
+            <Styled.ProfileCourseItemImg alt="Card" src={ img } />
+            <Styled.ProfileCourseItemButton>
               <ButtonGo text="Перейти →" type="button" onClick={ () => console.log('Click to button-go') } />
-            </S.ProfileCourseItemButton>
-          </S.ProfileCourseItem>
+            </Styled.ProfileCourseItemButton>
+          </Styled.ProfileCourseItem>
         )) }
-      </S.ProfileCoursesList>
-    </S.ProfileCourses>
+      </Styled.ProfileCoursesList>
+    </Styled.ProfileCourses>
   </Container>
 );

@@ -1,2 +1,2 @@
-export * from './ui';
+export * from './ui/button';
 export * from './login';

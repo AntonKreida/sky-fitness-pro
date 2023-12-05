@@ -9,7 +9,7 @@ import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
 
-import * as S from './home-page.styled';
+import * as Styled from './home-page.styled';
 
 
 export const HomePage = () => {
@@ -49,35 +49,35 @@ export const HomePage = () => {
 
   return (
     <Container>
-      <S.DescriptionContainer>
-        <S.DescriptionText>
-          <S.Paragraph>Онлайн-тренировки для занятий дома</S.Paragraph>
-          <S.Title> Начните заниматься спортом и улучшите качество жизни</S.Title>
-        </S.DescriptionText>
-        <S.SaleStickerContainer>
+      <Styled.DescriptionContainer>
+        <Styled.DescriptionText>
+          <Styled.Paragraph>Онлайн-тренировки для занятий дома</Styled.Paragraph>
+          <Styled.Title> Начните заниматься спортом и улучшите качество жизни</Styled.Title>
+        </Styled.DescriptionText>
+        <Styled.SaleStickerContainer>
           <SaleSticker />
-          <S.SaleStickerTitle>Измени своё <br /> тело за полгода</S.SaleStickerTitle>
-        </S.SaleStickerContainer>
-      </S.DescriptionContainer>
+          <Styled.SaleStickerTitle>Измени своё <br /> тело за полгода</Styled.SaleStickerTitle>
+        </Styled.SaleStickerContainer>
+      </Styled.DescriptionContainer>
       { isLoading
-        ? <S.Paragraph>Loading...</S.Paragraph>
+        ? <Styled.Paragraph>Loading...</Styled.Paragraph>
         : (
-          <S.CardsContainer>
+          <Styled.CardsContainer>
             { allCourses?.map((card) => (
-              <S.CardContainer
+              <Styled.CardContainer
                 key={ card._id }
                 onClick={ () => {
                   navigate(`/sky-fitness-pro/course/${card._id}`);
                 } }
               >
-                <S.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
-                <S.CardTitle>{ card.nameRU }</S.CardTitle>
-              </S.CardContainer>
+                <Styled.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
+                <Styled.CardTitle>{ card.nameRU }</Styled.CardTitle>
+              </Styled.CardContainer>
             )) }
-          </S.CardsContainer>
+          </Styled.CardsContainer>
         ) }
 
-      <S.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </S.Anchor>
+      <Styled.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </Styled.Anchor>
     </Container>
   );
 };

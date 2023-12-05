@@ -1,1 +1,1 @@
-export * from './ButtonToReg';
+export * from './button';

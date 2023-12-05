@@ -8,7 +8,7 @@ import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 
-import * as S from './course.styled';
+import * as Styled from './course.styled';
 
 
 export const Course = () => {
@@ -43,38 +43,44 @@ export const Course = () => {
   };
 
   return (
-    <S.CourseContainer>
-      <S.CourseBanner>
-        <S.CourseTitle>{ coursePage?.nameRU }</S.CourseTitle>
+    <Styled.CourseContainer>
+      <Styled.CourseBanner>
+        <Styled.CourseTitle>{ coursePage?.nameRU }</Styled.CourseTitle>
         { /* <S.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} /> */ }
-      </S.CourseBanner>
+      </Styled.CourseBanner>
 
-      <S.CourseText>Подойдет для вас, если:</S.CourseText>
-      <S.CourseAllPoints>
+      <Styled.CourseText>Подойдет для вас, если:</Styled.CourseText>
+      <Styled.CourseAllPoints>
         { coursePage?.fitting.map((item: string, index: number) => (
-          <S.CoursePoint key={ item }>
-            <S.CourseBullet>{ index + 1 }</S.CourseBullet>
-            <S.CoursePointText>{ item }</S.CoursePointText>
-          </S.CoursePoint>
+          <Styled.CoursePoint key={ item }>
+            <Styled.CourseBullet>{ index + 1 }</Styled.CourseBullet>
+            <Styled.CoursePointText>{ item }</Styled.CoursePointText>
+          </Styled.CoursePoint>
         )) }
-      </S.CourseAllPoints>
+      </Styled.CourseAllPoints>
 
-      <S.CourseText>Направления:</S.CourseText>
-      <S.CourseDirection>
-        { coursePage?.directions.map((item: string) => <S.CourseDirPoint key={ item }>{ item }</S.CourseDirPoint>) }
-      </S.CourseDirection>
+      <Styled.CourseText>Направления:</Styled.CourseText>
+      <Styled.CourseDirection>
+        { coursePage?.directions.map((item: string) => (
+          <Styled.CourseDirPoint
+            key={ item }
+          >
+            { item }
+          </Styled.CourseDirPoint>
+        )) }
+      </Styled.CourseDirection>
 
-      <S.CourseInfo>{ coursePage?.description }</S.CourseInfo>
+      <Styled.CourseInfo>{ coursePage?.description }</Styled.CourseInfo>
 
-      <S.CourseFooter>
+      <Styled.CourseFooter>
         <HandPhone />
-        <S.CourseFooterText>Оставьте заявку на пробное занятие,
+        <Styled.CourseFooterText>Оставьте заявку на пробное занятие,
           мы свяжемся с вами, поможем с выбором направления и тренера,
           с которым тренировки принесут здоровье и радость!
-        </S.CourseFooterText>
-        <S.CourseFooterBtn type="submit" onClick={ () => alert('You are registered!') }>Записаться на тренировку</S.CourseFooterBtn>
+        </Styled.CourseFooterText>
+        <Styled.CourseFooterBtn type="submit" onClick={ () => alert('You are registered!') }>Записаться на тренировку</Styled.CourseFooterBtn>
 
-      </S.CourseFooter>
-    </S.CourseContainer>
+      </Styled.CourseFooter>
+    </Styled.CourseContainer>
   );
 };
