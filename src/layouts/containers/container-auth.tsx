@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import * as S from './container.styled';
+import * as S from './Container.styled';
 
 
 interface IContainerAuth {
@@ -8,5 +8,5 @@ interface IContainerAuth {
 }
 
 export const ContainerAuth: FC<IContainerAuth> = ({ children }) => (
-  <S.ContainerAuth>{ children }</S.ContainerAuth>
+  <S.ContainerAuth>{children}</S.ContainerAuth>
 );

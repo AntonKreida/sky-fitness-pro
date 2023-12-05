@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import * as S from './container.styled';
+import * as S from './Container.styled';
 
 
 interface IContainerChangeData {
@@ -8,5 +8,5 @@ interface IContainerChangeData {
 }
 
 export const ContainerChangeData: FC<IContainerChangeData> = ({ children }) => (
-  <S.ContainerChangeData>{ children }</S.ContainerChangeData>
+  <S.ContainerChangeData>{children}</S.ContainerChangeData>
 );

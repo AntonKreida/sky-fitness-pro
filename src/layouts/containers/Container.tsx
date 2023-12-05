@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import * as S from './container.styled';
+import * as S from './Container.styled';
 
 
 interface IContainer {
@@ -8,5 +8,5 @@ interface IContainer {
 }
 
 export const Container: FC<IContainer> = ({ children }) => (
-  <S.Container>{ children }</S.Container>
+  <S.Container>{children}</S.Container>
 );
