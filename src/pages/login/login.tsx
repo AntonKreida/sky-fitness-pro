@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import {
-  getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword
+  getAuth, signInWithEmailAndPassword
 } from 'firebase/auth';
 
 import { Button } from '@shared/';
@@ -13,27 +13,20 @@ import { Input } from '../../shared/input/input';
 import { useAppDispatch } from '../../hooks/api';
 import { ButtonReg } from './ui';
 import { removeUser, setUser } from '../../redux/user-api/userSlice';
+import * as Styled from './login.styled';
 
 
 export const Login = () => {
-  const [email, setEmail] = useState<string | null>('');
-  const [password, setPassword] = useState<string | null>('');
-  const [error, setError] = useState<string | null>(null);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const auth = getAuth();
 
-  const getLogin = () => {
-
-  };
-
-  const getPassword = () => {
-
-  };
-
-  const handleAuth = (email = 'marina@mail.ru', password = 'marina@mail.ru') => {
+  const handleLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         navigate('/sky-fitness-pro/profile', { replace: true });
@@ -49,8 +42,21 @@ export const Login = () => {
       });
   };
 
+  const handleAuth = async () => {
+    if (!email) {
+      setError('Введите логин');
+      return;
+    }
+    if (!password) {
+      setError('Введите пароль');
+      return;
+    }
+
+    handleLogin();
+  };
+
   const handleLogout = () => {
-    navigate('/sky-fitness-pro/profile', { replace: true });
+    navigate('/sky-fitness-pro', { replace: true });
     dispatch(removeUser());
   };
 
@@ -60,15 +66,26 @@ export const Login = () => {
         <Logo />
       </NavLink>
       <FormAuth>
-        <Input placeholder="Логин" type="text" onChange={getLogin} />
-        <Input placeholder="Пароль" type="password" onChange={getPassword} />
+        <Input
+          placeholder="Логин"
+          type="text"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <Input
+          placeholder="Пароль"
+          type="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+        />
       </FormAuth>
-      { /* <Button text="Войти" type="button" onClick={(e) => console.log(`Click to ${e.target}`)} /> */}
       <Button text="Войти" type="button" onClick={() => handleAuth()} />
       <Button text="Выход" type="button" onClick={() => handleLogout()} />
 
       <ButtonReg />
-      {error && <div>Произошла ошибка: {error}</div>}
+      {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}
     </ContainerAuth>
   );
 };
