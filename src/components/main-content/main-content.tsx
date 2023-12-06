@@ -6,7 +6,7 @@ import { SelectWorkout } from '../select-workout';
 
 
 export const MainContent = () => {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
 
   const openMenu = () => {
     setOpen((prev) => !prev);

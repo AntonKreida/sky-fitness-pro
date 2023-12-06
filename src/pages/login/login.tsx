@@ -33,23 +33,6 @@ export const Login = () => {
 
   };
 
-  const handleReg = (email = 'marinaz@mail.ru', password = 'marinaz@mail.ru') => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        localStorage.setItem('user', email);
-        navigate('/profile', { replace: true });
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid
-          }),
-        );
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
-  };
-
   const handleAuth = (email = 'marina@mail.ru', password = 'marina@mail.ru') => {
     signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
@@ -81,9 +64,8 @@ export const Login = () => {
         <Input placeholder="Пароль" type="password" onChange={getPassword} />
       </FormAuth>
       { /* <Button text="Войти" type="button" onClick={(e) => console.log(`Click to ${e.target}`)} /> */}
-      <Button text="Создаю пользователя" type="button" onClick={() => handleReg()} />
-      <Button text="Захожу под пользователем" type="button" onClick={() => handleAuth()} />
-      <Button text="Выхожу" type="button" onClick={() => handleLogout()} />
+      <Button text="Войти" type="button" onClick={() => handleAuth()} />
+      <Button text="Выход" type="button" onClick={() => handleLogout()} />
 
       <ButtonReg />
       {error && <div>Произошла ошибка: {error}</div>}

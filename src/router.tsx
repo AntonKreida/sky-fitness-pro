@@ -18,6 +18,7 @@ export const AppRouter = () => (
   <Routes>
     <Route element={<LayoutAuth />} path="/sky-fitness-pro">
       <Route element={<Login />} path="login" />
+
       <Route element={<Register />} path="register" />
       <Route element={<ChangeDataLogin />} path="change-data-login" />
       <Route element={<ChangeDataPassword />} path="change-data-password" />

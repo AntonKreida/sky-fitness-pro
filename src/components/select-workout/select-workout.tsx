@@ -1,10 +1,17 @@
+import { FC } from 'react';
+
 import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
 
 import * as S from './select-workout.styled';
 import { WORKOUTS } from './lib/MockData';
 
 
-export const SelectWorkout = ({ setOpen }) => (
+interface ISelect {
+  setOpen: (prev: any) => void; // fix tip
+}
+
+
+export const SelectWorkout: FC<ISelect> = ({ setOpen }) => (
   <S.Select>
     <S.Progress>
       <S.SelectTitle>Мой прогресс</S.SelectTitle>
