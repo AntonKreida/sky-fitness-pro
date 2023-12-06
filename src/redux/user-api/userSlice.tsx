@@ -19,19 +19,19 @@ interface IPayload {
   id: string | null;
 }
 
-// function getUserFromLocalStorage() {
-//   try {
-//     return JSON.parse(localStorage.getItem(AUTH_DATA) || '');
-//   } catch (error) {
-//     console.error(error);
-//     return null;
-//   }
-// }
+function getUserFromLocalStorage() {
+  try {
+    return JSON.parse(localStorage.getItem(AUTH_DATA) || '');
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
 
 const userSlice = createSlice({
   name: 'user',
-  // initialState: getUserFromLocalStorage() ?? initialState,
-  initialState,
+  initialState: getUserFromLocalStorage() ?? initialState,
+  // initialState,
   reducers: {
     setUser(state, action: PayloadAction<IPayload>) {
       const payload = action.payload ?? initialState;

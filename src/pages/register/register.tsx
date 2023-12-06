@@ -27,7 +27,6 @@ export const Register = () => {
   const handleReg = async () => {
     await createUserWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
-        localStorage.setItem('user', email);
         navigate('/sky-fitness-pro/profile', { replace: true });
         dispatch(
           setUser({

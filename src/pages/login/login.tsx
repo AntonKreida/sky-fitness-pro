@@ -26,8 +26,8 @@ export const Login = () => {
 
   const auth = getAuth();
 
-  const handleLogin = () => {
-    signInWithEmailAndPassword(auth, email, password)
+  const handleLogin = async () => {
+    await signInWithEmailAndPassword(auth, email, password)
       .then(({ user }) => {
         navigate('/sky-fitness-pro/profile', { replace: true });
         dispatch(
