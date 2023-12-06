@@ -19,13 +19,11 @@ interface IPayload {
   id: string | null;
 }
 
-function getUserFromLocalStorage() {
-  try {
-    return JSON.parse(localStorage.getItem(AUTH_DATA) || '');
-  } catch (error) {
-    if (error instanceof Error) throw Error(error.message);
-  }
-}
+const getUserFromLocalStorage = () => {
+  const saveCheckedData = localStorage.getItem(AUTH_DATA);
+  const parseSaveData = saveCheckedData ? JSON.parse(saveCheckedData) : null;
+  return parseSaveData;
+};
 
 export const userSlice = createSlice({
   name: 'user',
