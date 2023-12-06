@@ -25,19 +25,20 @@ export const Register = () => {
   const auth = getAuth();
 
   const handleReg = async () => {
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        navigate('/sky-fitness-pro/profile', { replace: true });
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid
-          }),
-        );
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+    try {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          navigate('/sky-fitness-pro/profile', { replace: true });
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid
+            }),
+          );
+        });
+    } catch (error) {
+      if (error instanceof Error) setError(error.message);
+    }
   };
 
   const handleRegister = async () => {

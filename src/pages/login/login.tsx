@@ -27,19 +27,20 @@ export const Login = () => {
   const auth = getAuth();
 
   const handleLogin = async () => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        navigate('/sky-fitness-pro/profile', { replace: true });
-        dispatch(
-          setUser({
-            email: user.email,
-            id: user.uid,
-          }),
-        );
-      })
-      .catch((err) => {
-        setError(err.message);
-      });
+    try {
+      await signInWithEmailAndPassword(auth, email, password)
+        .then(({ user }) => {
+          navigate('/sky-fitness-pro/profile', { replace: true });
+          dispatch(
+            setUser({
+              email: user.email,
+              id: user.uid,
+            }),
+          );
+        });
+    } catch (error) {
+      if (error instanceof Error) { setError(error.message); }
+    }
   };
 
   const handleAuth = async () => {
@@ -81,8 +82,8 @@ export const Login = () => {
           }}
         />
       </FormAuth>
-      <Button text="Войти" type="button" onClick={() => handleAuth()} />
-      <Button text="Выход" type="button" onClick={() => handleLogout()} />
+      <Button text="Войти" type="button" onClick={handleAuth} />
+      <Button text="Выход" type="button" onClick={handleLogout} />
 
       <ButtonReg />
       {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}

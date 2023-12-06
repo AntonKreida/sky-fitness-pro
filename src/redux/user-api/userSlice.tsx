@@ -23,15 +23,13 @@ function getUserFromLocalStorage() {
   try {
     return JSON.parse(localStorage.getItem(AUTH_DATA) || '');
   } catch (error) {
-    console.error(error);
-    return null;
+    if (error instanceof Error) throw Error(error.message);
   }
 }
 
-const userSlice = createSlice({
+export const userSlice = createSlice({
   name: 'user',
   initialState: getUserFromLocalStorage() ?? initialState,
-  // initialState,
   reducers: {
     setUser(state, action: PayloadAction<IPayload>) {
       const payload = action.payload ?? initialState;
@@ -51,5 +49,3 @@ const userSlice = createSlice({
 });
 
 export const { setUser, removeUser } = userSlice.actions;
-
-export default userSlice.reducer;
