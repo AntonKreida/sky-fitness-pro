@@ -10,7 +10,6 @@ export const MainContent = () => {
 
   const openMenu = () => {
     setOpen((prev) => !prev);
-    console.log(open);
   };
 
   return (
@@ -48,7 +47,11 @@ export const MainContent = () => {
           <Button text="Заполнить свой прогресс" type="button" onClick={openMenu} />
 
           {open
-            ? <SelectWorkout />
+            ? (
+              <SelectWorkout
+                setOpen={setOpen}
+              />
+            )
             : null}
 
         </Styled.MainContentExercisesWrapper>
