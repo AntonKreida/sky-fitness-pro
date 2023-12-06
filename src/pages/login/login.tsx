@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword
 } from 'firebase/auth';
@@ -73,7 +73,9 @@ export const Login = () => {
 
   return (
     <ContainerAuth>
-      <Logo />
+      <NavLink to="/sky-fitness-pro">
+        <Logo />
+      </NavLink>
       <FormAuth>
         <Input placeholder="Логин" type="text" onChange={getLogin} />
         <Input placeholder="Пароль" type="password" onChange={getPassword} />
