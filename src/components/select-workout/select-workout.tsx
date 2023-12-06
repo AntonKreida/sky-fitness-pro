@@ -8,7 +8,7 @@ export const SelectWorkout = ({ setOpen }) => (
   <S.Select>
     <S.Progress>
       <S.SelectTitle>Мой прогресс</S.SelectTitle>
-      <S.closeBtn onClick={() => setOpen((prev) => !prev)}>
+      <S.closeBtn onClick={() => setOpen((prev: boolean) => !prev)}>
         <svg
           fill="#000000"
           height="20px"
