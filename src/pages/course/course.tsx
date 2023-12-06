@@ -45,32 +45,32 @@ export const Course = () => {
   return (
     <Styled.CourseContainer>
       <Styled.CourseBanner>
-        <Styled.CourseTitle>{ coursePage?.nameRU }</Styled.CourseTitle>
-        { /* <S.CourseImage alt="fitness" src={handleImg(coursePage?.nameRU)} /> */ }
+        <Styled.CourseTitle>{coursePage?.nameRU}</Styled.CourseTitle>
+        <Styled.CourseImage alt="fitness" src={`${handleImg(coursePage?.nameRU)}`} />
       </Styled.CourseBanner>
 
       <Styled.CourseText>Подойдет для вас, если:</Styled.CourseText>
       <Styled.CourseAllPoints>
-        { coursePage?.fitting.map((item: string, index: number) => (
-          <Styled.CoursePoint key={ item }>
-            <Styled.CourseBullet>{ index + 1 }</Styled.CourseBullet>
-            <Styled.CoursePointText>{ item }</Styled.CoursePointText>
+        {coursePage?.fitting.map((item: string, index: number) => (
+          <Styled.CoursePoint key={item}>
+            <Styled.CourseBullet>{index + 1}</Styled.CourseBullet>
+            <Styled.CoursePointText>{item}</Styled.CoursePointText>
           </Styled.CoursePoint>
-        )) }
+        ))}
       </Styled.CourseAllPoints>
 
       <Styled.CourseText>Направления:</Styled.CourseText>
       <Styled.CourseDirection>
-        { coursePage?.directions.map((item: string) => (
+        {coursePage?.directions.map((item: string) => (
           <Styled.CourseDirPoint
-            key={ item }
+            key={item}
           >
-            { item }
+            {item}
           </Styled.CourseDirPoint>
-        )) }
+        ))}
       </Styled.CourseDirection>
 
-      <Styled.CourseInfo>{ coursePage?.description }</Styled.CourseInfo>
+      <Styled.CourseInfo>{coursePage?.description}</Styled.CourseInfo>
 
       <Styled.CourseFooter>
         <HandPhone />
@@ -78,7 +78,7 @@ export const Course = () => {
           мы свяжемся с вами, поможем с выбором направления и тренера,
           с которым тренировки принесут здоровье и радость!
         </Styled.CourseFooterText>
-        <Styled.CourseFooterBtn type="submit" onClick={ () => alert('You are registered!') }>Записаться на тренировку</Styled.CourseFooterBtn>
+        <Styled.CourseFooterBtn type="submit" onClick={() => alert('You are registered!')}>Записаться на тренировку</Styled.CourseFooterBtn>
 
       </Styled.CourseFooter>
     </Styled.CourseContainer>

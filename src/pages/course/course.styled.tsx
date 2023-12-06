@@ -41,14 +41,16 @@ export const CourseContainer = styled.div`
     width: 100%;
 `;
 
-export const CourseImage = styled.img``;
-
+export const CourseImage = styled.img`
+    object-fit: fill;
+    width: 100%;
+`;
 
 export const CourseBanner = styled.div`
     position: relative;
     border-radius: 30px;
-    width: 1160px;
-    height: 310px;
+    width: 100%;
+    height: 100%;
     background-color: rgb(255, 255, 255)`;
 
 export const CourseTitle = styled.span`
