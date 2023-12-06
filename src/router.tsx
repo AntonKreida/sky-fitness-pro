@@ -11,6 +11,8 @@ import {
   Course,
 } from '@pages/';
 
+import { MainContent } from './components';
+
 
 export const AppRouter = () => (
   <Routes>
@@ -24,6 +26,7 @@ export const AppRouter = () => (
       <Route index element={<HomePage />} />
       <Route element={<Course />} path=":id" />
       <Route element={<Profile />} path="profile" />
+      <Route element={<MainContent />} path="workout" />
     </Route>
   </Routes>
 );
