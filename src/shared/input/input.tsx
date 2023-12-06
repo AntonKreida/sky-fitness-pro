@@ -11,8 +11,8 @@ interface IInputProps extends HTMLProps<HTMLInputElement> {
 
 export const Input: FC<IInputProps> = ({ type, placeholder, onChange }) => (
   <Styled.Input
-    placeholder={ placeholder }
-    type={ type }
-    onChange={ onChange }
+    placeholder={placeholder}
+    type={type}
+    onChange={onChange}
   />
 );
