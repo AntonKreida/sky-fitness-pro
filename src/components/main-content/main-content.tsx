@@ -1,11 +1,34 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
+import { IWorkout } from '@/interface';
+
+import { useGetAllWorkoutsQuery } from '../../redux/course-api/courses-api';
 import { Button } from '../../shared/button/button';
 import * as Styled from './styled.main-content';
-import { SelectWorkout } from '../select-workout';
+import { MyProgress } from './ui/progress';
 
 
 export const MainContent = () => {
+  const { data = [] } = useGetAllWorkoutsQuery(20);
+  const { id } = useParams();
+
+  const allWorkouts: IWorkout[] = [];
+  if (data) {
+    const keys = Object.keys(data);
+    keys.forEach((key: any) => allWorkouts.push(data[key]));
+  }
+  console.log(allWorkouts);
+
+  const selectedWorkout = allWorkouts?.find((item) => item._id === id);
+  // @ts-ignore later
+  const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
+
+  const workout = selectedWorkout?.exercises;
+  const nameWorkout = selectedWorkout?.name;
+  const youtubeLink = selectedWorkout?.video;
+  const link = `https://www.youtube.com/embed/${youtubeLink}`;
+
   const [open, setOpen] = useState(false);
 
   const openMenu = () => {
@@ -48,8 +71,11 @@ export const MainContent = () => {
 
           {open
             ? (
-              <SelectWorkout
+              <MyProgress
+                open={open}
+                selectedWorkoutId={selectedWorkoutId}
                 setOpen={setOpen}
+                workout={workout}
               />
             )
             : null}

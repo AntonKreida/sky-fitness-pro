@@ -6,6 +6,7 @@ import BannerYoga from '@assets/images/banner-yoga.svg';
 import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
+import { ICourse } from '@/interface';
 
 import { ReactComponent as Phone } from '../../assets/images/phone.svg';
 import { Button } from '../../shared/button/button';
@@ -18,7 +19,7 @@ export const Course = () => {
 
   const { data } = useGetAllCoursesQuery(5);
 
-  const allCourses: any[] = [];
+  const allCourses: ICourse[] = [];
   if (data) {
     const keys = Object.keys(data);
     keys.forEach((key: any) => allCourses.push(data[key]));

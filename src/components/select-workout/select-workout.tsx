@@ -19,7 +19,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
   return (
     <S.Select>
       <S.Progress>
-        <S.SelectTitle>Мой прогресс</S.SelectTitle>
+        <S.SelectTitle>Выберите тренировку</S.SelectTitle>
         <S.closeBtn onClick={toggleClose}>
           <svg
             fill="#000000"

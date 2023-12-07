@@ -16,7 +16,6 @@ export const BurgerMenu = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
 
-
   const handleLogout = () => {
     navigate('/sky-fitness-pro', { replace: true });
     dispatch(removeUser());
@@ -33,7 +32,6 @@ export const BurgerMenu = () => {
   const toggleView = () => {
     setVisible((prev) => !prev);
   };
-
 
   return (
     <S.profileHeader>
