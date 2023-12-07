@@ -101,27 +101,38 @@ export const MyProgress: React.FC<Props> = ({
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
-            <S.ProgressForm>
-              {exercises?.map((item, index) => (
-                <S.li key={index}>
-                  <S.ProgressText>
-                    Сколько раз вы сделали упражнение
-                    {/* Сколько раз вы сделали упражнение {item} */}
-                  </S.ProgressText>
-                  <S.ProgressInput
-                    placeholder="Введите значение"
-                    type="number"
-                    // @ts-ignore later
-                    onChange={(e) => handleInputChange(item, e.target.value)}
-                  />
-                </S.li>
-              ))}
-            </S.ProgressForm>
-            <S.ProgressForButton>
-              <S.ProgressButton onClick={() => alert('Your progress is accepted!')}>
-                Отправить
-              </S.ProgressButton>
-            </S.ProgressForButton>
+            {exercises
+              ? <>
+                <S.ProgressForm>
+                  {exercises?.map((item, index) => (
+                    <S.li key={index}>
+                      <S.ProgressText>
+                        Сколько раз вы сделали упражнение
+                        {/* Сколько раз вы сделали упражнение {item} */}
+                      </S.ProgressText>
+                      <S.ProgressInput
+                        placeholder="Введите значение"
+                        type="number"
+                        // @ts-ignore later
+                        onChange={(e) => handleInputChange(item, e.target.value)}
+                      />
+                    </S.li>
+                  ))}
+                </S.ProgressForm>
+                <S.ProgressForButton>
+                  <S.ProgressButton onClick={() => alert('Your progress is accepted!')}>
+                    Отправить
+                  </S.ProgressButton>
+                </S.ProgressForButton>
+              </>
+              :
+              <S.nullExsecises>
+                Тренировок для выполнения не найдено.
+                <br />
+                Выполняйте упражнения из видео!
+              </S.nullExsecises>
+            }
+
           </>
         )}
       </S.Progress>

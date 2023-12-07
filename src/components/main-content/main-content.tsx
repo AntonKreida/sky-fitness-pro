@@ -13,6 +13,8 @@ export const MainContent = () => {
   const { data = [] } = useGetAllWorkoutsQuery(20);
   // const { id } = useParams();
   const id = '17oz5f';
+  // a1rqtt
+  // 17oz5f
 
   const allWorkouts: IWorkout[] = [];
   if (data) {
@@ -21,7 +23,7 @@ export const MainContent = () => {
   }
 
   const selectedWorkout = allWorkouts?.find((item) => item._id === id);
-  console.log(selectedWorkout);
+
   // @ts-ignore later
   const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
 
@@ -46,9 +48,7 @@ export const MainContent = () => {
         <Styled.MainContentSubTittle>
           {nameWorkout}
         </Styled.MainContentSubTittle>
-
       </Styled.MainContentHeader>
-
       <Styled.MainContentVideoWrapper>
         <Styled.MainContentVideo
           allowFullScreen
@@ -56,20 +56,27 @@ export const MainContent = () => {
           title="YouTube video player"
         />
       </Styled.MainContentVideoWrapper>
-
       <Styled.MainContentWorkoutWrapper>
-
         <Styled.MainContentExercisesWrapper>
           <Styled.MainContentExerciseTitle>
             Упражнения
           </Styled.MainContentExerciseTitle>
-          <Styled.MainContentExerciseList>
-            {exercises?.map((item) => (
-              <Styled.MainContentExerciseItem key={item.name}>{item.name}</Styled.MainContentExerciseItem>
-            ))}
-          </Styled.MainContentExerciseList>
+          {exercises
+            ? (
+              <Styled.MainContentExerciseList>
+                {exercises?.map((item) => (
+                  <Styled.MainContentExerciseItem key={item.name}>{item.name}</Styled.MainContentExerciseItem>
+                ))}
+              </Styled.MainContentExerciseList>
+            )
+            : (
+              <div>
+                Тренировок для выполнения не найдено.
+                <br />
+                Выполняйте упражнения из видео!
+              </div>
+            )}
           <Button text="Заполнить свой прогресс" type="button" onClick={openMenu} />
-
           {open
             ? (
               <MyProgress
@@ -80,7 +87,6 @@ export const MainContent = () => {
               />
             )
             : null}
-
         </Styled.MainContentExercisesWrapper>
 
         <Styled.MainContentProgressWrapper>
@@ -90,24 +96,21 @@ export const MainContent = () => {
 
           <Styled.MainContentProgressBarsWrapper>
             <Styled.MainContentProgressBarItem>
-              {exercises?.map((item, index) => (
+              {exercises?.map((item) => (
                 <Styled.MainContentProgressBarContainer key={item.name}>
                   <Styled.MainContentProgressBarName>
                     {item.workout}
                   </Styled.MainContentProgressBarName>
                   <Styled.MainContentProgressBarStrip>
-                    <Styled.MainContentProgressBarValue />
+                    <Styled.MainTextPercent>10%</Styled.MainTextPercent>
                   </Styled.MainContentProgressBarStrip>
                 </Styled.MainContentProgressBarContainer>
               ))}
 
             </Styled.MainContentProgressBarItem>
           </Styled.MainContentProgressBarsWrapper>
-
         </Styled.MainContentProgressWrapper>
-
       </Styled.MainContentWorkoutWrapper>
-
     </Styled.MainContentWrapper>
   );
 };

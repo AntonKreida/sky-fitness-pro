@@ -125,3 +125,7 @@ export const li = styled.li`
   display: flex;
   flex-direction: column;
 `;
+
+export const nullExsecises = styled.div`
+  padding: 20px 5px;
+`;

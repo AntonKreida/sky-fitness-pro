@@ -132,3 +132,17 @@ export const MainContentProgressBarValue = styled.div`
     height: 100%;
     border-radius: 22px;
 `;
+
+export const MainTextPercent = styled.p`
+  color: #fff !important;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 32px;
+  letter-spacing: -0.05px;
+  margin: 0px;
+  padding: 0px;
+  text-align: right;
+  padding-right: 10px;
+  padding-left: 10px;
+`;
