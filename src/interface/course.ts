@@ -11,6 +11,7 @@ export interface ICourse {
 export interface IExercise {
   name: string;
   quantity: number;
+  workout: string;
 }
 export interface IWorkout {
   _id: string;

@@ -65,57 +65,70 @@ export const MainContentExerciseList = styled.ul`
 export const MainContentExerciseItem = styled.li``;
 
 export const MainContentProgressWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    height: 100%;
-    width: fit-content;
-    padding: 36px 55px;
+    display: grid;
+    grid-column: 8 / 17;
+    background: rgb(242, 242, 242);
     border-radius: 30px;
-    background: #F2F2F2;
+    width: 638px;
+    min-height: 336px;
+    padding-bottom: 32px;
 `;
 
 export const MainContentProgressTitle = styled.div`
-    color: #000;
+    color: rgb(0, 0, 0);
     font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
     text-align: center;
+    margin-top: 36px;
 `;
 
 export const MainContentProgressBarsWrapper = styled.div`
     display: flex;
-    flex-direction: column;
     gap: 30px;
 `;
 
 export const MainContentProgressBarItem = styled.div`
+    padding-left: 44px;
+    display: grid;
+    justify-content: space-between;
+    text-align: left;
+    columns: 2;
+    list-style: none;
+`;
+
+export const MainContentProgressBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
-    gap: 72px;
-    align-items: center;
+    padding-top: 30px;
 `;
 
 export const MainContentProgressBarName = styled.div`
-    color: #000;
+color: rgb(0, 0, 0);
     font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: -0.1px;
+    margin: 0px;
+    padding: 0px;
 `;
 
 export const MainContentProgressBarStrip = styled.div`
-    position: relative;
-    left: 0;
-    top: 0;
-    width: 100%;
+    width: 278px;
     height: 36px;
     border-radius: 22px;
-    border: 2px solid #565EEF;
-    background: #EDECFF;
-    overflow: hidden;
+    margin-right: 55px;
+    border: 2px solid rgb(86, 94, 239);
+    background: rgb(237, 236, 255);
+    flex-shrink: 0;
+    margin-left: 15px;
 `;
 
 export const MainContentProgressBarValue = styled.div`
-    position: absolute;
-    left: 0;
-    top: 0;
+    width: 0%;
+    background-color: rgb(86, 94, 239);
     height: 100%;
-    width: 50%;
-    background: #565EEF;
+    border-radius: 22px;
 `;

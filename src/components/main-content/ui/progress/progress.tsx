@@ -10,12 +10,12 @@ import { ProgressPopup } from '../pop-up';
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  workout: IExercise[] | undefined;
+  exercises: IExercise[] | undefined;
   selectedWorkoutId: number;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, workout, selectedWorkoutId
+  open, setOpen, exercises, selectedWorkoutId
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState(false);
   const [exerciseResults, setExerciseResults] = useState({});
@@ -102,7 +102,7 @@ export const MyProgress: React.FC<Props> = ({
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
             <S.ProgressForm>
-              {workout?.map((item, index) => (
+              {exercises?.map((item, index) => (
                 <S.li key={index}>
                   <S.ProgressText>
                     Сколько раз вы сделали упражнение

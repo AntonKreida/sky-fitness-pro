@@ -11,29 +11,30 @@ import { MyProgress } from './ui/progress';
 
 export const MainContent = () => {
   const { data = [] } = useGetAllWorkoutsQuery(20);
-  const { id } = useParams();
+  // const { id } = useParams();
+  const id = '17oz5f';
 
   const allWorkouts: IWorkout[] = [];
   if (data) {
     const keys = Object.keys(data);
     keys.forEach((key: any) => allWorkouts.push(data[key]));
   }
-  console.log(allWorkouts);
 
   const selectedWorkout = allWorkouts?.find((item) => item._id === id);
+  console.log(selectedWorkout);
   // @ts-ignore later
   const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
 
-  const workout = selectedWorkout?.exercises;
+  const exercises = selectedWorkout?.exercises;
   const nameWorkout = selectedWorkout?.name;
   const youtubeLink = selectedWorkout?.video;
-  const link = `https://www.youtube.com/embed/${youtubeLink}`;
-
   const [open, setOpen] = useState(false);
 
   const openMenu = () => {
     setOpen((prev) => !prev);
   };
+
+  const getNumberOfWorkout = () => selectedWorkoutId + 1;
 
   return (
     <Styled.MainContentWrapper>
@@ -43,7 +44,7 @@ export const MainContent = () => {
           Йога
         </Styled.MainContentTittle>
         <Styled.MainContentSubTittle>
-          Красота и здоровье / Йога на каждый день / 2 день
+          {nameWorkout}
         </Styled.MainContentSubTittle>
 
       </Styled.MainContentHeader>
@@ -51,7 +52,7 @@ export const MainContent = () => {
       <Styled.MainContentVideoWrapper>
         <Styled.MainContentVideo
           allowFullScreen
-          src="https://www.youtube.com/embed/oqe98Dxivns?si=jv_3liM4UgBgPc1O"
+          src={youtubeLink}
           title="YouTube video player"
         />
       </Styled.MainContentVideoWrapper>
@@ -63,19 +64,19 @@ export const MainContent = () => {
             Упражнения
           </Styled.MainContentExerciseTitle>
           <Styled.MainContentExerciseList>
-            <Styled.MainContentExerciseItem>Первое упражнение</Styled.MainContentExerciseItem>
-            <Styled.MainContentExerciseItem>Второе упражнение</Styled.MainContentExerciseItem>
-            <Styled.MainContentExerciseItem>Третье упражнение</Styled.MainContentExerciseItem>
+            {exercises?.map((item) => (
+              <Styled.MainContentExerciseItem key={item.name}>{item.name}</Styled.MainContentExerciseItem>
+            ))}
           </Styled.MainContentExerciseList>
           <Button text="Заполнить свой прогресс" type="button" onClick={openMenu} />
 
           {open
             ? (
               <MyProgress
+                exercises={exercises}
                 open={open}
                 selectedWorkoutId={selectedWorkoutId}
                 setOpen={setOpen}
-                workout={workout}
               />
             )
             : null}
@@ -84,17 +85,22 @@ export const MainContent = () => {
 
         <Styled.MainContentProgressWrapper>
           <Styled.MainContentProgressTitle>
-            Мои прогресс по тренировке:
+            Мои прогресс по тренировке  {getNumberOfWorkout()}:
           </Styled.MainContentProgressTitle>
 
           <Styled.MainContentProgressBarsWrapper>
             <Styled.MainContentProgressBarItem>
-              <Styled.MainContentProgressBarName>
-                Наклонны:
-              </Styled.MainContentProgressBarName>
-              <Styled.MainContentProgressBarStrip>
-                <Styled.MainContentProgressBarValue />
-              </Styled.MainContentProgressBarStrip>
+              {exercises?.map((item, index) => (
+                <Styled.MainContentProgressBarContainer key={item.name}>
+                  <Styled.MainContentProgressBarName>
+                    {item.workout}
+                  </Styled.MainContentProgressBarName>
+                  <Styled.MainContentProgressBarStrip>
+                    <Styled.MainContentProgressBarValue />
+                  </Styled.MainContentProgressBarStrip>
+                </Styled.MainContentProgressBarContainer>
+              ))}
+
             </Styled.MainContentProgressBarItem>
           </Styled.MainContentProgressBarsWrapper>
 
