@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import { RiArrowDownSLine } from 'react-icons/ri';
 
 import { useAuth } from '../../hooks/use-auth';
 import { removeUser } from '../../redux/user-api/userSlice';
@@ -43,19 +43,11 @@ export const BurgerMenu = () => {
         {pathname === '/sky-fitness-pro'
           ? <S.userEmail>{email}</S.userEmail>
           : <S.userEmailBlack>{email}</S.userEmailBlack>}
+        {pathname === '/sky-fitness-pro'
+          ? <RiArrowDownSLine />
+          : <svg fill="black" height="1em" stroke="black" strokeWidth="0" viewBox="0 0 24 24" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M11.9997 13.1714L16.9495 8.22168L18.3637 9.63589L11.9997 15.9999L5.63574 9.63589L7.04996 8.22168L11.9997 13.1714Z" /></svg>}
 
-        <S.svg
-          fill="none"
-          height="9"
-          viewBox="0 0 14 9"
-          width="14"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12.3552 1.03308L6.67761 6.7107L0.999999 1.03308"
-            strokeWidth="2"
-          />
-        </S.svg>
+
         {visible
           ? (
             <S.userInfoPopUp>
@@ -75,8 +67,6 @@ export const BurgerMenu = () => {
           )
           : null}
       </S.userInfo>
-
-
     </S.profileHeader>
   );
 };
