@@ -8,6 +8,7 @@ import cardDancingFit from '@assets/images/card-dancing-fit.png';
 import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
+import { ICourse } from '@/interface';
 
 import * as Styled from './home-page.styled';
 
@@ -16,7 +17,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllCoursesQuery(5);
 
-  const allCourses: any[] = [];
+  const allCourses: ICourse[] = [];
   if (data) {
     const keys = Object.keys(data);
     keys.forEach((key: any) => allCourses.push(data[key]));

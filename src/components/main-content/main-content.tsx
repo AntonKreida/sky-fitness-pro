@@ -28,8 +28,6 @@ export const MainContent = () => {
   const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
 
   const exercises = selectedWorkout?.exercises;
-  const nameWorkout = selectedWorkout?.name;
-  const youtubeLink = selectedWorkout?.video;
   const [open, setOpen] = useState(false);
 
   const openMenu = () => {
@@ -43,16 +41,16 @@ export const MainContent = () => {
 
       <Styled.MainContentHeader>
         <Styled.MainContentTittle>
-          Йога
+          {selectedWorkout?.course}
         </Styled.MainContentTittle>
         <Styled.MainContentSubTittle>
-          {nameWorkout}
+          {selectedWorkout?.name}
         </Styled.MainContentSubTittle>
       </Styled.MainContentHeader>
       <Styled.MainContentVideoWrapper>
         <Styled.MainContentVideo
           allowFullScreen
-          src={youtubeLink}
+          src={selectedWorkout?.video}
           title="YouTube video player"
         />
       </Styled.MainContentVideoWrapper>

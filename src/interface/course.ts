@@ -15,6 +15,7 @@ export interface IExercise {
 }
 export interface IWorkout {
   _id: string;
+  course: string;
   name: string;
   video: string;
   exercises?: IExercise[];
