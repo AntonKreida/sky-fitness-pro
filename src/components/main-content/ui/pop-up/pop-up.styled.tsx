@@ -22,6 +22,8 @@ export const ProgressPopup = styled.div`
   padding-top: 41px;
   background: #fff;
   width: 444px;
+  border: 1px solid #acacac;
+  border-radius: 20px;
 `;
 
 export const ProgressPopupTitle = styled.h1`

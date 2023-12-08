@@ -8,7 +8,7 @@ interface IProps {
 }
 
 
-export const ProgressPopup: React.FC<IProps> = ({ text }) => (
+export const Popup: React.FC<IProps> = ({ text }) => (
   <S.Container>
     <S.ProgressPopup>
       <S.ProgressPopupTitle>{text}</S.ProgressPopupTitle>

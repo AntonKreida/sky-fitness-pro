@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
 import { useGetAllCoursesQuery } from '@redux/';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
@@ -8,12 +9,15 @@ import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 import { ICourse } from '@/interface';
 
+import { Popup } from '../../components/main-content/ui/pop-up/pop-up';
 import { ReactComponent as Phone } from '../../assets/images/phone.svg';
 import { Button } from '../../shared/button/button';
 import * as Styled from './course.styled';
 
 
 export const Course = () => {
+  const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
+
   const params = useParams();
   const pageId = params.id;
 
@@ -26,6 +30,14 @@ export const Course = () => {
   }
 
   const coursePage = allCourses.filter((el) => el._id === pageId)[0];
+
+  const popUpEvent = () => {
+    setOkPopupOpen(true);
+
+    setTimeout(() => {
+      setOkPopupOpen(false);
+    }, 2000);
+  };
 
   const handleImg = (name: string) => {
     switch (name) {
@@ -46,6 +58,9 @@ export const Course = () => {
 
   return (
     <Styled.CourseContainer>
+      {okPopupOpen
+        ? <Popup text="Ваш прогресс засчитан!" />
+        : null}
       <Styled.CourseBanner>
         <Styled.CourseTitle>{coursePage?.nameRU}</Styled.CourseTitle>
         <Styled.CourseImage alt="fitness" src={`${handleImg(coursePage?.nameRU)}`} />
@@ -87,7 +102,7 @@ export const Course = () => {
           <Button
             text="Записаться на тренировку"
             type="submit"
-            onClick={() => alert('You are registered!')}
+            onClick={popUpEvent}
           />
         </Styled.CourseFooterMain>
         <Phone />

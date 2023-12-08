@@ -4,7 +4,7 @@ import { IExercise } from '@/interface';
 
 import { useAuth } from '../../../../hooks/use-auth';
 import * as S from './progress.styled';
-import { ProgressPopup } from '../pop-up';
+import { Popup } from '../pop-up';
 
 
 interface Props {
@@ -104,7 +104,7 @@ export const MyProgress: React.FC<Props> = ({
           </svg>
         </S.closeBtn>
         {okPopupOpen ? (
-          <ProgressPopup text="Ваш прогресс засчитан!" />
+          <Popup text="Ваш прогресс засчитан!" />
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
