@@ -17,7 +17,7 @@ interface Props {
 export const MyProgress: React.FC<Props> = ({
   open, setOpen, exercises, selectedWorkoutId
 }) => {
-  const [okPopupOpen, setOkPopupOpen] = useState(false);
+  const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
   const [exerciseResults, setExerciseResults] = useState({});
   const { id } = useAuth();
 
@@ -31,26 +31,33 @@ export const MyProgress: React.FC<Props> = ({
       [exerciseName]: value,
     }));
   };
+  console.log(okPopupOpen);
 
-  // const handleSendResults = async () => {
-  //   try {
-  //     const response = await axios.patch(
-  //       `${baseUrl}${selectedWorkoutId}/users.json`,
-  //       {
-  //         [id]: exerciseResults,
-  //       },
-  //     );
+  const handleSendResults = async () => {
+    setOkPopupOpen(true);
 
-  //     setOkPopupOpen(true);
+    setTimeout(() => {
+      setOpen(false)
+    }, 2000)
 
-  //     setTimeout(() => {
-  //       setOpen(!open);
-  //       window.location.reload();
-  //     }, 1000);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+
+    // try {
+    //   const response = await axios.patch(
+    //     `${baseUrl}${selectedWorkoutId}/users.json`,
+    //     {
+    //       [id]: exerciseResults,
+    //     },
+    //   );
+
+
+    //   setTimeout(() => {
+    //     setOpen(!open);
+    //     window.location.reload();
+    //   }, 1000);
+    // } catch (error) {
+    //   console.log(error.message);
+    // }
+  };
 
   return (
     <S.Container>
@@ -97,7 +104,7 @@ export const MyProgress: React.FC<Props> = ({
           </svg>
         </S.closeBtn>
         {okPopupOpen ? (
-          <ProgressPopup />
+          <ProgressPopup text="Ваш прогресс засчитан!" />
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
@@ -107,11 +114,10 @@ export const MyProgress: React.FC<Props> = ({
                   {exercises?.map((item, index) => (
                     <S.li key={index}>
                       <S.ProgressText>
-                        Сколько раз вы сделали упражнение
-                        {/* Сколько раз вы сделали упражнение {item} */}
+                        {`Сколько раз вы сделали упражнение ${item.workout} ?`}
                       </S.ProgressText>
                       <S.ProgressInput
-                        placeholder="Введите значение"
+                        placeholder="Введите числовое значение"
                         type="number"
                         // @ts-ignore later
                         onChange={(e) => handleInputChange(item, e.target.value)}
@@ -120,7 +126,7 @@ export const MyProgress: React.FC<Props> = ({
                   ))}
                 </S.ProgressForm>
                 <S.ProgressForButton>
-                  <S.ProgressButton onClick={() => alert('Your progress is accepted!')}>
+                  <S.ProgressButton onClick={handleSendResults}>
                     Отправить
                   </S.ProgressButton>
                 </S.ProgressForButton>
@@ -132,7 +138,6 @@ export const MyProgress: React.FC<Props> = ({
                 Выполняйте упражнения из видео!
               </S.nullExsecises>
             }
-
           </>
         )}
       </S.Progress>

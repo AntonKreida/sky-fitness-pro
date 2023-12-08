@@ -1,6 +1,20 @@
 import styled from 'styled-components';
 
 
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  justify-content: center;
+`;
+
 export const ProgressPopup = styled.div`
   display: flex;
   align-items: center;
