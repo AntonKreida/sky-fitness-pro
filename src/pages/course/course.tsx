@@ -18,16 +18,19 @@ import * as Styled from './course.styled';
 export const Course = () => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
 
+
   const params = useParams();
   const pageId = params.id;
 
   const { data } = useGetAllCoursesQuery(5);
 
   const allCourses: ICourse[] = [];
+
   if (data) {
     const keys = Object.keys(data);
     keys.forEach((key: any) => allCourses.push(data[key]));
   }
+
 
   const coursePage = allCourses.filter((el) => el._id === pageId)[0];
 
@@ -37,6 +40,14 @@ export const Course = () => {
     setTimeout(() => {
       setOkPopupOpen(false);
     }, 2000);
+  };
+
+  const bannerName = {
+    Стретчинг: bannerStretching,
+    Бодифлекс: bannerBodyFlex,
+    Йога: BannerYoga,
+    'Танцевальный фитнес': bannerDanceFitness,
+    'Степ-аэробика': bannerStepAerobic,
   };
 
   const handleImg = (name: string) => {
@@ -63,7 +74,8 @@ export const Course = () => {
         : null}
       <Styled.CourseBanner>
         <Styled.CourseTitle>{coursePage?.nameRU}</Styled.CourseTitle>
-        <Styled.CourseImage alt="fitness" src={`${handleImg(coursePage?.nameRU)}`} />
+        { /* @ts-ignore lalalla */}
+        <Styled.CourseImage alt="fitness" src={`${bannerName[coursePage?.nameRU]}`} />
       </Styled.CourseBanner>
 
       <Styled.CourseBlock>
