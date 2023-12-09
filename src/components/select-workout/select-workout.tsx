@@ -79,19 +79,19 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
         </S.closeBtn>
 
         <S.SelectList>
-          {selectedWorkout.map(({ course, name, _id }) => (
+          { selectedWorkout.map(({ course, name, _id }) => (
             <S.SelectItem
-              key={_id}
+              key={ _id }
               $color="#000"
-              onClick={() => navigate(`/sky-fitness-pro/workout/${_id}`)}
+              onClick={ () => navigate(`/sky-fitness-pro/workout/${_id}`) }
             >
               <S.SelectItemContent>
                 <S.SelectItemContentTitle $color="#000">
-                  {name}
-                  { /* {isCompleted && <IconStatusOk />} */}
+                  { name }
+                  { /* {isCompleted && <IconStatusOk />} */ }
                 </S.SelectItemContentTitle>
                 <S.SelectItemContentText $color="#000">
-                  {course}
+                  { course }
                 </S.SelectItemContentText>
               </S.SelectItemContent>
             </S.SelectItem>
@@ -107,7 +107,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
             //     </S.SelectItemContentText>
             //   </S.SelectItemContent>
             // </S.SelectItem>
-          ))}
+          )) }
         </S.SelectList>
 
       </S.Progress>

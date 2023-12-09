@@ -6,8 +6,7 @@ import { ICourse, IWorkout } from '@interface/';
 export const coursesApi = createApi({
   reducerPath: 'coursesApi',
   baseQuery: fetchBaseQuery({
-    baseUrl:
-      'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app/',
+    baseUrl: process.env.REACT_APP_DATABASE_URL,
   }),
   endpoints: (builder) => ({
     getAllCourses: builder.query<ICourse[], number>({
@@ -17,7 +16,7 @@ export const coursesApi = createApi({
       query: () => 'workouts.json',
     }),
     getByCourseId: builder.query<ICourse, string>({
-      query: (id) => `courses/${id}.json`,
+      query: (id: string) => `courses/${id}.json`,
     })
   }),
 });

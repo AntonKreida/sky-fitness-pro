@@ -60,25 +60,25 @@ export const HomePage = () => {
           <Styled.SaleStickerTitle>Измени своё <br /> тело за полгода</Styled.SaleStickerTitle>
         </Styled.SaleStickerContainer>
       </Styled.DescriptionContainer>
-      {isLoading
+      { isLoading
         ? <Styled.Paragraph>Loading...</Styled.Paragraph>
         : (
           <Styled.CardsContainer>
-            {allCourses?.map((card) => (
+            { allCourses?.map((card) => (
               <Styled.CardContainer
-                key={card._id}
-                onClick={() => {
-                  navigate(`/sky-fitness-pro/${card._id}`);
-                }}
+                key={ card._id }
+                onClick={ () => {
+                  navigate(`/sky-fitness-pro/course/${card._id}`);
+                } }
               >
-                <Styled.CardImage alt="fitness" src={handleImg(card.nameRU)} />
-                <Styled.CardTitle>{card.nameRU}</Styled.CardTitle>
+                <Styled.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
+                <Styled.CardTitle>{ card.nameRU }</Styled.CardTitle>
               </Styled.CardContainer>
-            ))}
+            )) }
           </Styled.CardsContainer>
-        )}
+        ) }
 
-      <Styled.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </Styled.Anchor>
+      <Styled.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </Styled.Anchor>
     </Container>
   );
 };
