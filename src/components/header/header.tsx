@@ -24,12 +24,12 @@ export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => {
   return (
     <Styled.Header>
       <NavLink to="/sky-fitness-pro">
-        {currentLocation === '/sky-fitness-pro' ? <Styled.HomePageLogo /> : <Styled.LogoDefault />}
+        { currentLocation === '/sky-fitness-pro' ? <Styled.HomePageLogo /> : <Styled.LogoDefault /> }
       </NavLink>
       <Styled.HeaderInfo>
-        {email
+        { email
           ? <BurgerMenu />
-          : <ButtonHeader text="Войти" type="button" onClick={goToAuth} />}
+          : <ButtonHeader text="Войти" type="button" onClick={ goToAuth } /> }
       </Styled.HeaderInfo>
     </Styled.Header>
   );

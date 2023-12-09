@@ -16,7 +16,14 @@ export const coursesApi = createApi({
     getAllWorkouts: builder.query<IWorkout[], number>({
       query: () => 'workouts.json',
     }),
+    getByCourseId: builder.query<ICourse, string>({
+      query: (id) => `courses/${id}.json`,
+    })
   }),
 });
 
-export const { useGetAllCoursesQuery, useGetAllWorkoutsQuery } = coursesApi;
+export const {
+  useGetAllCoursesQuery,
+  useGetAllWorkoutsQuery,
+  useGetByCourseIdQuery
+} = coursesApi;

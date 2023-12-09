@@ -21,7 +21,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
     <S.Select>
       <S.Progress>
         <S.SelectTitle>Выберите тренировку</S.SelectTitle>
-        <S.closeBtn onClick={toggleClose}>
+        <S.closeBtn onClick={ toggleClose }>
           <svg
             fill="#000000"
             height="20px"
@@ -64,21 +64,21 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
         </S.closeBtn>
 
         <S.SelectList>
-          {WORKOUTS.map(({
+          { WORKOUTS.map(({
             id, title, text, isCompleted
           }) => (
-            <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
+            <S.SelectItem key={ String(id) } $color={ isCompleted ? '#06b16e' : '#000' }>
               <S.SelectItemContent>
-                <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
-                  {title}
-                  {isCompleted && <IconStatusOk />}
+                <S.SelectItemContentTitle $color={ isCompleted ? '#06b16e' : '#000' }>
+                  { title }
+                  { isCompleted && <IconStatusOk /> }
                 </S.SelectItemContentTitle>
-                <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
-                  {text}
+                <S.SelectItemContentText $color={ isCompleted ? '#06b16e' : '#000' }>
+                  { text }
                 </S.SelectItemContentText>
               </S.SelectItemContent>
             </S.SelectItem>
-          ))}
+          )) }
         </S.SelectList>
 
       </S.Progress>
