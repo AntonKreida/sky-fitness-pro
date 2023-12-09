@@ -1,18 +1,33 @@
 import { FC } from 'react';
 
-import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
+// import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
+import { useNavigate } from 'react-router-dom';
 
+import { IWorkout } from '@/interface';
+
+import { useGetAllWorkoutsQuery } from '../../redux/course-api/courses-api';
 import * as S from './select-workout.styled';
-import { WORKOUTS } from './lib/MockData';
 
 
 interface ISelect {
   // @ts-ignore later
   setOpen: (prev) => void;
+  selectedCourse: string[] | undefined;
 }
 
 
-export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
+export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
+  const navigate = useNavigate();
+  const { data } = useGetAllWorkoutsQuery(20);
+  const allWorkouts: IWorkout[] = [];
+
+  if (data) {
+    const keys = Object.keys(data);
+    keys.forEach((key: any) => allWorkouts.push(data[key]));
+  }
+
+  const selectedWorkout = allWorkouts?.filter((i) => selectedCourse?.includes(i._id));
+
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
   };
@@ -64,20 +79,34 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
         </S.closeBtn>
 
         <S.SelectList>
-          {WORKOUTS.map(({
-            id, title, text, isCompleted
-          }) => (
-            <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
+          {selectedWorkout.map(({ course, name, _id }) => (
+            <S.SelectItem
+              key={_id}
+              $color="#000"
+              onClick={() => navigate(`/sky-fitness-pro/workout/${_id}`)}
+            >
               <S.SelectItemContent>
-                <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
-                  {title}
-                  {isCompleted && <IconStatusOk />}
+                <S.SelectItemContentTitle $color="#000">
+                  {name}
+                  { /* {isCompleted && <IconStatusOk />} */}
                 </S.SelectItemContentTitle>
-                <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
-                  {text}
+                <S.SelectItemContentText $color="#000">
+                  {course}
                 </S.SelectItemContentText>
               </S.SelectItemContent>
             </S.SelectItem>
+
+            //   <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
+            //   <S.SelectItemContent>
+            //     <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
+            //       {title}
+            //       { /* {isCompleted && <IconStatusOk />} */}
+            //     </S.SelectItemContentTitle>
+            //     <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
+            //       {text}
+            //     </S.SelectItemContentText>
+            //   </S.SelectItemContent>
+            // </S.SelectItem>
           ))}
         </S.SelectList>
 

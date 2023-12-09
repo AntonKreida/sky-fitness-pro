@@ -27,7 +27,7 @@ export const AppRouter = () => (
       <Route index element={<HomePage />} />
       <Route element={<Course />} path=":id" />
       <Route element={<Profile />} path="profile" />
-      <Route element={<MainContent />} path="workout" />
+      <Route element={<MainContent />} path="workout/:id" />
     </Route>
   </Routes>
 );

@@ -10,11 +10,10 @@ import { MyProgress } from './ui/progress';
 
 
 export const MainContent = () => {
+  const params = useParams();
+  const pageId = params.id;
+
   const { data = [] } = useGetAllWorkoutsQuery(20);
-  // const { id } = useParams();
-  const id = '17oz5f';
-  // a1rqtt
-  // 17oz5f
 
   const allWorkouts: IWorkout[] = [];
   if (data) {
@@ -22,7 +21,7 @@ export const MainContent = () => {
     keys.forEach((key: any) => allWorkouts.push(data[key]));
   }
 
-  const selectedWorkout = allWorkouts?.find((item) => item._id === id);
+  const selectedWorkout = allWorkouts?.find((item) => item._id === pageId);
 
   // @ts-ignore later
   const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
