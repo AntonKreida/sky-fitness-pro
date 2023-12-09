@@ -42,42 +42,42 @@ export const Course = () => {
 
   return (
     <Styled.CourseContainer>
-      { isLoading ? <p>Загрузка...</p> : (
+      {isLoading ? <p>Загрузка...</p> : (
         <>
-          { okPopupOpen
-            ? <Popup text="Ваш прогресс засчитан!" />
-            : null }
+          {okPopupOpen
+            ? <Popup text="Вы успешно подписались на курс!" />
+            : null}
           <Styled.CourseBanner>
-            <Styled.CourseTitle>{ data?.nameRU }</Styled.CourseTitle>
-            <Styled.CourseImage alt="fitness" src={ `${bannerName[data?.nameRU as keyof typeof bannerName]}` } />
+            <Styled.CourseTitle>{data?.nameRU}</Styled.CourseTitle>
+            <Styled.CourseImage alt="fitness" src={`${bannerName[data?.nameRU as keyof typeof bannerName]}`} />
           </Styled.CourseBanner>
 
           <Styled.CourseBlock>
             <Styled.CourseText>Подойдет для вас, если:</Styled.CourseText>
             <Styled.CourseAllPoints>
-              { data?.fitting.map((item: string, index: number) => (
-                <Styled.CoursePoint key={ item }>
-                  <Styled.CourseBullet>{ index + 1 }</Styled.CourseBullet>
-                  <Styled.CoursePointText>{ item }</Styled.CoursePointText>
+              {data?.fitting.map((item: string, index: number) => (
+                <Styled.CoursePoint key={item}>
+                  <Styled.CourseBullet>{index + 1}</Styled.CourseBullet>
+                  <Styled.CoursePointText>{item}</Styled.CoursePointText>
                 </Styled.CoursePoint>
-              )) }
+              ))}
             </Styled.CourseAllPoints>
           </Styled.CourseBlock>
 
           <Styled.CourseBlock>
             <Styled.CourseText>Направления:</Styled.CourseText>
             <Styled.CourseDirection>
-              { data?.directions.map((item: string) => (
+              {data?.directions.map((item: string) => (
                 <Styled.CourseDirPoint
-                  key={ item }
+                  key={item}
                 >
-                  { item }
+                  {item}
                 </Styled.CourseDirPoint>
-              )) }
+              ))}
             </Styled.CourseDirection>
           </Styled.CourseBlock>
 
-          <Styled.CourseInfo>{ data?.description }</Styled.CourseInfo>
+          <Styled.CourseInfo>{data?.description}</Styled.CourseInfo>
 
           <Styled.CourseFooter>
             <Styled.CourseFooterMain>
@@ -88,13 +88,13 @@ export const Course = () => {
               <Button
                 text="Записаться на тренировку"
                 type="submit"
-                onClick={ popUpEvent }
+                onClick={popUpEvent}
               />
             </Styled.CourseFooterMain>
             <Phone />
           </Styled.CourseFooter>
         </>
-      ) }
+      )}
     </Styled.CourseContainer>
   );
 };
