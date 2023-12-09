@@ -37,19 +37,23 @@ export const CourseBtnEnter = styled.button`
 export const CourseContainer = styled.div`
     display: flex;
     flex-flow: column;
+    gap: 75px;
     height: 100%;
     width: 100%;
 `;
 
-export const CourseImage = styled.img``;
-
+export const CourseImage = styled.img`
+    object-fit: fill;
+    width: 100%;
+`;
 
 export const CourseBanner = styled.div`
     position: relative;
     border-radius: 30px;
-    width: 1160px;
-    height: 310px;
-    background-color: rgb(255, 255, 255)`;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255)
+`;
 
 export const CourseTitle = styled.span`
     position: absolute;
@@ -59,23 +63,27 @@ export const CourseTitle = styled.span`
     line-height: normal;
 `;
 
-export const CourseText = styled.div`
+export const CourseBlock = styled.div`
     font-family: inherit;
     font-size: 2rem;
-    margin-top: 75px;
     margin-bottom: 40px;
-    `;
+`;
+
+export const CourseText = styled.div`
+    font-family: inherit;
+    font-size: 40px;
+    margin-bottom: 40px;
+`;
 
 export const CourseAllPoints = styled.div`
     display: flex;
-    width: fit-content;
-    gap: 87px;
-    `;
+    justify-content: space-between;
+`;
 
 export const CoursePoint = styled.div`
     display: flex;
     gap: 24px;
-    `;
+`;
 
 export const CourseBullet = styled.div`
     border-radius: 34px;
@@ -86,16 +94,17 @@ export const CourseBullet = styled.div`
     align-items: center;
     width: 67px;
     height: 67px;
-    font-size: 2rem`;
+    font-size: 2rem
+`;
 
 export const CoursePointText = styled.li`
     list-style-type: none;
     width: 244px;
     font-size: 1.5rem;
-    `;
+`;
 
 export const CourseDirection = styled.div`
-column-count: 2
+    column-count: 2
 `;
 
 export const CourseDirPoint = styled.li`
@@ -103,38 +112,31 @@ export const CourseDirPoint = styled.li`
 `;
 
 export const CourseInfo = styled.div`
-    margin-top: 75px;
-    width: 1160px;
+    width: 100%;
     font-size: 24px;
 `;
 
 export const CourseFooter = styled.div`
-    position: relative;
-    margin-top: 75px;
+    display: flex;
+    border-radius: 30px;
+    background: rgb(249, 235, 255);
+    justify-content: space-between;
+    min-height: 300px;
 `;
 
+export const CourseFooterMain = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 31px;
+    padding-left: 52px;
+`;
 export const CourseFooterText = styled.span`
-    position: absolute;
-    width: 823px;
-    font-size: 2rem;
+    color: rgb(0, 0, 0);
+    font-variant-numeric: lining-nums proportional-nums;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 40px;
-    top: 46px;
-    left: 52px;
-`;
-
-export const CourseFooterBtn = styled.button`
-    position: absolute;
-    left: 3.25rem;
-    bottom: 3rem;
-
-    outline: none;
-    border: none;
-    border-radius: 5rem;
-    padding: 12px 1rem 16px;
-    min-width: 17rem;
-    font-family: inherit;
-    font-size: 1.25rem;
-    color: rgb(255, 255, 255);
-    background-color: rgb(88, 14, 162);
-    cursor: pointer;
+    max-width: 823px;
+    padding-top: 46px;
 `;

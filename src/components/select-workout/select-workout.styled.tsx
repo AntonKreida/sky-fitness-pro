@@ -6,31 +6,55 @@ interface ISelectProps {
 }
 
 export const Select = styled.div`
-    width: 444px;
-    height: 626px;
-    padding: 53px 36px 38px;
-    border-radius: 12px;
-    background: #fff;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  justify-content: center;
+`;
+
+export const Progress = styled.div`
+  width: 444px;
+  background-color: #fff;
+  position: absolute;
+  border-radius: 12px;
+  padding: 44px;
+`;
+
+export const SelectTitle = styled.h3`
+  color: #000;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: center;
+  margin-bottom: 40px;
+`;
+
+export const closeBtn = styled.div`
+  position: absolute;
+  z-index: 999;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  cursor: pointer;
+`;
+
+export const SelectList = styled.ul`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-`;
-export const SelectTitle = styled.h3`
-    color: #000;
-    font-variant-numeric: lining-nums proportional-nums;
-    font-size: 32px;
-    font-weight: 400;
-    line-height: 40px;
-`;
-export const SelectList = styled.ul`
-    width: 307px;
-    align-self: flex-end;
-    padding-right: 24px;
-    display: flex;
-    flex-direction: column;
     gap: 12px;
 `;
+
 export const SelectItem = styled.li<ISelectProps>`
     width: 278px;
     height: 76px;
@@ -46,6 +70,7 @@ export const SelectItem = styled.li<ISelectProps>`
         opacity: 0.5;
     }
 `;
+
 export const SelectItemContent = styled.div`
     width: 223px;
     display: flex;
@@ -53,6 +78,7 @@ export const SelectItemContent = styled.div`
     align-items: center;
     gap: 6px;
 `;
+
 export const SelectItemContentTitle = styled.h4<ISelectProps>`
     color: ${({ $color }) => $color};
     text-align: center;
@@ -65,6 +91,7 @@ export const SelectItemContentTitle = styled.h4<ISelectProps>`
     align-items: center;
     gap: 11px;
 `;
+
 export const SelectItemContentText = styled.p<ISelectProps>`
     color: ${({ $color }) => $color};
     text-align: center;

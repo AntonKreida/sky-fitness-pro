@@ -4,15 +4,19 @@ import styled from 'styled-components';
 export const Button = styled.button`
     width: 275px;
     height: 52px;
-    border: none;
     border-radius: 46px;
-    background: #580ea2;
-    color: #fff;
+    background: rgb(88, 14, 162);
+    color: rgb(255, 255, 255);
     font-variant-numeric: lining-nums proportional-nums;
+    font-family: StratosLCWeb-Regular, sans-serif;
     font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.05px;
-    transition: all 0.5s;
+    outline: none;
+    border: none;
+    cursor: pointer;
 
     &:hover {
         background: #3f007d;
