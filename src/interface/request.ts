@@ -1,4 +1,3 @@
-type TUserID = number | string;
 type TCourseID = number | string;
 
 export interface IRequestDataForAddCourse {
