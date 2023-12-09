@@ -1,26 +1,27 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useGetByCourseIdQuery } from '@redux/';
+import { Popup } from '@components/';
+import { useGetByCourseIdQuery, getUser } from '@redux/';
+import { Button } from '@shared/';
+import { useAppSelector } from '@hook/';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
 import BannerYoga from '@assets/images/banner-yoga.svg';
 import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
+import { ReactComponent as Phone } from '@assets/images/phone.svg';
+import { patchAddCourse } from '@api/';
 
-import { Popup } from '../../components/main-content/ui/pop-up/pop-up';
-import { ReactComponent as Phone } from '../../assets/images/phone.svg';
-import { Button } from '../../shared/button/button';
 import * as Styled from './course.styled';
 
 
 export const Course = () => {
+  const { id } = useParams();
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
 
-  const params = useParams();
-  const pageId = params.id;
-
-  const { data, isLoading } = useGetByCourseIdQuery(pageId as string);
+  const { data, isLoading } = useGetByCourseIdQuery(id as string);
+  const userData = useAppSelector(getUser);
 
   const bannerName = {
     Стретчинг: bannerStretching,
@@ -30,13 +31,19 @@ export const Course = () => {
     'Степ-аэробика': bannerStepAerobic,
   };
 
+  const handlerOnClickAddCourse = async () => {
+    const dataForRequest = {
+      [`${data?._id}`]: {
+        workouts: data?.workouts as string[],
+      }
+    };
 
-  const popUpEvent = () => {
-    setOkPopupOpen(true);
-
-    setTimeout(() => {
+    try {
+      await patchAddCourse(dataForRequest, userData?.id as string);
+      setOkPopupOpen(true);
+    } catch {
       setOkPopupOpen(false);
-    }, 2000);
+    }
   };
 
 
@@ -87,8 +94,8 @@ export const Course = () => {
               </Styled.CourseFooterText>
               <Button
                 text="Записаться на тренировку"
-                type="submit"
-                onClick={ popUpEvent }
+                type="button"
+                onClick={ handlerOnClickAddCourse }
               />
             </Styled.CourseFooterMain>
             <Phone />

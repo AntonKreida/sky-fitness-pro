@@ -36,8 +36,8 @@ export const ProfileCourses = styled.div`
     gap: 60px;
 `;
 export const ProfileCoursesList = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 40px;
 `;
 export const ProfileCourseItem = styled.li`

@@ -16,7 +16,7 @@ export const coursesApi = createApi({
       query: () => 'workouts.json',
     }),
     getByCourseId: builder.query<ICourse, string>({
-      query: (id) => `courses/${id}.json`,
+      query: (id: string) => `courses/${id}.json`,
     })
   }),
 });

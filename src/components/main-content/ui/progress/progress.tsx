@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
 import { IExercise } from '@/interface';
+import { useAuth } from '@hook/';
 
-import { useAuth } from '../../../../hooks/use-auth';
 import * as S from './progress.styled';
 import { Popup } from '../pop-up';
 

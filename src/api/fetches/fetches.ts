@@ -1,11 +1,13 @@
+import { IRequestDataForAddCourse } from '@/interface';
+
 import { base } from '../base';
 
-
-// ADD USER IN COURSE
-export const patchAddUserInCourse = async (idCourse: string, user: string) => {
-  const { data } = await base.patch<string>(`/course/${idCourse}/users.json`, {
-    [user]: true,
-  });
-
-  return data;
+// ADD COURSE
+export const patchAddCourse = async (dataUserForCourse: IRequestDataForAddCourse, idUser: number | string) => {
+  try {
+    const { data} = await base.patch<IRequestDataForAddCourse>(`/usersActiveCourse/${idUser}.json`, dataUserForCourse);
+    return data;
+  } catch {
+    return new Error('Что-то пошло не так! Попробуйте позже!');
+  }
 };
