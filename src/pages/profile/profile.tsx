@@ -21,6 +21,7 @@ export const Profile = () => {
   const allCourses: ICourse[] = [];
 
   const [open, setOpen] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
 
   if (data) {
     const keys = Object.keys(data);
@@ -35,8 +36,9 @@ export const Profile = () => {
     'Степ-аэробика': cardStepAerobic,
   };
 
-  const openMenu = () => {
+  const openMenu = (workouts: string[]) => {
     setOpen((prev) => !prev);
+    if (workouts) { setSelectedCourse(workouts); }
   };
 
   return (
@@ -54,18 +56,17 @@ export const Profile = () => {
       <Styled.ProfileCourses>
         <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
         <Styled.ProfileCoursesList>
-          {allCourses?.map(({ _id, nameRU }) => (
+          {allCourses?.map(({ _id, nameRU, workouts }) => (
             <Styled.ProfileCourseItem key={String(_id)}>
               <Styled.ProfileCourseItemTitle>{nameRU}</Styled.ProfileCourseItemTitle>
-              { /* @ts-ignore lalalla */}
-              <Styled.ProfileCourseItemImg alt="Card" src={`${bannerName[nameRU]}`} />
+              <Styled.ProfileCourseItemImg alt="Card" src={`${bannerName[nameRU as keyof typeof bannerName]}`} />
               <Styled.ProfileCourseItemButton>
-                <ButtonGo text="Перейти →" type="button" onClick={openMenu} />
+                <ButtonGo text="Перейти →" type="button" onClick={() => openMenu(workouts)} />
               </Styled.ProfileCourseItemButton>
             </Styled.ProfileCourseItem>
           ))}
           {open
-            ? <SelectWorkout setOpen={setOpen} />
+            ? <SelectWorkout selectedCourse={selectedCourse} setOpen={setOpen} />
             : null}
         </Styled.ProfileCoursesList>
       </Styled.ProfileCourses>

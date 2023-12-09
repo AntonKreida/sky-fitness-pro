@@ -45,7 +45,7 @@ export const Course = () => {
       { isLoading ? <p>Загрузка...</p> : (
         <>
           { okPopupOpen
-            ? <Popup text="Ваш прогресс засчитан!" />
+            ? <Popup text="Вы успешно подписались на курс!" />
             : null }
           <Styled.CourseBanner>
             <Styled.CourseTitle>{ data?.nameRU }</Styled.CourseTitle>
