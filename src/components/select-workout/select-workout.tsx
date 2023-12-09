@@ -7,7 +7,8 @@ import { WORKOUTS } from './lib/MockData';
 
 
 interface ISelect {
-  setOpen: (prev: any) => void; // fix type
+  // @ts-ignore later
+  setOpen: (prev) => void;
 }
 
 
@@ -19,7 +20,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
   return (
     <S.Select>
       <S.Progress>
-        <S.SelectTitle>Мой прогресс</S.SelectTitle>
+        <S.SelectTitle>Выберите тренировку</S.SelectTitle>
         <S.closeBtn onClick={toggleClose}>
           <svg
             fill="#000000"
@@ -61,6 +62,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
 
           </svg>
         </S.closeBtn>
+
         <S.SelectList>
           {WORKOUTS.map(({
             id, title, text, isCompleted
@@ -78,6 +80,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
             </S.SelectItem>
           ))}
         </S.SelectList>
+
       </S.Progress>
     </S.Select>
   );

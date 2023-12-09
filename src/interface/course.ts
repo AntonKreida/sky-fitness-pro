@@ -8,3 +8,15 @@ export interface ICourse {
   order: number;
   workouts: string[];
 }
+export interface IExercise {
+  name: string;
+  quantity: number;
+  workout: string;
+}
+export interface IWorkout {
+  _id: string;
+  course: string;
+  name: string;
+  video: string;
+  exercises?: IExercise[];
+}
