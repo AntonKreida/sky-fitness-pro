@@ -36,5 +36,6 @@ export const {
   useGetAllCoursesQuery,
   useGetAllAddedCoursesQuery,
   useGetAllWorkoutsQuery,
-  useGetByCourseIdQuery
+  useGetByCourseIdQuery,
+  useGetAllAddedWorkoutsQuery
 } = coursesApi;

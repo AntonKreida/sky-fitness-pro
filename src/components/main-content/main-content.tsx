@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 
 import { IWorkout } from '@/interface';
 
-import { useGetAllWorkoutsQuery } from '../../redux/course-api/courses-api';
+import { getUser } from '../../redux/selectors/selectors';
+import { useAppSelector } from '../../hook/api';
+import { calculatePercentage } from '../../utils/calculatePercent';
+import { useGetAllAddedWorkoutsQuery } from '../../redux/course-api/courses-api';
 import { Button } from '../../shared/button/button';
 import * as Styled from './styled.main-content';
 import { MyProgress } from './ui/progress';
@@ -12,28 +15,29 @@ import { MyProgress } from './ui/progress';
 export const MainContent = () => {
   const params = useParams();
   const pageId = params.id;
+  const userName = useAppSelector(getUser);
 
-  const { data = [] } = useGetAllWorkoutsQuery(20);
+
+  // @ts-ignore later
+  const { data: userWorkouts } = useGetAllAddedWorkoutsQuery(userName.id);
 
   const allWorkouts: IWorkout[] = [];
-  if (data) {
-    const keys = Object.keys(data);
-    keys.forEach((key: any) => allWorkouts.push(data[key]));
+
+  if (userWorkouts) {
+    const keys = Object.keys(userWorkouts);
+    keys.forEach((key: any) => allWorkouts.push(userWorkouts[key]));
   }
 
   const selectedWorkout = allWorkouts?.find((item) => item._id === pageId);
 
-  // @ts-ignore later
-  const selectedWorkoutId = allWorkouts.indexOf(selectedWorkout);
 
   const exercises = selectedWorkout?.exercises;
+  console.log(exercises);
   const [open, setOpen] = useState(false);
 
   const openMenu = () => {
     setOpen((prev) => !prev);
   };
-
-  const getNumberOfWorkout = () => selectedWorkoutId + 1;
 
   return (
     <Styled.MainContentWrapper>
@@ -79,7 +83,6 @@ export const MainContent = () => {
               <MyProgress
                 exercises={exercises}
                 open={open}
-                selectedWorkoutId={selectedWorkoutId}
                 setOpen={setOpen}
               />
             )
@@ -88,7 +91,7 @@ export const MainContent = () => {
 
         <Styled.MainContentProgressWrapper>
           <Styled.MainContentProgressTitle>
-            Мои прогресс по тренировке  {getNumberOfWorkout()}:
+            Мои прогресс по тренировкам:
           </Styled.MainContentProgressTitle>
 
           <Styled.MainContentProgressBarsWrapper>
@@ -99,7 +102,13 @@ export const MainContent = () => {
                     {item.workout}
                   </Styled.MainContentProgressBarName>
                   <Styled.MainContentProgressBarStrip>
-                    <Styled.MainTextPercent>10%</Styled.MainTextPercent>
+                    <Styled.MainTextPercent>
+                      {calculatePercentage(
+                        item.repeat,
+                        item.quantity,
+                      )}
+                      %
+                    </Styled.MainTextPercent>
                   </Styled.MainContentProgressBarStrip>
                 </Styled.MainContentProgressBarContainer>
               ))}

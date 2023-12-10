@@ -15,7 +15,6 @@ interface ISelect {
   selectedCourse: string[] | undefined;
 }
 
-
 export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
   const navigate = useNavigate();
   const { data: usersWorkouts } = useGetAllWorkoutsQuery(20);
@@ -28,7 +27,6 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
   }
 
   const selectedWorkout = allWorkouts?.filter((i) => selectedCourse?.includes(i._id));
-  console.log(selectedWorkout);
 
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);

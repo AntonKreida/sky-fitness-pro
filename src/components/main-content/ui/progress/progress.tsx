@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useState } from 'react';
 
 import { IExercise } from '@/interface';
@@ -7,31 +8,31 @@ import * as S from './progress.styled';
 import { Popup } from '../pop-up';
 
 
+const baseUrl = 'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app';
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
-  selectedWorkoutId: number;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises, selectedWorkoutId
+  open, setOpen, exercises
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
   const [exerciseResults, setExerciseResults] = useState({});
   const { id } = useAuth();
 
-  const handleInputChange = (exerciseName: string, value: number) => {
-    if (value < 0) {
+  const handleInputChange = (exerciseName: string, handleValue: number) => {
+    console.log(exerciseName);
+    if (handleValue < 0) {
       /* eslint-disable */
-      value = 0;
+      handleValue = 0;
     }
     setExerciseResults((prevResults) => ({
       ...prevResults,
-      [exerciseName]: value,
+      [exerciseName]: handleValue,
     }));
   };
-  console.log(okPopupOpen);
 
   const handleSendResults = async () => {
     setOkPopupOpen(true);
@@ -39,7 +40,6 @@ export const MyProgress: React.FC<Props> = ({
     setTimeout(() => {
       setOpen(false)
     }, 2000)
-
 
     // try {
     //   const response = await axios.patch(
@@ -120,7 +120,7 @@ export const MyProgress: React.FC<Props> = ({
                         placeholder="Введите числовое значение"
                         type="number"
                         // @ts-ignore later
-                        onChange={(e) => handleInputChange(item, e.target.value)}
+                        onChange={(e) => handleInputChange(item.workout, e.target.value)}
                       />
                     </S.li>
                   ))}
