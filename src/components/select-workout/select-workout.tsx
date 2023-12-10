@@ -18,15 +18,17 @@ interface ISelect {
 
 export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
   const navigate = useNavigate();
-  const { data } = useGetAllWorkoutsQuery(20);
+  const { data: usersWorkouts } = useGetAllWorkoutsQuery(20);
+
   const allWorkouts: IWorkout[] = [];
 
-  if (data) {
-    const keys = Object.keys(data);
-    keys.forEach((key: any) => allWorkouts.push(data[key]));
+  if (usersWorkouts) {
+    const keys = Object.keys(usersWorkouts);
+    keys.forEach((key: any) => allWorkouts.push(usersWorkouts[key]));
   }
 
   const selectedWorkout = allWorkouts?.filter((i) => selectedCourse?.includes(i._id));
+  console.log(selectedWorkout);
 
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
@@ -79,19 +81,19 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
         </S.closeBtn>
 
         <S.SelectList>
-          { selectedWorkout.map(({ course, name, _id }) => (
+          {selectedWorkout.map(({ course, name, _id }) => (
             <S.SelectItem
-              key={ _id }
+              key={_id}
               $color="#000"
-              onClick={ () => navigate(`/sky-fitness-pro/workout/${_id}`) }
+              onClick={() => navigate(`/sky-fitness-pro/workout/${_id}`)}
             >
               <S.SelectItemContent>
                 <S.SelectItemContentTitle $color="#000">
-                  { name }
-                  { /* {isCompleted && <IconStatusOk />} */ }
+                  {name}
+                  { /* {isCompleted && <IconStatusOk />} */}
                 </S.SelectItemContentTitle>
                 <S.SelectItemContentText $color="#000">
-                  { course }
+                  {course}
                 </S.SelectItemContentText>
               </S.SelectItemContent>
             </S.SelectItem>
@@ -107,7 +109,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
             //     </S.SelectItemContentText>
             //   </S.SelectItemContent>
             // </S.SelectItem>
-          )) }
+          ))}
         </S.SelectList>
 
       </S.Progress>

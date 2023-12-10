@@ -1,6 +1,7 @@
 export interface IExercise {
   name: string;
   quantity: number;
+  repeat: number;
   workout: string;
 }
 

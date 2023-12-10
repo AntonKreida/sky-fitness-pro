@@ -11,7 +11,7 @@ import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { useAppDispatch } from '@hook/';
 
 import { ButtonReg } from './ui';
-import { removeUser, setUser } from '../../redux/user-api/userSlice';
+import { setUser } from '../../redux/user-api/userSlice';
 import * as Styled from './login.styled';
 
 
@@ -55,10 +55,6 @@ export const Login = () => {
     handleLogin();
   };
 
-  const handleLogout = () => {
-    navigate('/sky-fitness-pro', { replace: true });
-    dispatch(removeUser());
-  };
 
   return (
     <ContainerAuth>
@@ -82,7 +78,6 @@ export const Login = () => {
         />
       </FormAuth>
       <Button text="Войти" type="button" onClick={handleAuth} />
-      <Button text="Выход" type="button" onClick={handleLogout} />
 
       <ButtonReg />
       {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}

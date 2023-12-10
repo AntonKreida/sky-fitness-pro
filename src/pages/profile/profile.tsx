@@ -9,7 +9,9 @@ import cardDanceFitness from '@assets/images/card-dancing-fit.png';
 import { useAppSelector } from '@hook/';
 import { SelectWorkout } from '@components/';
 
-import { useGetAllAddedCoursesQuery } from '../../redux/course-api/courses-api';
+import { patchAddWorkout } from '../../api/fetches/fetches';
+import { getUser } from '../../redux/selectors/selectors';
+import { useGetAllAddedCoursesQuery, useGetAllWorkoutsQuery } from '../../redux/course-api/courses-api';
 import * as Styled from './profile.styled';
 
 
@@ -19,20 +21,23 @@ interface AddedCourse {
 }
 
 export const Profile = () => {
-  const userName = useAppSelector((store) => store.user);
+  const userName = useAppSelector(getUser);
+
   const allCourses: AddedCourse[] = [];
 
   // @ts-ignore later
-  const { data } = useGetAllAddedCoursesQuery(userName.id);
+  const { data: courses } = useGetAllAddedCoursesQuery(userName.id);
+  const { data: workoutsData } = useGetAllWorkoutsQuery(20);
+  const AllWorkouts = workoutsData;
+
   const [open, setOpen] = useState<boolean>(false);
   const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
 
-  if (data) {
-    const keys = Object.keys(data);
+  if (courses) {
+    const keys = Object.keys(courses);
     // @ts-ignore later
-    keys.forEach((key: any) => allCourses.push(data[key]));
+    keys.forEach((key: any) => allCourses.push(courses[key]));
   }
-
   const bannerName = {
     Стретчинг: cardStretching,
     Бодифлекс: cardBodyFlex,
@@ -41,7 +46,14 @@ export const Profile = () => {
     'Степ-аэробика': cardStepAerobic,
   };
 
-  const openMenu = (workouts: string[]) => {
+  const openMenu = async (workouts: string[]) => {
+    try {
+      // @ts-ignore later
+      await patchAddWorkout(AllWorkouts, userName.id as string);
+    } catch {
+      console.error('error');
+    }
+
     setOpen((prev) => !prev);
     if (workouts) { setSelectedCourse(workouts); }
   };

@@ -10,8 +10,8 @@ interface IUser {
 
 
 const initialState: IUser = {
-  email: '',
-  id: '',
+  email: null,
+  id: null,
 };
 
 interface IPayload {
