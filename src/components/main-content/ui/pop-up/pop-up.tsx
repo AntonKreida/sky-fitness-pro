@@ -7,7 +7,6 @@ interface IProps {
   text: string;
 }
 
-
 export const Popup: React.FC<IProps> = ({ text }) => (
   <S.Container>
     <S.ProgressPopup>
