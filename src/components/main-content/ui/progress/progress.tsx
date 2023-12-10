@@ -1,8 +1,6 @@
-import axios from 'axios';
 import { useState } from 'react';
 
-import { IExercise } from '@/interface';
-import { useAuth } from '@hook/';
+import { IExercise } from '@interface/';
 
 import * as S from './progress.styled';
 import { Popup } from '../pop-up';
@@ -19,44 +17,17 @@ export const MyProgress: React.FC<Props> = ({
   open, setOpen, exercises
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
-  const [exerciseResults, setExerciseResults] = useState({});
-  const { id } = useAuth();
 
-  const handleInputChange = (exerciseName: string, handleValue: number) => {
+  const handleInputChange = (exerciseName: IExercise, handleValue: string) => {
     console.log(exerciseName);
-    if (handleValue < 0) {
-      /* eslint-disable */
-      handleValue = 0;
-    }
-    setExerciseResults((prevResults) => ({
-      ...prevResults,
-      [exerciseName]: handleValue,
-    }));
   };
 
   const handleSendResults = async () => {
     setOkPopupOpen(true);
 
     setTimeout(() => {
-      setOpen(false)
-    }, 2000)
-
-    // try {
-    //   const response = await axios.patch(
-    //     `${baseUrl}${selectedWorkoutId}/users.json`,
-    //     {
-    //       [id]: exerciseResults,
-    //     },
-    //   );
-
-
-    //   setTimeout(() => {
-    //     setOpen(!open);
-    //     window.location.reload();
-    //   }, 1000);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+      setOpen(false);
+    }, 2000);
   };
 
   return (
@@ -109,35 +80,38 @@ export const MyProgress: React.FC<Props> = ({
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
             {exercises
-              ? <>
-                <S.ProgressForm>
-                  {exercises?.map((item, index) => (
-                    <S.li key={index}>
-                      <S.ProgressText>
-                        {`Сколько раз вы сделали упражнение ${item.workout} ?`}
-                      </S.ProgressText>
-                      <S.ProgressInput
-                        placeholder="Введите числовое значение"
-                        type="number"
-                        // @ts-ignore later
-                        onChange={(e) => handleInputChange(item.workout, e.target.value)}
-                      />
-                    </S.li>
-                  ))}
-                </S.ProgressForm>
-                <S.ProgressForButton>
-                  <S.ProgressButton onClick={handleSendResults}>
-                    Отправить
-                  </S.ProgressButton>
-                </S.ProgressForButton>
-              </>
-              :
-              <S.nullExsecises>
-                Тренировок для выполнения не найдено.
-                <br />
-                Выполняйте упражнения из видео!
-              </S.nullExsecises>
-            }
+              ? (
+                <>
+                  <S.ProgressForm>
+                    {exercises?.map((item) => (
+                      <S.li key={item.name}>
+                        <S.ProgressText>
+                          {`Сколько раз вы сделали упражнение ${item.workout} ?`}
+                        </S.ProgressText>
+                        <S.ProgressInput
+                          name={`${item.name}`}
+                          placeholder="Введите числовое значение"
+                          type="number"
+                          onChange={(e) => handleInputChange(item, e.currentTarget.value)}
+                        />
+                      </S.li>
+                    ))}
+                  </S.ProgressForm>
+
+                  <S.ProgressForButton>
+                    <S.ProgressButton onSubmit={handleSendResults}>
+                      Отправить
+                    </S.ProgressButton>
+                  </S.ProgressForButton>
+                </>
+              )
+              : (
+                <S.nullExsecises>
+                  Тренировок для выполнения не найдено.
+                  <br />
+                  Выполняйте упражнения из видео!
+                </S.nullExsecises>
+              )}
           </>
         )}
       </S.Progress>
