@@ -7,7 +7,7 @@ import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { Button, Input } from '@shared/';
 import { useAppDispatch } from '@hook/';
-import { setUser } from '@/redux';
+import { setUser } from '@redux/';
 
 import * as Styled from '../login/login.styled';
 
