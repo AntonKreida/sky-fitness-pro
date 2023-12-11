@@ -41,6 +41,7 @@ export const userSlice = createSlice({
     removeUser(state) {
       state.email = null;
       state.id = null;
+
       localStorage.removeItem(AUTH_DATA);
     },
   },

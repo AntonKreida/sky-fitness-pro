@@ -4,16 +4,15 @@ import {
   getAuth, signInWithEmailAndPassword
 } from 'firebase/auth';
 
-import { Button } from '@shared/';
+import { Button, Input } from '@shared/';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
+import { useAppDispatch } from '@/hooks/api';
+import { removeUser, setUser } from '@redux/';
 
-import { Input } from '../../shared/input/input';
-import { useAppDispatch } from '../../hooks/api';
-import { ButtonReg } from './ui';
-import { removeUser, setUser } from '../../redux/user-api/userSlice';
 import * as Styled from './login.styled';
+import { ButtonReg } from './ui';
 
 
 export const Login = () => {
@@ -70,23 +69,23 @@ export const Login = () => {
         <Input
           placeholder="Логин"
           type="text"
-          onChange={(event) => {
+          onChange={ (event) => {
             setEmail(event.target.value);
-          }}
+          } }
         />
         <Input
           placeholder="Пароль"
           type="password"
-          onChange={(event) => {
+          onChange={ (event) => {
             setPassword(event.target.value);
-          }}
+          } }
         />
       </FormAuth>
-      <Button text="Войти" type="button" onClick={handleAuth} />
-      <Button text="Выход" type="button" onClick={handleLogout} />
+      <Button text="Войти" type="button" onClick={ handleAuth } />
+      <Button text="Выход" type="button" onClick={ handleLogout } />
 
       <ButtonReg />
-      {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}
+      { error && <Styled.LoginError>Произошла ошибка: { error }</Styled.LoginError> }
     </ContainerAuth>
   );
 };

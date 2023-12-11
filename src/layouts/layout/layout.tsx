@@ -1,7 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
 
-import { Header } from '@components/';
-
+import { Header } from '../../components/header/header';
 import * as Styled from './layout.styled';
 
 
