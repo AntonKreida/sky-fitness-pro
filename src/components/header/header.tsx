@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ButtonHeader } from '@shared/';
+import { useAuth } from '@hook/';
 
-import { useAuth } from '../../hooks/use-auth';
-import { BurgerMenu } from '../../layouts/burger-menu/burger-menu';
+import { BurgerMenu } from '../burger-menu';
 import * as Styled from './header.styled';
 
 

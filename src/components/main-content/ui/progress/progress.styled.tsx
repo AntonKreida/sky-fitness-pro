@@ -36,7 +36,7 @@ export const ProgressTitle = styled.h1`
   margin-top: 36px;
 `;
 
-export const ProgressForm = styled.div``;
+export const ProgressForm = styled.form``;
 
 export const ProgressText = styled.p`
   color: #000;

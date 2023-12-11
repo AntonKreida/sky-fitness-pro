@@ -1,62 +1,33 @@
 import { useState } from 'react';
 
-import { IExercise } from '@/interface';
+import { IExercise } from '@interface/';
 
-import { useAuth } from '../../../../hooks/use-auth';
 import * as S from './progress.styled';
 import { Popup } from '../pop-up';
 
 
+const baseUrl = 'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app';
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
-  selectedWorkoutId: number;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises, selectedWorkoutId
+  open, setOpen, exercises
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
-  const [exerciseResults, setExerciseResults] = useState({});
-  const { id } = useAuth();
 
-  const handleInputChange = (exerciseName: string, value: number) => {
-    if (value < 0) {
-      /* eslint-disable */
-      value = 0;
-    }
-    setExerciseResults((prevResults) => ({
-      ...prevResults,
-      [exerciseName]: value,
-    }));
+  const handleInputChange = (exerciseName: IExercise, handleValue: string) => {
+    console.log(exerciseName);
   };
-  console.log(okPopupOpen);
 
   const handleSendResults = async () => {
     setOkPopupOpen(true);
 
     setTimeout(() => {
-      setOpen(false)
-    }, 2000)
-
-
-    // try {
-    //   const response = await axios.patch(
-    //     `${baseUrl}${selectedWorkoutId}/users.json`,
-    //     {
-    //       [id]: exerciseResults,
-    //     },
-    //   );
-
-
-    //   setTimeout(() => {
-    //     setOpen(!open);
-    //     window.location.reload();
-    //   }, 1000);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+      setOpen(false);
+    }, 2000);
   };
 
   return (
@@ -109,35 +80,38 @@ export const MyProgress: React.FC<Props> = ({
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
             {exercises
-              ? <>
-                <S.ProgressForm>
-                  {exercises?.map((item, index) => (
-                    <S.li key={index}>
-                      <S.ProgressText>
-                        {`Сколько раз вы сделали упражнение ${item.workout} ?`}
-                      </S.ProgressText>
-                      <S.ProgressInput
-                        placeholder="Введите числовое значение"
-                        type="number"
-                        // @ts-ignore later
-                        onChange={(e) => handleInputChange(item, e.target.value)}
-                      />
-                    </S.li>
-                  ))}
-                </S.ProgressForm>
-                <S.ProgressForButton>
-                  <S.ProgressButton onClick={handleSendResults}>
-                    Отправить
-                  </S.ProgressButton>
-                </S.ProgressForButton>
-              </>
-              :
-              <S.nullExsecises>
-                Тренировок для выполнения не найдено.
-                <br />
-                Выполняйте упражнения из видео!
-              </S.nullExsecises>
-            }
+              ? (
+                <>
+                  <S.ProgressForm>
+                    {exercises?.map((item) => (
+                      <S.li key={item.name}>
+                        <S.ProgressText>
+                          {`Сколько раз вы сделали упражнение ${item.workout} ?`}
+                        </S.ProgressText>
+                        <S.ProgressInput
+                          name={`${item.name}`}
+                          placeholder="Введите числовое значение"
+                          type="number"
+                          onChange={(e) => handleInputChange(item, e.currentTarget.value)}
+                        />
+                      </S.li>
+                    ))}
+                  </S.ProgressForm>
+
+                  <S.ProgressForButton>
+                    <S.ProgressButton onSubmit={handleSendResults}>
+                      Отправить
+                    </S.ProgressButton>
+                  </S.ProgressForButton>
+                </>
+              )
+              : (
+                <S.nullExsecises>
+                  Тренировок для выполнения не найдено.
+                  <br />
+                  Выполняйте упражнения из видео!
+                </S.nullExsecises>
+              )}
           </>
         )}
       </S.Progress>
