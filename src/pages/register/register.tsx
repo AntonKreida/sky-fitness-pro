@@ -5,11 +5,10 @@ import { useState } from 'react';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
-import { Button } from '@shared/';
+import { Button, Input } from '@shared/';
 import { useAppDispatch } from '@hook/';
+import { setUser } from '@/redux';
 
-import { setUser } from '../../redux/user-api/userSlice';
-import { Input } from '../../shared/input/input';
 import * as Styled from '../login/login.styled';
 
 

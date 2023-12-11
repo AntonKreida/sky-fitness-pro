@@ -9,9 +9,9 @@ import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { useAppDispatch } from '@hook/';
+import { setUser } from '@/redux';
 
 import { ButtonReg } from './ui';
-import { setUser } from '../../redux/user-api/userSlice';
 import * as Styled from './login.styled';
 
 
@@ -65,22 +65,22 @@ export const Login = () => {
         <Input
           placeholder="Логин"
           type="text"
-          onChange={(event) => {
+          onChange={ (event) => {
             setEmail(event.target.value);
-          }}
+          } }
         />
         <Input
           placeholder="Пароль"
           type="password"
-          onChange={(event) => {
+          onChange={ (event) => {
             setPassword(event.target.value);
-          }}
+          } }
         />
       </FormAuth>
-      <Button text="Войти" type="button" onClick={handleAuth} />
+      <Button text="Войти" type="button" onClick={ handleAuth } />
 
       <ButtonReg />
-      {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}
+      { error && <Styled.LoginError>Произошла ошибка: { error }</Styled.LoginError> }
     </ContainerAuth>
   );
 };
