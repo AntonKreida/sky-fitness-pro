@@ -38,6 +38,13 @@ export const MainContent = () => {
     setOpen((prev) => !prev);
   };
 
+  const progressColors = [
+    '#565eef',
+    '#ff6d00',
+    '#9a48f1',
+    '#7cff31'
+  ];
+
   return (
     <Styled.MainContentWrapper>
 
@@ -95,19 +102,25 @@ export const MainContent = () => {
 
           <Styled.MainContentProgressBarsWrapper>
             <Styled.MainContentProgressBarItem>
-              { exercises?.map((item) => (
+              { exercises?.map((item, index) => (
                 <Styled.MainContentProgressBarContainer key={ item.name }>
                   <Styled.MainContentProgressBarName>
                     { item.workout }
                   </Styled.MainContentProgressBarName>
-                  <Styled.MainContentProgressBarStrip>
-                    <Styled.MainTextPercent>
-                      { calculatePercentage(
-                        item.repeat,
-                        item.quantity,
-                      ) }
-                      %
-                    </Styled.MainTextPercent>
+                  <Styled.MainContentProgressBarStrip color={ progressColors[index] }>
+                    <Styled.MainContentProgressBarFulled style={{
+                      width: `${calculatePercentage(item.repeat, item.quantity)}%`,
+                      background: progressColors[index]
+                    }}
+                    >
+                      <Styled.MainTextPercent>
+                        { calculatePercentage(
+                          item.repeat,
+                          item.quantity,
+                        ) }
+                        %
+                      </Styled.MainTextPercent>
+                    </Styled.MainContentProgressBarFulled>
                   </Styled.MainContentProgressBarStrip>
                 </Styled.MainContentProgressBarContainer>
               )) }
