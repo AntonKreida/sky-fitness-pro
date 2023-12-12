@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useState } from 'react';
 
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
@@ -31,7 +31,7 @@ export const Register = () => {
           dispatch(
             setUser({
               email: user.email,
-              id: user.uid
+              id: user.uid,
             }),
           );
         });

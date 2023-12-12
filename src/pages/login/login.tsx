@@ -8,8 +8,8 @@ import { Button, Input } from '@shared/';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
+import { removeUser, setUser } from '@redux/';
 import { useAppDispatch } from '@hook/';
-import { setUser } from '@redux/';
 
 import { ButtonReg } from './ui';
 import * as Styled from './login.styled';
@@ -78,7 +78,6 @@ export const Login = () => {
         />
       </FormAuth>
       <Button text="Войти" type="button" onClick={ handleAuth } />
-
       <ButtonReg />
       { error && <Styled.LoginError>Произошла ошибка: { error }</Styled.LoginError> }
     </ContainerAuth>

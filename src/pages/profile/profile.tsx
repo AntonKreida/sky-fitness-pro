@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button, ButtonGo } from '@shared/';
 import cardStepAerobic from '@assets/images/card-aerobics.png';
@@ -20,6 +21,7 @@ interface AddedCourse {
 }
 
 export const Profile = () => {
+  const navigate = useNavigate();
   const userName = useAppSelector(getUser);
 
   const allCourses: AddedCourse[] = [];
@@ -65,8 +67,8 @@ export const Profile = () => {
           <Styled.ProfileText>Ваш логин: { userName.email }</Styled.ProfileText>
         </Styled.ProfileInfo>
         <Styled.ProfileButtons>
-          <Button text="Редактировать логин" type="button" onClick={ () => console.log('Click change login') } />
-          <Button text="Редактировать пароль" type="button" onClick={ () => console.log('Click change password') } />
+          <Button text="Редактировать логин" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-login', { replace: true }) } />
+          <Button text="Сбросить пароль" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) } />
         </Styled.ProfileButtons>
       </Styled.Profile>
       <Styled.ProfileCourses>
