@@ -68,7 +68,7 @@ export const HomePage = () => {
               <Styled.CardContainer
                 key={ card._id }
                 onClick={ () => {
-                  navigate(`/sky-fitness-pro/course/${card._id}`);
+                  navigate(`/sky-fitness-pro/${card._id}`);
                 } }
               >
                 <Styled.CardImage alt="fitness" src={ handleImg(card.nameRU) } />

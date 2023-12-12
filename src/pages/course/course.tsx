@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Popup } from '@components/';
-import { useGetByCourseIdQuery, getUser } from '@redux/';
+import { useGetByCourseIdQuery, getStateUser } from '@redux/';
 import { Button } from '@shared/';
 import { useAppSelector } from '@hook/';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
@@ -23,7 +23,7 @@ export const Course = () => {
 
   const { data, isLoading } = useGetByCourseIdQuery(id as string);
 
-  const userData = useAppSelector(getUser);
+  const userData = useAppSelector(getStateUser);
 
 
   const bannerName = {

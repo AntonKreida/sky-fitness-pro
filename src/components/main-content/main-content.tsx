@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { IWorkout } from '@interface/';
-import { getUser, useGetAllAddedWorkoutsQuery } from '@redux/';
+import { getStateUser, useGetAllAddedWorkoutsQuery } from '@redux/';
 import { useAppSelector } from '@hook/';
 import { Button } from '@shared/';
 import { calculatePercentage } from '@utils/';
@@ -14,7 +14,7 @@ import { MyProgress } from './ui/progress';
 export const MainContent = () => {
   const params = useParams();
   const pageId = params.id;
-  const userName = useAppSelector(getUser);
+  const userName = useAppSelector(getStateUser);
 
 
   // @ts-ignore later
@@ -29,7 +29,6 @@ export const MainContent = () => {
 
   const selectedWorkout = allWorkouts?.find((item) => item._id === pageId);
 
-
   const exercises = selectedWorkout?.exercises;
   console.log(exercises);
   const [open, setOpen] = useState(false);
@@ -42,7 +41,9 @@ export const MainContent = () => {
     '#565eef',
     '#ff6d00',
     '#9a48f1',
-    '#7cff31'
+    '#7cff31',
+    '#31c8ff'
+
   ];
 
   return (

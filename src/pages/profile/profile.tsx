@@ -10,7 +10,7 @@ import cardDanceFitness from '@assets/images/card-dancing-fit.png';
 import { useAppSelector } from '@hook/';
 import { SelectWorkout } from '@components/';
 import { patchAddWorkout } from '@api/';
-import { getUser, useGetAllAddedCoursesQuery, useGetAllWorkoutsQuery } from '@redux/';
+import { getStateUser, useGetAllAddedCoursesQuery, useGetAllWorkoutsQuery } from '@redux/';
 
 import * as Styled from './profile.styled';
 
@@ -22,7 +22,7 @@ interface AddedCourse {
 
 export const Profile = () => {
   const navigate = useNavigate();
-  const userName = useAppSelector(getUser);
+  const userName = useAppSelector(getStateUser);
 
   const allCourses: AddedCourse[] = [];
 
