@@ -8,6 +8,7 @@ import cardDancingFit from '@assets/images/card-dancing-fit.png';
 import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
+import { ICourse } from '@/interface';
 
 import * as Styled from './home-page.styled';
 
@@ -16,7 +17,7 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetAllCoursesQuery(5);
 
-  const allCourses: any[] = [];
+  const allCourses: ICourse[] = [];
   if (data) {
     const keys = Object.keys(data);
     keys.forEach((key: any) => allCourses.push(data[key]));
@@ -59,25 +60,25 @@ export const HomePage = () => {
           <Styled.SaleStickerTitle>Измени своё <br /> тело за полгода</Styled.SaleStickerTitle>
         </Styled.SaleStickerContainer>
       </Styled.DescriptionContainer>
-      {isLoading
+      { isLoading
         ? <Styled.Paragraph>Loading...</Styled.Paragraph>
         : (
           <Styled.CardsContainer>
-            {allCourses?.map((card) => (
+            { allCourses?.map((card) => (
               <Styled.CardContainer
-                key={card._id}
-                onClick={() => {
-                  navigate(`/sky-fitness-pro/${card._id}`);
-                }}
+                key={ card._id }
+                onClick={ () => {
+                  navigate(`/sky-fitness-pro/course/${card._id}`);
+                } }
               >
-                <Styled.CardImage alt="fitness" src={handleImg(card.nameRU)} />
-                <Styled.CardTitle>{card.nameRU}</Styled.CardTitle>
+                <Styled.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
+                <Styled.CardTitle>{ card.nameRU }</Styled.CardTitle>
               </Styled.CardContainer>
-            ))}
+            )) }
           </Styled.CardsContainer>
-        )}
+        ) }
 
-      <Styled.Anchor onClick={scrollToTop}>Наверх <span>↑</span> </Styled.Anchor>
+      <Styled.Anchor onClick={ scrollToTop }>Наверх <span>↑</span> </Styled.Anchor>
     </Container>
   );
 };

@@ -1,24 +1,70 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Container } from '@layouts/';
 import { Button, ButtonGo } from '@shared/';
-import { getStateUser } from '@redux/';
-import { useAppSelector } from '@/hooks/api';
+import cardStepAerobic from '@assets/images/card-aerobics.png';
+import cardYoga from '@assets/images/card-yoga.png';
+import cardStretching from '@assets/images/card-stretching.png';
+import cardBodyFlex from '@assets/images/card-body-flex.png';
+import cardDanceFitness from '@assets/images/card-dancing-fit.png';
+import { useAppSelector } from '@hook/';
+import { SelectWorkout } from '@components/';
+import { patchAddWorkout } from '@api/';
+import { getUser, useGetAllAddedCoursesQuery, useGetAllWorkoutsQuery } from '@redux/';
 
 import * as Styled from './profile.styled';
-import * as Mock from './lib/mock-data';
 
+
+interface AddedCourse {
+  name: string;
+  workouts: string[];
+}
 
 export const Profile = () => {
   const navigate = useNavigate();
-  const { email } = useAppSelector(getStateUser);
+  const userName = useAppSelector(getUser);
+
+  const allCourses: AddedCourse[] = [];
+
+  // @ts-ignore later
+  const { data: courses } = useGetAllAddedCoursesQuery(userName.id);
+  const { data: workoutsData } = useGetAllWorkoutsQuery(20);
+  const AllWorkouts = workoutsData;
+
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
+
+  if (courses) {
+    const keys = Object.keys(courses);
+    // @ts-ignore later
+    keys.forEach((key: any) => allCourses.push(courses[key]));
+  }
+  const bannerName = {
+    Стретчинг: cardStretching,
+    Бодифлекс: cardBodyFlex,
+    Йога: cardYoga,
+    'Танцевальный фитнес': cardDanceFitness,
+    'Степ-аэробика': cardStepAerobic,
+  };
+
+  const openMenu = async (workouts: string[]) => {
+    try {
+      // @ts-ignore later
+      await patchAddWorkout(AllWorkouts, userName.id as string);
+    } catch {
+      console.error('error');
+    }
+
+    setOpen((prev) => !prev);
+    if (workouts) { setSelectedCourse(workouts); }
+  };
 
   return (
-    <Container>
+    <>
       <Styled.Profile>
         <Styled.ProfileTitle>Мой профиль</Styled.ProfileTitle>
         <Styled.ProfileInfo>
-          <Styled.ProfileText>Логин: { email }</Styled.ProfileText>
+          <Styled.ProfileText>Ваш логин: { userName.email }</Styled.ProfileText>
         </Styled.ProfileInfo>
         <Styled.ProfileButtons>
           <Button text="Редактировать логин" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-login', { replace: true }) } />
@@ -28,17 +74,27 @@ export const Profile = () => {
       <Styled.ProfileCourses>
         <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
         <Styled.ProfileCoursesList>
-          { Mock.COURSES.map(({ id, name, img }) => (
-            <Styled.ProfileCourseItem key={ String(id) }>
+          { allCourses?.map(({ name, workouts }) => (
+            <Styled.ProfileCourseItem key={ name }>
               <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
-              <Styled.ProfileCourseItemImg alt="Card" src={ img } />
+              <Styled.ProfileCourseItemImg
+                alt="Card"
+                src={ `${bannerName[name as keyof typeof bannerName]}` }
+              />
               <Styled.ProfileCourseItemButton>
-                <ButtonGo text="Перейти →" type="button" onClick={ () => console.log('Click to button-go') } />
+                <ButtonGo
+                  text="Перейти →"
+                  type="button"
+                  onClick={ () => openMenu(workouts) }
+                />
               </Styled.ProfileCourseItemButton>
             </Styled.ProfileCourseItem>
           )) }
+          { open
+            ? <SelectWorkout selectedCourse={ selectedCourse } setOpen={ setOpen } />
+            : null }
         </Styled.ProfileCoursesList>
       </Styled.ProfileCourses>
-    </Container>
+    </>
   );
 };

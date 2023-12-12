@@ -6,11 +6,10 @@ import { ContainerChangeData } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { FormAuth } from '@components/';
 import { Button, Input } from '@shared/';
-import { useAppDispatch } from '@/hooks/api';
+import { useAppDispatch } from '@hook/';
 import { removeUser } from '@redux/';
 
 import * as Styled from './change.styled';
-
 
 export const ChangeDataLogin = () => {
   const navigate = useNavigate();

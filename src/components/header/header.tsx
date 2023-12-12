@@ -3,9 +3,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { getStateUser } from '@redux/';
 import { ButtonHeader } from '@shared/';
+import { useAuth, useAppSelector } from '@hook/';
+import { ReactComponent as Arrow } from '@assets/icons/arrow.svg';
+import { BurgerMenu } from '../burger-menu';
 
-import { useAppSelector } from '../../hooks/api';
-import { ReactComponent as Arrow } from '../../assets/icons/arrow.svg';
 import * as Styled from './header.styled';
 
 
@@ -13,7 +14,8 @@ interface IHeaderProps {
   currentLocation?: string;
 }
 
-export const Header: FC<IHeaderProps> = ({ currentLocation }) => {
+export const Header: FC<IHeaderProps> = ({ currentLocation, name }) => {
+  const { email } = useAuth();
   const navigate = useNavigate();
   const { id, email } = useAppSelector(getStateUser);
 
@@ -27,13 +29,16 @@ export const Header: FC<IHeaderProps> = ({ currentLocation }) => {
         { currentLocation === '/sky-fitness-pro' ? <Styled.HomePageLogo /> : <Styled.LogoDefault /> }
       </NavLink>
       <Styled.HeaderInfo>
-        { id ? (
+        { id && (
           <>
             <Styled.HeaderInfoAva />
             <Styled.HeaderInfoName>{ email }</Styled.HeaderInfoName>
             <Arrow />
           </>
-        ) : (<ButtonHeader text="Войти" type="button" onClick={ goToAuth } />) }
+        ) }
+        { email
+          ? <BurgerMenu />
+          : <ButtonHeader text="Войти" type="button" onClick={ goToAuth } /> }
       </Styled.HeaderInfo>
     </Styled.Header>
   );

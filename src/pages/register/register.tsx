@@ -1,12 +1,12 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useState } from 'react';
 
-import { useAppDispatch } from '@/hooks/api';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { Button, Input } from '@shared/';
+import { useAppDispatch } from '@hook/';
 import { setUser } from '@redux/';
 
 import * as Styled from '../login/login.styled';

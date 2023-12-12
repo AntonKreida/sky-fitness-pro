@@ -21,13 +21,13 @@ interface IPayload {
 
 const getUserFromLocalStorage = () => {
   const saveCheckedData = localStorage.getItem(AUTH_DATA);
-  const parseSaveData = saveCheckedData ? JSON.parse(saveCheckedData) : null;
+  const parseSaveData = saveCheckedData ? JSON.parse(saveCheckedData) as IUser : initialState;
   return parseSaveData;
 };
 
 export const userSlice = createSlice({
   name: 'user',
-  initialState: getUserFromLocalStorage() ?? initialState,
+  initialState: getUserFromLocalStorage(),
   reducers: {
     setUser(state, action: PayloadAction<IPayload>) {
       const payload = action.payload ?? initialState;

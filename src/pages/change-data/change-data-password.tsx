@@ -7,7 +7,7 @@ import { FormAuth } from '@components/';
 import { ContainerChangeData } from '@layouts/';
 import { Button, Input } from '@shared/';
 import { removeUser } from '@redux/';
-import { useAppDispatch } from '@/hooks/api';
+import { useAppDispatch } from '@hook/';
 
 import * as Styled from './change.styled';
 

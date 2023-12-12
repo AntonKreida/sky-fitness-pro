@@ -8,11 +8,11 @@ import { Button, Input } from '@shared/';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
-import { useAppDispatch } from '@/hooks/api';
 import { removeUser, setUser } from '@redux/';
+import { useAppDispatch } from '@hook/';
 
-import * as Styled from './login.styled';
 import { ButtonReg } from './ui';
+import * as Styled from './login.styled';
 
 
 export const Login = () => {
@@ -55,10 +55,6 @@ export const Login = () => {
     handleLogin();
   };
 
-  const handleLogout = () => {
-    navigate('/sky-fitness-pro', { replace: true });
-    dispatch(removeUser());
-  };
 
   return (
     <ContainerAuth>
@@ -82,8 +78,6 @@ export const Login = () => {
         />
       </FormAuth>
       <Button text="Войти" type="button" onClick={ handleAuth } />
-      <Button text="Выход" type="button" onClick={ handleLogout } />
-
       <ButtonReg />
       { error && <Styled.LoginError>Произошла ошибка: { error }</Styled.LoginError> }
     </ContainerAuth>
