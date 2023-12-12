@@ -17,12 +17,28 @@ export const MyProgress: React.FC<Props> = ({
   open, setOpen, exercises
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
+  const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
 
-  const handleInputChange = (exerciseName: IExercise, handleValue: string) => {
-    console.log(exerciseName);
-  };
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
 
-  const handleSendResults = async () => {
+    const formData = new FormData(event.currentTarget);
+    const inputData = Object.fromEntries(formData);
+    console.log(inputData);
+    // @ts-ignore later
+    const inputArr = [...formData.entries()];
+    console.log(inputArr);
+
+    // @ts-ignore later
+    const inputValues = [...formData.values()];
+    const isEmptyValues = inputValues.includes('');
+    if (isEmptyValues) {
+      setIsEmptyField(true);
+      console.log('Fill all inputs');
+      return;
+    }
+
+
     setOkPopupOpen(true);
 
     setTimeout(() => {
@@ -33,7 +49,7 @@ export const MyProgress: React.FC<Props> = ({
   return (
     <S.Container>
       <S.Progress>
-        <S.closeBtn onClick={() => setOpen(!open)}>
+        <S.closeBtn onClick={ () => setOpen(!open) }>
           <svg
             fill="#000000"
             height="20px"
@@ -74,36 +90,34 @@ export const MyProgress: React.FC<Props> = ({
 
           </svg>
         </S.closeBtn>
-        {okPopupOpen ? (
+        { okPopupOpen ? (
           <Popup text="Ваш прогресс засчитан!" />
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
-            {exercises
+            { exercises
               ? (
-                <>
-                  <S.ProgressForm>
-                    {exercises?.map((item) => (
-                      <S.li key={item.name}>
-                        <S.ProgressText>
-                          {`Сколько раз вы сделали упражнение ${item.workout} ?`}
-                        </S.ProgressText>
-                        <S.ProgressInput
-                          name={`${item.name}`}
-                          placeholder="Введите числовое значение"
-                          type="number"
-                          onChange={(e) => handleInputChange(item, e.currentTarget.value)}
-                        />
-                      </S.li>
-                    ))}
-                  </S.ProgressForm>
+                <S.ProgressForm id="form" onSubmit={ handleSubmit }>
+                  { exercises?.map((item) => (
+                    <S.li key={ item.name }>
+                      <S.ProgressText>
+                        { `Сколько раз вы сделали упражнение ${item.workout} ?` }
+                      </S.ProgressText>
+                      <S.ProgressInput
+                        name={ `${item.workout}` }
+                        placeholder="Введите числовое значение"
+                        type="number"
+                      />
+                    </S.li>
+                  )) }
+                  { isEmptyField && <S.LoginError>Заполните все поля</S.LoginError> }
 
                   <S.ProgressForButton>
-                    <S.ProgressButton onSubmit={handleSendResults}>
+                    <S.ProgressButton>
                       Отправить
                     </S.ProgressButton>
                   </S.ProgressForButton>
-                </>
+                </S.ProgressForm>
               )
               : (
                 <S.nullExsecises>
@@ -111,9 +125,9 @@ export const MyProgress: React.FC<Props> = ({
                   <br />
                   Выполняйте упражнения из видео!
                 </S.nullExsecises>
-              )}
+              ) }
           </>
-        )}
+        ) }
       </S.Progress>
     </S.Container>
   );
