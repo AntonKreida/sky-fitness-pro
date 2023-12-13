@@ -9,8 +9,7 @@ import cardBodyFlex from '@assets/images/card-body-flex.png';
 import cardDanceFitness from '@assets/images/card-dancing-fit.png';
 import { useAppSelector } from '@hook/';
 import { SelectWorkout } from '@components/';
-import { patchAddWorkout } from '@api/';
-import { getStateUser, useGetAllAddedCoursesQuery, useGetAllWorkoutsQuery } from '@redux/';
+import { getStateUser, useGetAllAddedCoursesQuery } from '@redux/';
 
 import * as Styled from './profile.styled';
 
@@ -28,8 +27,6 @@ export const Profile = () => {
 
   // @ts-ignore later
   const { data: courses } = useGetAllAddedCoursesQuery(userName.id);
-  const { data: workoutsData } = useGetAllWorkoutsQuery(20);
-  const AllWorkouts = workoutsData;
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
@@ -39,6 +36,7 @@ export const Profile = () => {
     // @ts-ignore later
     keys.forEach((key: any) => allCourses.push(courses[key]));
   }
+
   const bannerName = {
     Стретчинг: cardStretching,
     Бодифлекс: cardBodyFlex,
@@ -48,13 +46,6 @@ export const Profile = () => {
   };
 
   const openMenu = async (workouts: string[]) => {
-    try {
-      // @ts-ignore later
-      await patchAddWorkout(AllWorkouts, userName.id as string);
-    } catch {
-      console.error('error');
-    }
-
     setOpen((prev) => !prev);
     if (workouts) { setSelectedCourse(workouts); }
   };

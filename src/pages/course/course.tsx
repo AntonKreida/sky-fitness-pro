@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Popup } from '@components/';
-import { useGetByCourseIdQuery, getStateUser } from '@redux/';
+import { useGetByCourseIdQuery, getStateUser, useGetAllWorkoutsQuery } from '@redux/';
 import { Button } from '@shared/';
 import { useAppSelector } from '@hook/';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
@@ -11,19 +11,32 @@ import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 import { ReactComponent as Phone } from '@assets/images/phone.svg';
-import { patchAddCourse } from '@api/';
+import { patchAddCourse, patchAddWorkout } from '@api/';
+import { IWorkout } from '@interface/';
 
 import * as Styled from './course.styled';
 
 
 export const Course = () => {
   const { id } = useParams();
-
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
 
-  const { data, isLoading } = useGetByCourseIdQuery(id as string);
+  const userName = useAppSelector(getStateUser);
+  const { data: allCoursesById, isLoading } = useGetByCourseIdQuery(id as string);
+  const { data: workoutsData } = useGetAllWorkoutsQuery(20);
 
-  const userData = useAppSelector(getStateUser);
+  const allWorkoutsFix: IWorkout[] = [];
+
+  if (workoutsData) {
+    const keys = Object.keys(workoutsData);
+    // @ts-ignore later
+    keys.forEach((key: any) => allWorkoutsFix.push(workoutsData[key]));
+  }
+
+  const workoutBySelectedCourse = allWorkoutsFix?.filter((i) => allCoursesById?.workouts?.includes(i._id));
+
+  const workoutBySelectedCourseSend = workoutBySelectedCourse
+    .reduce((object, workout) => ({ ...object, [workout._id]: workout }), {});
 
 
   const bannerName = {
@@ -36,15 +49,16 @@ export const Course = () => {
 
   const handlerOnClickAddCourse = async () => {
     const dataForRequest = {
-      [`${data?._id}`]: {
-        name: data?.nameRU,
-        workouts: data?.workouts as string[],
+      [`${allCoursesById?._id}`]: {
+        name: allCoursesById?.nameRU,
+        workouts: allCoursesById?.workouts as string[],
       }
     };
 
     try {
-      await patchAddCourse(dataForRequest, userData?.id as string);
-
+      await patchAddCourse(dataForRequest, userName?.id as string);
+      // @ts-ignore later
+      await patchAddWorkout(workoutBySelectedCourseSend, userName.id as string);
       setOkPopupOpen(true);
 
       setTimeout(() => {
@@ -58,46 +72,46 @@ export const Course = () => {
 
   return (
     <Styled.CourseContainer>
-      {isLoading ? <p>Загрузка...</p> : (
+      { isLoading ? <p>Загрузка...</p> : (
         <>
-          {okPopupOpen
+          { okPopupOpen
             ? (
               <Popup
                 text="Вы успешно подписались на курс!"
               />
             )
-            : null}
+            : null }
           <Styled.CourseBanner>
-            <Styled.CourseTitle>{data?.nameRU}</Styled.CourseTitle>
-            <Styled.CourseImage alt="fitness" src={`${bannerName[data?.nameRU as keyof typeof bannerName]}`} />
+            <Styled.CourseTitle>{ allCoursesById?.nameRU }</Styled.CourseTitle>
+            <Styled.CourseImage alt="fitness" src={ `${bannerName[allCoursesById?.nameRU as keyof typeof bannerName]}` } />
           </Styled.CourseBanner>
 
           <Styled.CourseBlock>
             <Styled.CourseText>Подойдет для вас, если:</Styled.CourseText>
             <Styled.CourseAllPoints>
-              {data?.fitting.map((item: string, index: number) => (
-                <Styled.CoursePoint key={item}>
-                  <Styled.CourseBullet>{index + 1}</Styled.CourseBullet>
-                  <Styled.CoursePointText>{item}</Styled.CoursePointText>
+              { allCoursesById?.fitting.map((item: string, index: number) => (
+                <Styled.CoursePoint key={ item }>
+                  <Styled.CourseBullet>{ index + 1 }</Styled.CourseBullet>
+                  <Styled.CoursePointText>{ item }</Styled.CoursePointText>
                 </Styled.CoursePoint>
-              ))}
+              )) }
             </Styled.CourseAllPoints>
           </Styled.CourseBlock>
 
           <Styled.CourseBlock>
             <Styled.CourseText>Направления:</Styled.CourseText>
             <Styled.CourseDirection>
-              {data?.directions.map((item: string) => (
+              { allCoursesById?.directions.map((item: string) => (
                 <Styled.CourseDirPoint
-                  key={item}
+                  key={ item }
                 >
-                  {item}
+                  { item }
                 </Styled.CourseDirPoint>
-              ))}
+              )) }
             </Styled.CourseDirection>
           </Styled.CourseBlock>
 
-          <Styled.CourseInfo>{data?.description}</Styled.CourseInfo>
+          <Styled.CourseInfo>{ allCoursesById?.description }</Styled.CourseInfo>
 
           <Styled.CourseFooter>
             <Styled.CourseFooterMain>
@@ -108,13 +122,13 @@ export const Course = () => {
               <Button
                 text="Записаться на тренировку"
                 type="button"
-                onClick={handlerOnClickAddCourse}
+                onClick={ handlerOnClickAddCourse }
               />
             </Styled.CourseFooterMain>
             <Phone />
           </Styled.CourseFooter>
         </>
-      )}
+      ) }
     </Styled.CourseContainer>
   );
 };
