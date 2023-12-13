@@ -1,45 +1,87 @@
 import { useState } from 'react';
 
 import { IExercise } from '@interface/';
+import { patchChangeWorkout } from '@api/';
+import { useAppSelector } from '@hook/';
+import { getStateUser } from '@redux/';
 
-import * as S from './progress.styled';
 import { Popup } from '../pop-up';
+import * as S from './progress.styled';
 
 
-const baseUrl = 'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app';
+const oneW = [
+  {
+    name: 'Наклон вперед (10 повторений)',
+    quantity: 10,
+    repeat: 10,
+    workout: 'Наклон вперед'
+  },
+  {
+    name: 'Наклон назад (10 повторений)',
+    quantity: 10,
+    repeat: 10,
+    workout: 'Наклон назад'
+  },
+  {
+    name: 'Поднятие ног, согнутых в коленях (5 повторений)',
+    quantity: 5,
+    repeat: 10,
+    workout: 'Поднятие ног, согнутых в коленях'
+  }
+];
+
+
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
+  pageIdWorkout: string | undefined;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises
+  open, setOpen, exercises, pageIdWorkout
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
   const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
+
+  const userName = useAppSelector(getStateUser);
+
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const inputData = Object.fromEntries(formData);
-    console.log(inputData);
+    const inputDataObj = Object.fromEntries(formData);
+    console.log(inputDataObj);
     // @ts-ignore later
     const inputArr = [...formData.entries()];
     console.log(inputArr);
 
+    const newWorkoutData = inputArr.reduce((object, workout, index, array) => ({
+      ...object,
+      exercises: {
+        repeat: workout[1],
+        workout: workout[0],
+      }
+    }), {});
+    console.log(newWorkoutData);
+
+    try {
+      await patchChangeWorkout(oneW, userName?.id as string, pageIdWorkout as string);
+    } catch {
+      console.log('Error');
+    }
+
     // @ts-ignore later
     const inputValues = [...formData.values()];
     const isEmptyValues = inputValues.includes('');
+
     if (isEmptyValues) {
       setIsEmptyField(true);
-      console.log('Fill all inputs');
       return;
     }
 
     setOkPopupOpen(true);
-
     setTimeout(() => {
       setOpen(false);
     }, 2000);

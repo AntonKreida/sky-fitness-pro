@@ -13,9 +13,8 @@ import { MyProgress } from './ui/progress';
 
 export const MainContent = () => {
   const params = useParams();
-  const pageId = params.id;
+  const pageIdWorkout = params.id;
   const userName = useAppSelector(getStateUser);
-
 
   // @ts-ignore later
   const { data: userWorkouts } = useGetAllAddedWorkoutsQuery(userName.id);
@@ -27,7 +26,7 @@ export const MainContent = () => {
     keys.forEach((key: any) => allWorkouts.push(userWorkouts[key]));
   }
 
-  const selectedWorkout = allWorkouts?.find((item) => item._id === pageId);
+  const selectedWorkout = allWorkouts?.find((item) => item._id === pageIdWorkout);
 
   const exercises = selectedWorkout?.exercises;
   console.log(exercises);
@@ -90,6 +89,7 @@ export const MainContent = () => {
               <MyProgress
                 exercises={ exercises }
                 open={ open }
+                pageIdWorkout={ pageIdWorkout }
                 setOpen={ setOpen }
               />
             )
