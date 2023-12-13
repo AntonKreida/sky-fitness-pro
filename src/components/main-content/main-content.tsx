@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { IWorkout } from '@interface/';
@@ -11,39 +11,43 @@ import * as Styled from './styled.main-content';
 import { MyProgress } from './ui/progress';
 
 
+const progressColors = [
+  '#565eef',
+  '#ff6d00',
+  '#9a48f1',
+  '#7cff31',
+  '#31c8ff'
+];
+
+
 export const MainContent = () => {
   const params = useParams();
   const pageIdWorkout = params.id;
   const userName = useAppSelector(getStateUser);
+  const { data: userWorkouts } = useGetAllAddedWorkoutsQuery(userName.id as string);
 
-  // @ts-ignore later
-  const { data: userWorkouts } = useGetAllAddedWorkoutsQuery(userName.id);
-
-  const allWorkouts: IWorkout[] = [];
-
-  if (userWorkouts) {
-    const keys = Object.keys(userWorkouts);
-    keys.forEach((key: any) => allWorkouts.push(userWorkouts[key]));
-  }
-
-  const selectedWorkout = allWorkouts?.find((item) => item._id === pageIdWorkout);
-
-  const exercises = selectedWorkout?.exercises;
-  console.log(exercises);
+  const [currentWorkouts, setCurrentWorkouts] = useState<IWorkout[]>([]);
   const [open, setOpen] = useState(false);
+
+
+  const selectedWorkout = useMemo(
+    () => (
+      currentWorkouts?.find((item) => item._id === pageIdWorkout)),
+    [currentWorkouts, pageIdWorkout]
+  );
 
   const openMenu = () => {
     setOpen((prev) => !prev);
   };
 
-  const progressColors = [
-    '#565eef',
-    '#ff6d00',
-    '#9a48f1',
-    '#7cff31',
-    '#31c8ff'
-
-  ];
+  useEffect(() => {
+    if (userWorkouts) {
+      const keys = Object.keys(userWorkouts);
+      keys.forEach((key: string) => {
+        setCurrentWorkouts((prev) => prev.concat(userWorkouts[key]));
+      });
+    }
+  }, [userWorkouts]);
 
   return (
     <Styled.MainContentWrapper>
@@ -68,10 +72,10 @@ export const MainContent = () => {
           <Styled.MainContentExerciseTitle>
             Упражнения
           </Styled.MainContentExerciseTitle>
-          { exercises
+          { selectedWorkout?.exercises
             ? (
               <Styled.MainContentExerciseList>
-                { exercises?.map((item) => (
+                { selectedWorkout.exercises.map((item) => (
                   <Styled.MainContentExerciseItem key={ item.name }>{ item.name }</Styled.MainContentExerciseItem>
                 )) }
               </Styled.MainContentExerciseList>
@@ -84,16 +88,14 @@ export const MainContent = () => {
               </div>
             ) }
           <Button text="Заполнить свой прогресс" type="button" onClick={ openMenu } />
-          { open
-            ? (
-              <MyProgress
-                exercises={ exercises }
-                open={ open }
-                pageIdWorkout={ pageIdWorkout }
-                setOpen={ setOpen }
-              />
-            )
-            : null }
+          { open && (
+            <MyProgress
+              exercises={ selectedWorkout?.exercises }
+              open={ open }
+              pageIdWorkout={ pageIdWorkout }
+              setOpen={ setOpen }
+            />
+          ) }
         </Styled.MainContentExercisesWrapper>
 
         <Styled.MainContentProgressWrapper>
@@ -103,7 +105,7 @@ export const MainContent = () => {
 
           <Styled.MainContentProgressBarsWrapper>
             <Styled.MainContentProgressBarItem>
-              { exercises?.map((item, index) => (
+              { selectedWorkout?.exercises && selectedWorkout.exercises.map((item, index) => (
                 <Styled.MainContentProgressBarContainer key={ item.name }>
                   <Styled.MainContentProgressBarName>
                     { item.workout }

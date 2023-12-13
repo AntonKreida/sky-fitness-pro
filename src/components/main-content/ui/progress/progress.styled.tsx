@@ -2,18 +2,18 @@ import styled from 'styled-components';
 
 
 export const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   position: fixed;
   left: 0px;
   top: 0px;
   background-color: rgba(0, 0, 0, 0.7);
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 10;
-  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
 `;
 
 export const Progress = styled.div`

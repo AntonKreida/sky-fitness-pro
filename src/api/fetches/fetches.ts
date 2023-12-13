@@ -35,7 +35,9 @@ export const patchChangeWorkout = async (
   pageIdWorkout: number | string
 ) => {
   try {
-    const { data } = await base.patch<IRequestDataForAddWorkout>(`/usersActiveWorkout/${idUser}/${pageIdWorkout}/exercises.json`, dataUserForWorkout);
+    const { data } = await base.patch<IRequestDataForAddWorkout>(`/usersActiveWorkout/${idUser}/${pageIdWorkout}.json`, {
+      exercises: dataUserForWorkout,
+    });
 
     return data;
   } catch {

@@ -13,6 +13,10 @@ export interface IWorkout {
   exercises?: IExercise[];
 }
 
+export interface IResponseWorkout {
+  [key: string]: IWorkout;
+}
+
 export interface ICourse {
   _id: string;
   description: string;
