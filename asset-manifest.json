@@ -1,10 +1,35 @@
 {
   "files": {
-    "main.js": "/sky-fitness-pro/static/js/main.6249f71a.js",
+    "main.css": "/sky-fitness-pro/static/css/main.ec4dd448.css",
+    "main.js": "/sky-fitness-pro/static/js/main.57ad647a.js",
+    "static/media/card-stretching.png": "/sky-fitness-pro/static/media/card-stretching.fec5d9cadbcae9a96af3.png",
+    "static/media/card-aerobics.png": "/sky-fitness-pro/static/media/card-aerobics.70e031e242e6ba5b4d1b.png",
+    "static/media/card-body-flex.png": "/sky-fitness-pro/static/media/card-body-flex.66ffdaeed91d08566c16.png",
+    "static/media/card-yoga.png": "/sky-fitness-pro/static/media/card-yoga.1cad57114e7860e2c5ee.png",
+    "static/media/card-dancing-fit.png": "/sky-fitness-pro/static/media/card-dancing-fit.c0024716ce08a91bde6a.png",
+    "static/media/StratosLCWeb-Bold.woff": "/sky-fitness-pro/static/media/StratosLCWeb-Bold.ed2e7b59e44431137ce1.woff",
+    "static/media/StratosLCWeb-Light.woff": "/sky-fitness-pro/static/media/StratosLCWeb-Light.ec0b6e675e0926848b17.woff",
+    "static/media/StratosLCWeb-Regular.woff": "/sky-fitness-pro/static/media/StratosLCWeb-Regular.03b01a6d0972d3524efe.woff",
+    "static/media/StratosLCWeb-Bold.woff2": "/sky-fitness-pro/static/media/StratosLCWeb-Bold.37bafe35cf57739f32ea.woff2",
+    "static/media/StratosLCWeb-Light.woff2": "/sky-fitness-pro/static/media/StratosLCWeb-Light.c28692f77e379015cd2a.woff2",
+    "static/media/StratosLCWeb-Regular.woff2": "/sky-fitness-pro/static/media/StratosLCWeb-Regular.c14b0c073901d3014117.woff2",
+    "static/media/phone.svg": "/sky-fitness-pro/static/media/phone.4adca43ff65250800c6816ec3ef88702.svg",
+    "static/media/sale-sticker.svg": "/sky-fitness-pro/static/media/sale-sticker.cd5216dead9aaffd6d5ac189303f48e6.svg",
+    "static/media/logo-black.svg": "/sky-fitness-pro/static/media/logo-black.eac1a69ed1d67272e53997c5cd4f70b6.svg",
+    "static/media/logo-home-page.svg": "/sky-fitness-pro/static/media/logo-home-page.0968e7a37fd41ca7a3d4502d55bb03d7.svg",
+    "static/media/banner-dance-fitness.svg": "/sky-fitness-pro/static/media/banner-dance-fitness.8c33911ca40b9ca5cfbf5f6e350393fc.svg",
+    "static/media/banner-yoga.svg": "/sky-fitness-pro/static/media/banner-yoga.f780d796a96efaacc8fbe24e39ea5e54.svg",
+    "static/media/banner-body-flex.svg": "/sky-fitness-pro/static/media/banner-body-flex.8f54e6edb7f2557c34fe78a6dbe5bd64.svg",
+    "static/media/banner-step-aerobic.svg": "/sky-fitness-pro/static/media/banner-step-aerobic.6b40937672978d69fa20350e5fce75e2.svg",
+    "static/media/banner-stretching.svg": "/sky-fitness-pro/static/media/banner-stretching.1de72785c21a45408c2acdbf56ad19d4.svg",
+    "static/media/progress-ok.svg": "/sky-fitness-pro/static/media/progress-ok.2a47c4f97a36e28c09f775c5a59d7baf.svg",
     "index.html": "/sky-fitness-pro/index.html",
-    "main.6249f71a.js.map": "/sky-fitness-pro/static/js/main.6249f71a.js.map"
+    "static/media/arrow.svg": "/sky-fitness-pro/static/media/arrow.5082bbd3867ea4d6675b8a65f7cb1f43.svg",
+    "main.ec4dd448.css.map": "/sky-fitness-pro/static/css/main.ec4dd448.css.map",
+    "main.57ad647a.js.map": "/sky-fitness-pro/static/js/main.57ad647a.js.map"
   },
   "entrypoints": [
-    "static/js/main.6249f71a.js"
+    "static/css/main.ec4dd448.css",
+    "static/js/main.57ad647a.js"
   ]
 }
