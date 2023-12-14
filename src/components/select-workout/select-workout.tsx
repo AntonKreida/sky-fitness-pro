@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 // import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
 import { useNavigate } from 'react-router-dom';
 
-import { IWorkout } from '@/interface';
-import { useGetAllWorkoutsQuery } from '@redux/';
+import { IWorkout } from '@interface/';
+import { getStateUser, useGetAllAddedWorkoutsQuery, useGetAllWorkoutsQuery } from '@redux/';
+import { useAppSelector } from '@hook/';
 
 import * as S from './select-workout.styled';
 import { LoaderSmall } from '../loader';
@@ -17,17 +18,22 @@ interface ISelect {
 }
 
 export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
+  const userName = useAppSelector(getStateUser);
+  const { data: myWorkouts, isLoading } = useGetAllAddedWorkoutsQuery(userName.id as string);
+
   const navigate = useNavigate();
-  const { data: usersWorkouts, isLoading } = useGetAllWorkoutsQuery(20);
+  const [workouts, setWorkouts] = useState<IWorkout[]>([]);
 
-  const allWorkouts: IWorkout[] = [];
+  useEffect(() => {
+    if (myWorkouts) {
+      const keys = Object.keys(myWorkouts);
+      keys.forEach((key: string) => {
+        setWorkouts((prev) => prev.concat(myWorkouts[key]));
+      });
+    }
+  }, [myWorkouts]);
 
-  if (usersWorkouts) {
-    const keys = Object.keys(usersWorkouts);
-    keys.forEach((key: any) => allWorkouts.push(usersWorkouts[key]));
-  }
-
-  const selectedWorkout = allWorkouts?.filter((i) => selectedCourse?.includes(i._id));
+  const selectedWorkout = workouts?.filter((i) => selectedCourse?.includes(i._id));
 
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
@@ -83,7 +89,9 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
           ? <LoaderSmall />
           : (
             <S.SelectList>
-              { selectedWorkout.map(({ course, name, _id }) => (
+              { selectedWorkout.map(({
+                course, name, _id
+              }) => (
                 <S.SelectItem
                   key={ _id }
                   $color="#000"

@@ -61,8 +61,16 @@ export const Profile = () => {
           <Styled.ProfileText>Ваш логин: { userName.email }</Styled.ProfileText>
         </Styled.ProfileInfo>
         <Styled.ProfileButtons>
-          <Button text="Редактировать логин" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-login', { replace: true }) } />
-          <Button text="Редактировать пароль" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) } />
+          <Button
+            text="Редактировать логин"
+            type="button"
+            onClick={ () => navigate('/sky-fitness-pro/change-data-login', { replace: true }) }
+          />
+          <Button
+            text="Редактировать пароль"
+            type="button"
+            onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) }
+          />
         </Styled.ProfileButtons>
       </Styled.Profile>
       { isLoading

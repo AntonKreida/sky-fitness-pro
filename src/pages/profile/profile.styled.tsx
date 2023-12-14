@@ -83,6 +83,6 @@ export const ProfileLink = styled.div`
     cursor: pointer;
 
     &:hover {
-            color: rgb(39, 5, 73);
+        color: rgb(39, 5, 73);
     }
 `;

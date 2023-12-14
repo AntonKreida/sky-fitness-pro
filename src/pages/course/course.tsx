@@ -58,7 +58,6 @@ export const Course = () => {
     [workoutBySelectedCourse]
   );
 
-
   const handlerOnClickAddCourse = async () => {
     const dataForRequest = {
       [`${allCoursesById?._id}`]: {

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import {
-  ICourse, IResponseCourse, IResponseWorkout, IUserAddedCourses, IWorkout
+  ICourse, IResponseCourse, IResponseWorkout, IWorkout
 } from '@interface/';
 
 
