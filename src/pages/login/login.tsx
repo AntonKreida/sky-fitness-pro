@@ -8,7 +8,7 @@ import { Button, Input } from '@shared/';
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
-import { removeUser, setUser } from '@redux/';
+import { setUser } from '@redux/';
 import { useAppDispatch } from '@hook/';
 
 import { ButtonReg } from './ui';

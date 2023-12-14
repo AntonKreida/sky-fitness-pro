@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 import { Container } from '@layouts/';
 import { ReactComponent as SaleSticker } from '@assets/images/sale-sticker.svg';
@@ -14,33 +15,29 @@ import { LoaderFull } from '@components/';
 import * as Styled from './home-page.styled';
 
 
+const bannerName = {
+  Стретчинг: cardStretching,
+  Бодифлекс: cardBodyFlex,
+  Йога: cardYoga,
+  'Танцевальный фитнес': cardDancingFit,
+  'Степ-аэробика': cardAerobic,
+};
+
 export const HomePage = () => {
-  const navigate = useNavigate();
   const { data, isLoading } = useGetAllCoursesQuery(5);
 
-  const allCourses: ICourse[] = [];
-  if (data) {
-    const keys = Object.keys(data);
-    keys.forEach((key: any) => allCourses.push(data[key]));
-  }
+  const navigate = useNavigate();
+  const [courses, setCourses] = useState<ICourse[]>([]);
 
-  const handleImg = (card: string) => {
-    switch (card) {
-      case 'Стретчинг':
-        return cardStretching;
-      case 'Бодифлекс':
-        return cardBodyFlex;
-      case 'Йога':
-        return cardYoga;
-      case 'Танцевальный фитнес':
-        return cardDancingFit;
-      case 'Степ-аэробика':
-        return cardAerobic;
-      default:
-        return null;
+  useEffect(() => {
+    if (data) {
+      const keys = Object.keys(data);
+      keys.forEach((key: string) => {
+        // @ts-ignore key
+        setCourses((prev) => prev.concat(data[key]));
+      });
     }
-  };
-
+  }, [data]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -66,15 +63,16 @@ export const HomePage = () => {
         )
         : (
           <Styled.CardsContainer>
-            { allCourses?.map((card) => (
+            { courses?.map((card) => (
               <Styled.CardContainer
                 key={ card._id }
                 onClick={ () => {
                   navigate(`/sky-fitness-pro/${card._id}`);
                 } }
               >
-                <Styled.CardImage alt="fitness" src={ handleImg(card.nameRU) } />
+                <Styled.CardImage alt="fitness" src={ `${bannerName[card.nameRU as keyof typeof bannerName]}` } />
                 <Styled.CardTitle>{ card.nameRU }</Styled.CardTitle>
+
               </Styled.CardContainer>
             )) }
           </Styled.CardsContainer>

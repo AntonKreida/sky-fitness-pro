@@ -27,3 +27,10 @@ export interface ICourse {
   order: number;
   workouts: string[];
 }
+
+export interface IResponseCourse {
+  [key: number]: {
+    name: string;
+    workout: string[];
+  };
+}

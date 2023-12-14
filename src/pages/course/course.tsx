@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Popup, LoaderFull } from '@components/';
@@ -17,35 +17,47 @@ import { IWorkout } from '@interface/';
 import * as Styled from './course.styled';
 
 
+const bannerName = {
+  Стретчинг: bannerStretching,
+  Бодифлекс: bannerBodyFlex,
+  Йога: BannerYoga,
+  'Танцевальный фитнес': bannerDanceFitness,
+  'Степ-аэробика': bannerStepAerobic,
+};
+
+
 export const Course = () => {
   const { id } = useParams();
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
+  const [allWorkouts, setAllWorkouts] = useState<IWorkout[]>([]);
 
   const userName = useAppSelector(getStateUser);
   const { data: allCoursesById, isLoading } = useGetByCourseIdQuery(id as string);
   const { data: workoutsData } = useGetAllWorkoutsQuery(20);
 
-  const allWorkoutsFix: IWorkout[] = [];
+  useEffect(() => {
+    if (workoutsData) {
+      const keys = Object.keys(workoutsData);
+      keys.forEach((key: string) => {
+        // @ts-ignore key
+        setAllWorkouts((prev) => prev.concat(workoutsData[key]));
+      });
+    }
+  }, [workoutsData]);
 
-  if (workoutsData) {
-    const keys = Object.keys(workoutsData);
-    // @ts-ignore later
-    keys.forEach((key: any) => allWorkoutsFix.push(workoutsData[key]));
-  }
+  const workoutBySelectedCourse = useMemo(
+    () => (
+      allWorkouts?.filter((i) => allCoursesById?.workouts?.includes(i._id))),
+    [allWorkouts, allCoursesById]
+  );
 
-  const workoutBySelectedCourse = allWorkoutsFix?.filter((i) => allCoursesById?.workouts?.includes(i._id));
+  const workoutBySelectedCourseSend = useMemo(
+    () => (
+      workoutBySelectedCourse
+        .reduce((object, workout) => ({ ...object, [workout._id]: workout }), {})),
+    [workoutBySelectedCourse]
+  );
 
-  const workoutBySelectedCourseSend = workoutBySelectedCourse
-    .reduce((object, workout) => ({ ...object, [workout._id]: workout }), {});
-
-
-  const bannerName = {
-    Стретчинг: bannerStretching,
-    Бодифлекс: bannerBodyFlex,
-    Йога: BannerYoga,
-    'Танцевальный фитнес': bannerDanceFitness,
-    'Степ-аэробика': bannerStepAerobic,
-  };
 
   const handlerOnClickAddCourse = async () => {
     const dataForRequest = {

@@ -1,6 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import { ICourse, IResponseWorkout, IUserAddedCourses, IWorkout } from '@interface/';
+import {
+  ICourse, IResponseCourse, IResponseWorkout, IUserAddedCourses, IWorkout
+} from '@interface/';
 
 
 export const coursesApi = createApi({
@@ -21,7 +23,7 @@ export const coursesApi = createApi({
       query: (id: string) => `courses/${id}.json`,
     }),
 
-    getAllAddedCourses: builder.query<IUserAddedCourses[], string>({
+    getAllAddedCourses: builder.query<IResponseCourse, string>({
       query: (id: string) => `usersActiveCourse/${id}.json`,
     }),
     getAllAddedWorkouts: builder.query<IResponseWorkout, string>({

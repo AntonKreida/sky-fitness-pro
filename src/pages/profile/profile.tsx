@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdKeyboardDoubleArrowRight } from 'react-icons/md';
 
 import { LoaderFull, SelectWorkout } from '@components/';
 import { Button, ButtonGo } from '@shared/';
@@ -19,35 +20,37 @@ interface AddedCourse {
   workouts: string[];
 }
 
+const bannerName = {
+  Стретчинг: cardStretching,
+  Бодифлекс: cardBodyFlex,
+  Йога: cardYoga,
+  'Танцевальный фитнес': cardDanceFitness,
+  'Степ-аэробика': cardStepAerobic,
+};
+
 export const Profile = () => {
   const navigate = useNavigate();
   const userName = useAppSelector(getStateUser);
 
-  const allCourses: AddedCourse[] = [];
-
-  // @ts-ignore later
-  const { data: courses, isLoading } = useGetAllAddedCoursesQuery(userName.id);
+  const { data: userCourses, isLoading } = useGetAllAddedCoursesQuery(userName.id as string);
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
+  const [coursesData, setCoursesData] = useState<AddedCourse[]>([]);
 
-  if (courses) {
-    const keys = Object.keys(courses);
-    // @ts-ignore later
-    keys.forEach((key: any) => allCourses.push(courses[key]));
-  }
-
-  const bannerName = {
-    Стретчинг: cardStretching,
-    Бодифлекс: cardBodyFlex,
-    Йога: cardYoga,
-    'Танцевальный фитнес': cardDanceFitness,
-    'Степ-аэробика': cardStepAerobic,
-  };
+  useEffect(() => {
+    if (userCourses) {
+      const keys = Object.keys(userCourses);
+      keys.forEach((key: string) => {
+        // @ts-ignore key
+        setCoursesData((prev) => prev.concat(userCourses[key]));
+      });
+    }
+  }, [userCourses]);
 
   const openMenu = async (workouts: string[]) => {
     setOpen((prev) => !prev);
-    if (workouts) { setSelectedCourse(workouts); }
+    if (workouts) setSelectedCourse(workouts);
   };
 
   return (
@@ -59,7 +62,7 @@ export const Profile = () => {
         </Styled.ProfileInfo>
         <Styled.ProfileButtons>
           <Button text="Редактировать логин" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-login', { replace: true }) } />
-          <Button text="Сбросить пароль" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) } />
+          <Button text="Редактировать пароль" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) } />
         </Styled.ProfileButtons>
       </Styled.Profile>
       { isLoading
@@ -67,27 +70,47 @@ export const Profile = () => {
         : (
           <Styled.ProfileCourses>
             <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
-            <Styled.ProfileCoursesList>
-              { allCourses?.map(({ name, workouts }) => (
-                <Styled.ProfileCourseItem key={ name }>
-                  <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
-                  <Styled.ProfileCourseItemImg
-                    alt="Card"
-                    src={ `${bannerName[name as keyof typeof bannerName]}` }
-                  />
-                  <Styled.ProfileCourseItemButton>
-                    <ButtonGo
-                      text="Перейти →"
-                      type="button"
-                      onClick={ () => openMenu(workouts) }
-                    />
-                  </Styled.ProfileCourseItemButton>
-                </Styled.ProfileCourseItem>
-              )) }
-              { open
-                ? <SelectWorkout selectedCourse={ selectedCourse } setOpen={ setOpen } />
-                : null }
-            </Styled.ProfileCoursesList>
+            { coursesData.length === 0
+              ? (
+                <>
+                  <Styled.ProfileText>Вы пока не добавили ни одного курса :( <br />
+                    Перейдите по ссылке ниже, чтобы выбрать курсы!
+                  </Styled.ProfileText>
+                  <Styled.ProfileContainerForLink
+                    onClick={ () => navigate('/sky-fitness-pro', { replace: true }) }
+                  >
+                    <Styled.ProfileLink> Все курсы </Styled.ProfileLink>
+                    <Styled.ProfileLink>
+                      <MdKeyboardDoubleArrowRight />
+                    </Styled.ProfileLink>
+                  </Styled.ProfileContainerForLink>
+
+                </>
+              )
+              : (
+                <Styled.ProfileCoursesList>
+                  { coursesData?.map(({ name, workouts }) => (
+                    <Styled.ProfileCourseItem key={ name }>
+                      <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
+                      <Styled.ProfileCourseItemImg
+                        alt="Card"
+                        src={ `${bannerName[name as keyof typeof bannerName]}` }
+                      />
+                      <Styled.ProfileCourseItemButton>
+                        <ButtonGo
+                          text="Перейти →"
+                          type="button"
+                          onClick={ () => openMenu(workouts) }
+                        />
+                      </Styled.ProfileCourseItemButton>
+                    </Styled.ProfileCourseItem>
+                  )) }
+                  { open
+                    ? <SelectWorkout selectedCourse={ selectedCourse } setOpen={ setOpen } />
+                    : null }
+                </Styled.ProfileCoursesList>
+              ) }
+
           </Styled.ProfileCourses>
         ) }
 

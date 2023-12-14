@@ -72,3 +72,17 @@ export const ProfileCourseItemButton = styled.div`
     bottom: 45px;
     left: 45px;
 `;
+
+export const ProfileContainerForLink = styled.div`
+    display: flex
+`;
+
+export const ProfileLink = styled.div`
+    font-size: 40px;
+    color: rgb(88, 14, 162);
+    cursor: pointer;
+
+    &:hover {
+            color: rgb(39, 5, 73);
+    }
+`;

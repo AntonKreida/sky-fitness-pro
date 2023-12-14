@@ -30,7 +30,6 @@ export const MainContent = () => {
   const [currentWorkouts, setCurrentWorkouts] = useState<IWorkout[]>([]);
   const [open, setOpen] = useState(false);
 
-
   const selectedWorkout = useMemo(
     () => (
       currentWorkouts?.find((item) => item._id === pageIdWorkout)),
@@ -139,7 +138,6 @@ export const MainContent = () => {
             </Styled.MainContentWorkoutWrapper>
           </Styled.MainContentWrapper>
         ) }
-
     </>
   );
 };

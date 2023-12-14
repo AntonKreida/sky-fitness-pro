@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-import { getStateUser } from '@redux/';
 import { ButtonHeader } from '@shared/';
-import { useAuth, useAppSelector } from '@hook/';
-import { ReactComponent as Arrow } from '@assets/icons/arrow.svg';
+import { useAuth } from '@hook/';
 
 import { BurgerMenu } from '../burger-menu';
 import * as Styled from './header.styled';
