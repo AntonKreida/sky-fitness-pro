@@ -13,6 +13,10 @@ export interface IWorkout {
   exercises?: IExercise[];
 }
 
+export interface IResponseWorkout {
+  [key: string]: IWorkout;
+}
+
 export interface ICourse {
   _id: string;
   description: string;
@@ -22,4 +26,11 @@ export interface ICourse {
   nameRU: string;
   order: number;
   workouts: string[];
+}
+
+export interface IResponseCourse {
+  [key: number]: {
+    name: string;
+    workout: string[];
+  };
 }

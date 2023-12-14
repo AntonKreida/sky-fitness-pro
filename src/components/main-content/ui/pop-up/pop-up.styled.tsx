@@ -22,7 +22,7 @@ export const ProgressPopup = styled.div`
   padding-top: 41px;
   background: #fff;
   width: 444px;
-  border: 1px solid #acacac;
+  border: 1px solid #d1cece;
   border-radius: 20px;
 `;
 

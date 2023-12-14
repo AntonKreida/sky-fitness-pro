@@ -1,30 +1,76 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 import { IExercise } from '@interface/';
+import { patchChangeWorkout } from '@api/';
+import { useAppSelector } from '@hook/';
+import { getStateUser } from '@redux/';
 
-import * as S from './progress.styled';
 import { Popup } from '../pop-up';
+import * as S from './progress.styled';
 
 
-const baseUrl = 'https://skypro-fitness-96004-default-rtdb.europe-west1.firebasedatabase.app';
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
+  pageIdWorkout: string | undefined;
+}
+
+interface TResultForForm {
+  name: string;
+  quantity: number;
+  workout: string;
+  repeat: number;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises
+  open, setOpen, exercises, pageIdWorkout
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
+  const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
 
-  const handleInputChange = (exerciseName: IExercise, handleValue: string) => {
-    console.log(exerciseName);
-  };
+  const userName = useAppSelector(getStateUser);
 
-  const handleSendResults = async () => {
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { currentTarget } = event;
+
+    const formData = new FormData(currentTarget);
+    const listFormData = formData.entries();
+    const inputArr = [...listFormData];
+
+    const newWorkoutData = inputArr.reduce<TResultForForm[]>((acc, workout) => {
+      const currentExercise = exercises?.find((item) => item.workout === workout[0]);
+
+      const result = {
+        name: currentExercise?.name as string,
+        quantity: Number(currentExercise?.quantity),
+        workout: workout[0],
+        repeat: Number(workout[1]),
+      };
+
+      acc.push(result);
+      return acc;
+    }, []);
+
+
+    try {
+      await patchChangeWorkout(newWorkoutData, userName?.id as string, pageIdWorkout as string);
+    } catch {
+      throw new Error('Не удалось изменить тренировку');
+    }
+
+    // @ts-ignore later
+    const inputValues = [...formData.values()];
+    const isEmptyValues = inputValues.includes('');
+
+    if (isEmptyValues) {
+      setIsEmptyField(true);
+      return;
+    }
+
     setOkPopupOpen(true);
-
     setTimeout(() => {
       setOpen(false);
     }, 2000);
@@ -33,7 +79,7 @@ export const MyProgress: React.FC<Props> = ({
   return (
     <S.Container>
       <S.Progress>
-        <S.closeBtn onClick={() => setOpen(!open)}>
+        <S.closeBtn onClick={ () => setOpen(!open) }>
           <svg
             fill="#000000"
             height="20px"
@@ -74,36 +120,34 @@ export const MyProgress: React.FC<Props> = ({
 
           </svg>
         </S.closeBtn>
-        {okPopupOpen ? (
+        { okPopupOpen ? (
           <Popup text="Ваш прогресс засчитан!" />
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
-            {exercises
+            { exercises
               ? (
-                <>
-                  <S.ProgressForm>
-                    {exercises?.map((item) => (
-                      <S.li key={item.name}>
-                        <S.ProgressText>
-                          {`Сколько раз вы сделали упражнение ${item.workout} ?`}
-                        </S.ProgressText>
-                        <S.ProgressInput
-                          name={`${item.name}`}
-                          placeholder="Введите числовое значение"
-                          type="number"
-                          onChange={(e) => handleInputChange(item, e.currentTarget.value)}
-                        />
-                      </S.li>
-                    ))}
-                  </S.ProgressForm>
+                <S.ProgressForm id="form" onSubmit={ handleSubmit }>
+                  { exercises?.map((item) => (
+                    <S.li key={ item.name }>
+                      <S.ProgressText>
+                        { `Сколько раз вы сделали упражнение ${item.workout} ?` }
+                      </S.ProgressText>
+                      <S.ProgressInput
+                        name={ `${item.workout}` }
+                        placeholder="Введите числовое значение"
+                        type="number"
+                      />
+                    </S.li>
+                  )) }
+                  { isEmptyField && <S.LoginError>Заполните все поля</S.LoginError> }
 
                   <S.ProgressForButton>
-                    <S.ProgressButton onSubmit={handleSendResults}>
+                    <S.ProgressButton>
                       Отправить
                     </S.ProgressButton>
                   </S.ProgressForButton>
-                </>
+                </S.ProgressForm>
               )
               : (
                 <S.nullExsecises>
@@ -111,9 +155,9 @@ export const MyProgress: React.FC<Props> = ({
                   <br />
                   Выполняйте упражнения из видео!
                 </S.nullExsecises>
-              )}
+              ) }
           </>
-        )}
+        ) }
       </S.Progress>
     </S.Container>
   );
