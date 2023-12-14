@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Popup } from '@components/';
+import { Popup, LoaderFull } from '@components/';
 import { useGetByCourseIdQuery, getStateUser, useGetAllWorkoutsQuery } from '@redux/';
 import { Button } from '@shared/';
 import { useAppSelector } from '@hook/';
@@ -72,7 +72,7 @@ export const Course = () => {
 
   return (
     <Styled.CourseContainer>
-      { isLoading ? <p>Загрузка...</p> : (
+      { isLoading ? <LoaderFull /> : (
         <>
           { okPopupOpen
             ? (

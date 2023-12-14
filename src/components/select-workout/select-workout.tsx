@@ -7,6 +7,7 @@ import { IWorkout } from '@/interface';
 import { useGetAllWorkoutsQuery } from '@redux/';
 
 import * as S from './select-workout.styled';
+import { LoaderSmall } from '../loader';
 
 
 interface ISelect {
@@ -17,7 +18,7 @@ interface ISelect {
 
 export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
   const navigate = useNavigate();
-  const { data: usersWorkouts } = useGetAllWorkoutsQuery(20);
+  const { data: usersWorkouts, isLoading } = useGetAllWorkoutsQuery(20);
 
   const allWorkouts: IWorkout[] = [];
 
@@ -78,37 +79,42 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
           </svg>
         </S.closeBtn>
 
-        <S.SelectList>
-          { selectedWorkout.map(({ course, name, _id }) => (
-            <S.SelectItem
-              key={ _id }
-              $color="#000"
-              onClick={ () => navigate(`/sky-fitness-pro/workout/${_id}`) }
-            >
-              <S.SelectItemContent>
-                <S.SelectItemContentTitle $color="#000">
-                  { name }
-                  { /* {isCompleted && <IconStatusOk />} */ }
-                </S.SelectItemContentTitle>
-                <S.SelectItemContentText $color="#000">
-                  { course }
-                </S.SelectItemContentText>
-              </S.SelectItemContent>
-            </S.SelectItem>
+        { isLoading
+          ? <LoaderSmall />
+          : (
+            <S.SelectList>
+              { selectedWorkout.map(({ course, name, _id }) => (
+                <S.SelectItem
+                  key={ _id }
+                  $color="#000"
+                  onClick={ () => navigate(`/sky-fitness-pro/workout/${_id}`) }
+                >
+                  <S.SelectItemContent>
+                    <S.SelectItemContentTitle $color="#000">
+                      { name }
+                      { /* {isCompleted && <IconStatusOk />} */ }
+                    </S.SelectItemContentTitle>
+                    <S.SelectItemContentText $color="#000">
+                      { course }
+                    </S.SelectItemContentText>
+                  </S.SelectItemContent>
+                </S.SelectItem>
 
-            //   <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
-            //   <S.SelectItemContent>
-            //     <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
-            //       {title}
-            //       { /* {isCompleted && <IconStatusOk />} */}
-            //     </S.SelectItemContentTitle>
-            //     <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
-            //       {text}
-            //     </S.SelectItemContentText>
-            //   </S.SelectItemContent>
-            // </S.SelectItem>
-          )) }
-        </S.SelectList>
+                //   <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
+                //   <S.SelectItemContent>
+                //     <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
+                //       {title}
+                //       { /* {isCompleted && <IconStatusOk />} */}
+                //     </S.SelectItemContentTitle>
+                //     <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
+                //       {text}
+                //     </S.SelectItemContentText>
+                //   </S.SelectItemContent>
+                // </S.SelectItem>
+              )) }
+            </S.SelectList>
+          ) }
+
 
       </S.Progress>
     </S.Select>

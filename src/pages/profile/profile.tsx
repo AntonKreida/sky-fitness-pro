@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { LoaderFull, SelectWorkout } from '@components/';
 import { Button, ButtonGo } from '@shared/';
 import cardStepAerobic from '@assets/images/card-aerobics.png';
 import cardYoga from '@assets/images/card-yoga.png';
@@ -8,7 +9,6 @@ import cardStretching from '@assets/images/card-stretching.png';
 import cardBodyFlex from '@assets/images/card-body-flex.png';
 import cardDanceFitness from '@assets/images/card-dancing-fit.png';
 import { useAppSelector } from '@hook/';
-import { SelectWorkout } from '@components/';
 import { getStateUser, useGetAllAddedCoursesQuery } from '@redux/';
 
 import * as Styled from './profile.styled';
@@ -26,7 +26,7 @@ export const Profile = () => {
   const allCourses: AddedCourse[] = [];
 
   // @ts-ignore later
-  const { data: courses } = useGetAllAddedCoursesQuery(userName.id);
+  const { data: courses, isLoading } = useGetAllAddedCoursesQuery(userName.id);
 
   const [open, setOpen] = useState<boolean>(false);
   const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
@@ -62,30 +62,35 @@ export const Profile = () => {
           <Button text="Сбросить пароль" type="button" onClick={ () => navigate('/sky-fitness-pro/change-data-password', { replace: true }) } />
         </Styled.ProfileButtons>
       </Styled.Profile>
-      <Styled.ProfileCourses>
-        <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
-        <Styled.ProfileCoursesList>
-          { allCourses?.map(({ name, workouts }) => (
-            <Styled.ProfileCourseItem key={ name }>
-              <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
-              <Styled.ProfileCourseItemImg
-                alt="Card"
-                src={ `${bannerName[name as keyof typeof bannerName]}` }
-              />
-              <Styled.ProfileCourseItemButton>
-                <ButtonGo
-                  text="Перейти →"
-                  type="button"
-                  onClick={ () => openMenu(workouts) }
-                />
-              </Styled.ProfileCourseItemButton>
-            </Styled.ProfileCourseItem>
-          )) }
-          { open
-            ? <SelectWorkout selectedCourse={ selectedCourse } setOpen={ setOpen } />
-            : null }
-        </Styled.ProfileCoursesList>
-      </Styled.ProfileCourses>
+      { isLoading
+        ? <LoaderFull />
+        : (
+          <Styled.ProfileCourses>
+            <Styled.ProfileTitle>Мои курсы</Styled.ProfileTitle>
+            <Styled.ProfileCoursesList>
+              { allCourses?.map(({ name, workouts }) => (
+                <Styled.ProfileCourseItem key={ name }>
+                  <Styled.ProfileCourseItemTitle>{ name }</Styled.ProfileCourseItemTitle>
+                  <Styled.ProfileCourseItemImg
+                    alt="Card"
+                    src={ `${bannerName[name as keyof typeof bannerName]}` }
+                  />
+                  <Styled.ProfileCourseItemButton>
+                    <ButtonGo
+                      text="Перейти →"
+                      type="button"
+                      onClick={ () => openMenu(workouts) }
+                    />
+                  </Styled.ProfileCourseItemButton>
+                </Styled.ProfileCourseItem>
+              )) }
+              { open
+                ? <SelectWorkout selectedCourse={ selectedCourse } setOpen={ setOpen } />
+                : null }
+            </Styled.ProfileCoursesList>
+          </Styled.ProfileCourses>
+        ) }
+
     </>
   );
 };
