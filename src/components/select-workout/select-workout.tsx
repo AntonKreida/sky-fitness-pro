@@ -28,14 +28,13 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
 
   useEffect(() => {
     if (myWorkouts) {
-      const keys = Object.keys(myWorkouts);
-      keys.forEach((key: string) => {
-        setWorkouts((prev) => prev.concat(myWorkouts[key]));
-      });
+      const result = Object.values(myWorkouts).filter((course) => selectedCourse?.includes(course._id));
+      setWorkouts(result);
     }
-  }, [myWorkouts]);
+  }, [myWorkouts, selectedCourse]);
 
-  const selectedWorkout = workouts?.filter((i) => selectedCourse?.includes(i._id));
+  console.log(workouts);
+
 
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
@@ -91,7 +90,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
           ? <LoaderSmall />
           : (
             <S.SelectList>
-              { selectedWorkout.map(({
+              { workouts.map(({
                 course, name, _id
               }) => (
                 <S.SelectItem
