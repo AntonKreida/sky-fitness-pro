@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/sky-fitness-pro/static/css/main.ec4dd448.css",
-    "main.js": "/sky-fitness-pro/static/js/main.e7cd120d.js",
+    "main.js": "/sky-fitness-pro/static/js/main.6f4293f0.js",
     "static/media/card-stretching.png": "/sky-fitness-pro/static/media/card-stretching.fec5d9cadbcae9a96af3.png",
     "static/media/card-aerobics.png": "/sky-fitness-pro/static/media/card-aerobics.70e031e242e6ba5b4d1b.png",
     "static/media/card-body-flex.png": "/sky-fitness-pro/static/media/card-body-flex.66ffdaeed91d08566c16.png",
@@ -26,10 +26,10 @@
     "index.html": "/sky-fitness-pro/index.html",
     "static/media/arrow.svg": "/sky-fitness-pro/static/media/arrow.5082bbd3867ea4d6675b8a65f7cb1f43.svg",
     "main.ec4dd448.css.map": "/sky-fitness-pro/static/css/main.ec4dd448.css.map",
-    "main.e7cd120d.js.map": "/sky-fitness-pro/static/js/main.e7cd120d.js.map"
+    "main.6f4293f0.js.map": "/sky-fitness-pro/static/js/main.6f4293f0.js.map"
   },
   "entrypoints": [
     "static/css/main.ec4dd448.css",
-    "static/js/main.e7cd120d.js"
+    "static/js/main.6f4293f0.js"
   ]
 }
