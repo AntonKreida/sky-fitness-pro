@@ -1,3 +1,4 @@
+/* eslint-disable import/max-dependencies */
 import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -13,6 +14,7 @@ import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 import { ReactComponent as Phone } from '@assets/images/phone.svg';
 import { patchAddCourse, patchAddWorkout } from '@api/';
 import { IWorkout } from '@interface/';
+
 
 import * as Styled from './course.styled';
 

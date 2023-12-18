@@ -12,6 +12,7 @@ import { setUser } from '@redux/';
 import { useAppDispatch } from '@hook/';
 
 import { ButtonReg } from './ui';
+// eslint-disable-next-line import/max-dependencies
 import * as Styled from './login.styled';
 
 
@@ -37,6 +38,7 @@ export const Login = () => {
             }),
           );
         });
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     } catch (error) {
       if (error instanceof Error) { setError(error.message); }
     }

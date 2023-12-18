@@ -1,8 +1,10 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { IWorkout } from '@interface/';
-import { getStateUser, useGetAllAddedWorkoutsQuery } from '@redux/';
+import {
+  getStateUser, useGetWorkoutByIdQuery, usePatchChangeWorkoutMutation
+} from '@redux/';
 import { useAppSelector } from '@hook/';
 import { Button } from '@shared/';
 import { calculatePercentage } from '@utils/';
@@ -25,29 +27,26 @@ export const MainContent = () => {
   const params = useParams();
   const pageIdWorkout = params.id;
   const userName = useAppSelector(getStateUser);
-  const { data: userWorkouts, isLoading } = useGetAllAddedWorkoutsQuery(userName.id as string);
+  const { data: workoutData, isLoading } = useGetWorkoutByIdQuery({
+    userId: userName.id as string,
+    workoutId: pageIdWorkout as string,
+  });
 
-  const [currentWorkouts, setCurrentWorkouts] = useState<IWorkout[]>([]);
+  const [patchChangeWorkout] = usePatchChangeWorkoutMutation();
+
+  const [currentWorkouts, setCurrentWorkouts] = useState<IWorkout| null>(null);
   const [open, setOpen] = useState(false);
 
-  const selectedWorkout = useMemo(
-    () => (
-      currentWorkouts?.find((item) => item._id === pageIdWorkout)),
-    [currentWorkouts, pageIdWorkout]
-  );
 
   const openMenu = () => {
     setOpen((prev) => !prev);
   };
 
   useEffect(() => {
-    if (userWorkouts) {
-      const keys = Object.keys(userWorkouts);
-      keys.forEach((key: string) => {
-        setCurrentWorkouts((prev) => prev.concat(userWorkouts[key]));
-      });
+    if (workoutData) {
+      setCurrentWorkouts(workoutData);
     }
-  }, [userWorkouts]);
+  }, [workoutData]);
 
   return (
     <>
@@ -58,16 +57,16 @@ export const MainContent = () => {
 
             <Styled.MainContentHeader>
               <Styled.MainContentTittle>
-                { selectedWorkout?.course }
+                { currentWorkouts?.course }
               </Styled.MainContentTittle>
               <Styled.MainContentSubTittle>
-                { selectedWorkout?.name }
+                { currentWorkouts?.name }
               </Styled.MainContentSubTittle>
             </Styled.MainContentHeader>
             <Styled.MainContentVideoWrapper>
               <Styled.MainContentVideo
                 allowFullScreen
-                src={ selectedWorkout?.video }
+                src={ currentWorkouts?.video }
                 title="YouTube video player"
               />
             </Styled.MainContentVideoWrapper>
@@ -76,10 +75,10 @@ export const MainContent = () => {
                 <Styled.MainContentExerciseTitle>
                   Упражнения
                 </Styled.MainContentExerciseTitle>
-                { selectedWorkout?.exercises
+                { currentWorkouts?.exercises
                   ? (
                     <Styled.MainContentExerciseList>
-                      { selectedWorkout.exercises.map((item) => (
+                      { currentWorkouts.exercises.map((item) => (
                         <Styled.MainContentExerciseItem key={ item.name }>{ item.name }</Styled.MainContentExerciseItem>
                       )) }
                     </Styled.MainContentExerciseList>
@@ -94,9 +93,10 @@ export const MainContent = () => {
                 <Button text="Заполнить свой прогресс" type="button" onClick={ openMenu } />
                 { open && (
                   <MyProgress
-                    exercises={ selectedWorkout?.exercises }
+                    exercises={ currentWorkouts?.exercises }
                     open={ open }
                     pageIdWorkout={ pageIdWorkout }
+                    patchChangeWorkout={ patchChangeWorkout }
                     setOpen={ setOpen }
                   />
                 ) }
@@ -109,7 +109,7 @@ export const MainContent = () => {
 
                 <Styled.MainContentProgressBarsWrapper>
                   <Styled.MainContentProgressBarItem>
-                    { selectedWorkout?.exercises && selectedWorkout.exercises.map((item, index) => (
+                    { currentWorkouts?.exercises && currentWorkouts.exercises.map((item, index) => (
                       <Styled.MainContentProgressBarContainer key={ item.name }>
                         <Styled.MainContentProgressBarName>
                           { item.workout }

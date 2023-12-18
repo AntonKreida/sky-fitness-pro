@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import {
-  ICourse, IResponseCourse, IResponseWorkout, IWorkout
+  ICourse, IExercise, IResponseCourse, IResponseWorkout, IWorkout
 } from '@interface/';
 
 
@@ -10,6 +10,7 @@ export const coursesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_DATABASE_URL,
   }),
+  tagTypes: ['Workout'],
   endpoints: (builder) => ({
 
     getAllCourses: builder.query<ICourse[], number>({
@@ -25,10 +26,35 @@ export const coursesApi = createApi({
 
     getAllAddedCourses: builder.query<IResponseCourse, string>({
       query: (id: string) => `usersActiveCourse/${id}.json`,
+      providesTags: ['Workout'],
     }),
     getAllAddedWorkouts: builder.query<IResponseWorkout, string>({
       query: (id: string) => `usersActiveWorkout/${id}.json`,
     }),
+    getWorkoutById: builder.query<IWorkout, {
+      userId: string;
+      workoutId: string;
+    }>({
+      query: ({
+        userId, workoutId,
+      }) => `usersActiveWorkout/${userId}/${workoutId}.json`,
+      providesTags: ['Workout'],
+    }),
+    patchChangeWorkout: builder.mutation({
+      query: ({
+        idUser, idWorkout, body,
+      }: { idUser: string; idWorkout: string; body: IExercise[] }) => ({
+        url: `usersActiveWorkout/${idUser}/${idWorkout}.json`,
+        method: 'PATCH',
+        body: {
+          exercises: body,
+        },
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }),
+      invalidatesTags: ['Workout'],
+    })
   }),
 });
 
@@ -37,5 +63,7 @@ export const {
   useGetAllAddedCoursesQuery,
   useGetAllWorkoutsQuery,
   useGetByCourseIdQuery,
-  useGetAllAddedWorkoutsQuery
+  useGetAllAddedWorkoutsQuery,
+  usePatchChangeWorkoutMutation,
+  useGetWorkoutByIdQuery,
 } = coursesApi;
