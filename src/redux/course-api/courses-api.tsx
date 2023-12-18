@@ -10,11 +10,11 @@ export const coursesApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: process.env.REACT_APP_DATABASE_URL,
   }),
-  tagTypes: ['Workout'],
+  tagTypes: ['Workout', 'Course'],
   endpoints: (builder) => ({
-
     getAllCourses: builder.query<ICourse[], number>({
       query: () => 'courses.json',
+      providesTags: ['Course'],
     }),
     getAllWorkouts: builder.query<IWorkout[], number>({
       query: () => 'workouts.json',
@@ -23,10 +23,26 @@ export const coursesApi = createApi({
     getByCourseId: builder.query<ICourse, string>({
       query: (id: string) => `courses/${id}.json`,
     }),
-
+    patchAddCourse: builder.mutation({
+      query: ({
+        idUser, body,
+      }: { idUser: string; body: IWorkout }) => ({
+        url: `usersActiveCourse/${idUser}.json`,
+        method: 'PATCH',
+        body,
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }),
+      invalidatesTags: ['Course'],
+    }),
     getAllAddedCourses: builder.query<IResponseCourse, string>({
       query: (id: string) => `usersActiveCourse/${id}.json`,
-      providesTags: ['Workout'],
+      merge: (currentCacheData, responseDate) => ({
+        ...currentCacheData,
+        ...responseDate,
+      }),
+      providesTags: ['Course'],
     }),
     getAllAddedWorkouts: builder.query<IResponseWorkout, string>({
       query: (id: string) => `usersActiveWorkout/${id}.json`,
@@ -66,4 +82,5 @@ export const {
   useGetAllAddedWorkoutsQuery,
   usePatchChangeWorkoutMutation,
   useGetWorkoutByIdQuery,
+  usePatchAddCourseMutation,
 } = coursesApi;

@@ -12,7 +12,6 @@ import cardDanceFitness from '@assets/images/card-dancing-fit.png';
 import { useAppSelector } from '@hook/';
 import { getStateUser, useGetAllAddedCoursesQuery } from '@redux/';
 
-// eslint-disable-next-line import/max-dependencies
 import * as Styled from './profile.styled';
 
 
@@ -41,11 +40,8 @@ export const Profile = () => {
 
   useEffect(() => {
     if (userCourses) {
-      const keys = Object.keys(userCourses);
-      keys.forEach((key: string) => {
-        // @ts-ignore key
-        setCoursesData((prev) => prev.concat(userCourses[key]));
-      });
+      const result = Object.values(userCourses);
+      setCoursesData(result);
     }
   }, [userCourses]);
 

@@ -32,11 +32,8 @@ export const HomePage = () => {
 
   useEffect(() => {
     if (data) {
-      const keys = Object.keys(data);
-      keys.forEach((key: string) => {
-        // @ts-ignore key
-        setCourses((prev) => prev.concat(data[key]));
-      });
+      const result = Object.values(data);
+      setCourses(result);
     }
   }, [data]);
 
