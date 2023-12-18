@@ -1,3 +1,4 @@
+/* eslint-disable import/max-dependencies */
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 

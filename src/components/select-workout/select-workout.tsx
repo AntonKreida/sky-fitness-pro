@@ -1,10 +1,12 @@
-import { FC, useEffect, useState } from 'react';
-
-// import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
 import { useNavigate } from 'react-router-dom';
+import {
+  FC,
+  useEffect,
+  useState
+} from 'react';
 
 import { IWorkout } from '@interface/';
-import { getStateUser, useGetAllAddedWorkoutsQuery, useGetAllWorkoutsQuery } from '@redux/';
+import { getStateUser, useGetAllAddedWorkoutsQuery } from '@redux/';
 import { useAppSelector } from '@hook/';
 
 import * as S from './select-workout.styled';

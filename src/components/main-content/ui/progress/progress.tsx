@@ -1,9 +1,8 @@
 import { FormEvent, useState } from 'react';
 
 import { IExercise } from '@interface/';
-import { patchChangeWorkout } from '@api/';
 import { useAppSelector } from '@hook/';
-import { getStateUser } from '@redux/';
+import { getStateUser, usePatchChangeWorkoutMutation } from '@redux/';
 
 import { Popup } from '../pop-up';
 import * as S from './progress.styled';
@@ -24,10 +23,12 @@ interface TResultForForm {
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises, pageIdWorkout
+  open, setOpen, exercises, pageIdWorkout,
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
   const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
+
+  const [patchChangeWorkout] = usePatchChangeWorkoutMutation();
 
   const userName = useAppSelector(getStateUser);
 
@@ -56,7 +57,11 @@ export const MyProgress: React.FC<Props> = ({
 
 
     try {
-      await patchChangeWorkout(newWorkoutData, userName?.id as string, pageIdWorkout as string);
+      await patchChangeWorkout({
+        idUser: userName?.id as string,
+        idWorkout: pageIdWorkout as string,
+        body: newWorkoutData,
+      });
     } catch {
       throw new Error('Не удалось изменить тренировку');
     }
