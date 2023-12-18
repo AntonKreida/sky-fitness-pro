@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Popup, LoaderFull } from '@components/';
-import { useGetByCourseIdQuery, getStateUser, useGetAllWorkoutsQuery } from '@redux/';
+import {
+  useGetByCourseIdQuery, getStateUser, useGetAllWorkoutsQuery, usePatchAddCourseMutation
+} from '@redux/';
 import { Button } from '@shared/';
 import { useAppSelector } from '@hook/';
 import bannerStepAerobic from '@assets/images/banner-step-aerobic.svg';
@@ -11,7 +13,7 @@ import bannerStretching from '@assets/images/banner-stretching.svg';
 import bannerBodyFlex from '@assets/images/banner-body-flex.svg';
 import bannerDanceFitness from '@assets/images/banner-dance-fitness.svg';
 import { ReactComponent as Phone } from '@assets/images/phone.svg';
-import { patchAddCourse, patchAddWorkout } from '@api/';
+import { patchAddWorkout } from '@api/';
 import { IWorkout } from '@interface/';
 
 import * as Styled from './course.styled';
@@ -34,14 +36,12 @@ export const Course = () => {
   const userName = useAppSelector(getStateUser);
   const { data: allCoursesById, isLoading } = useGetByCourseIdQuery(id as string);
   const { data: workoutsData } = useGetAllWorkoutsQuery(20);
+  const [patchAddCourse] = usePatchAddCourseMutation();
 
   useEffect(() => {
     if (workoutsData) {
-      const keys = Object.keys(workoutsData);
-      keys.forEach((key: string) => {
-        // @ts-ignore key
-        setAllWorkouts((prev) => prev.concat(workoutsData[key]));
-      });
+      const result = Object.values(workoutsData);
+      setAllWorkouts(result);
     }
   }, [workoutsData]);
 
@@ -67,7 +67,10 @@ export const Course = () => {
     };
 
     try {
-      await patchAddCourse(dataForRequest, userName?.id as string);
+      await patchAddCourse({
+        idUser: userName?.id as string,
+        body: dataForRequest,
+      });
       // @ts-ignore later
       await patchAddWorkout(workoutBySelectedCourseSend, userName.id as string);
       setOkPopupOpen(true);

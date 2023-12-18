@@ -10,7 +10,7 @@ import cardDancingFit from '@assets/images/card-dancing-fit.png';
 import cardStretching from '@assets/images/card-stretching.png';
 import cardYoga from '@assets/images/card-yoga.png';
 import { useGetAllCoursesQuery } from '@redux/';
-import { ICourse } from '@/interface';
+import { ICourse } from '@interface/';
 import { LoaderFull } from '@components/';
 
 import * as Styled from './home-page.styled';

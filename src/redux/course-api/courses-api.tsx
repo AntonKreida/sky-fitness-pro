@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import {
-  ICourse, IExercise, IResponseCourse, IResponseWorkout, IWorkout
+  ICourse, IExercise, IRequestDataForAddCourse, IResponseCourse, IResponseWorkout, IWorkout
 } from '@interface/';
 
 
@@ -26,7 +26,7 @@ export const coursesApi = createApi({
     patchAddCourse: builder.mutation({
       query: ({
         idUser, body,
-      }: { idUser: string; body: IWorkout }) => ({
+      }: { idUser: string; body: IRequestDataForAddCourse }) => ({
         url: `usersActiveCourse/${idUser}.json`,
         method: 'PATCH',
         body,
