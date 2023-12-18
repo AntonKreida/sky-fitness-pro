@@ -11,7 +11,6 @@ import { removeUser } from '@redux/';
 
 import * as Styled from './change.styled';
 
-
 export const ChangeDataLogin = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

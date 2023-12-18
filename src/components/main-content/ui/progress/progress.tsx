@@ -13,7 +13,6 @@ interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
   pageIdWorkout: string | undefined;
-  patchChangeWorkout: any;
 }
 
 interface TResultForForm {
@@ -24,10 +23,12 @@ interface TResultForForm {
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises, pageIdWorkout, patchChangeWorkout,
+  open, setOpen, exercises, pageIdWorkout,
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
   const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
+
+  const [patchChangeWorkout] = usePatchChangeWorkoutMutation();
 
   const userName = useAppSelector(getStateUser);
 

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { IWorkout } from '@interface/';
 import {
-  getStateUser, useGetWorkoutByIdQuery, usePatchChangeWorkoutMutation
+  getStateUser, useGetWorkoutByIdQuery
 } from '@redux/';
 import { useAppSelector } from '@hook/';
 import { Button } from '@shared/';
@@ -31,8 +31,6 @@ export const MainContent = () => {
     userId: userName.id as string,
     workoutId: pageIdWorkout as string,
   });
-
-  const [patchChangeWorkout] = usePatchChangeWorkoutMutation();
 
   const [currentWorkouts, setCurrentWorkouts] = useState<IWorkout| null>(null);
   const [open, setOpen] = useState(false);
@@ -96,7 +94,6 @@ export const MainContent = () => {
                     exercises={ currentWorkouts?.exercises }
                     open={ open }
                     pageIdWorkout={ pageIdWorkout }
-                    patchChangeWorkout={ patchChangeWorkout }
                     setOpen={ setOpen }
                   />
                 ) }
