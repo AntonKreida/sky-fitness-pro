@@ -1,68 +1,85 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-import { IExercise } from '@/interface';
+import { IExercise } from '@interface/';
+import { patchChangeWorkout } from '@api/';
+import { useAppSelector } from '@hook/';
+import { getStateUser } from '@redux/';
 
-import { useAuth } from '../../../../hooks/use-auth';
-import * as S from './progress.styled';
 import { Popup } from '../pop-up';
+import * as S from './progress.styled';
 
 
 interface Props {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   exercises: IExercise[] | undefined;
-  selectedWorkoutId: number;
+  pageIdWorkout: string | undefined;
+}
+
+interface TResultForForm {
+  name: string;
+  quantity: number;
+  workout: string;
+  repeat: number;
 }
 
 export const MyProgress: React.FC<Props> = ({
-  open, setOpen, exercises, selectedWorkoutId
+  open, setOpen, exercises, pageIdWorkout
 }) => {
   const [okPopupOpen, setOkPopupOpen] = useState<boolean>(false);
-  const [exerciseResults, setExerciseResults] = useState({});
-  const { id } = useAuth();
+  const [isEmptyField, setIsEmptyField] = useState<boolean>(false);
 
-  const handleInputChange = (exerciseName: string, value: number) => {
-    if (value < 0) {
-      /* eslint-disable */
-      value = 0;
+  const userName = useAppSelector(getStateUser);
+
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const { currentTarget } = event;
+
+    const formData = new FormData(currentTarget);
+    const listFormData = formData.entries();
+    const inputArr = [...listFormData];
+
+    const newWorkoutData = inputArr.reduce<TResultForForm[]>((acc, workout) => {
+      const currentExercise = exercises?.find((item) => item.workout === workout[0]);
+
+      const result = {
+        name: currentExercise?.name as string,
+        quantity: Number(currentExercise?.quantity),
+        workout: workout[0],
+        repeat: Number(workout[1]),
+      };
+
+      acc.push(result);
+      return acc;
+    }, []);
+
+
+    try {
+      await patchChangeWorkout(newWorkoutData, userName?.id as string, pageIdWorkout as string);
+    } catch {
+      throw new Error('Не удалось изменить тренировку');
     }
-    setExerciseResults((prevResults) => ({
-      ...prevResults,
-      [exerciseName]: value,
-    }));
-  };
-  console.log(okPopupOpen);
 
-  const handleSendResults = async () => {
+    // @ts-ignore later
+    const inputValues = [...formData.values()];
+    const isEmptyValues = inputValues.includes('');
+
+    if (isEmptyValues) {
+      setIsEmptyField(true);
+      return;
+    }
+
     setOkPopupOpen(true);
-
     setTimeout(() => {
-      setOpen(false)
-    }, 2000)
-
-
-    // try {
-    //   const response = await axios.patch(
-    //     `${baseUrl}${selectedWorkoutId}/users.json`,
-    //     {
-    //       [id]: exerciseResults,
-    //     },
-    //   );
-
-
-    //   setTimeout(() => {
-    //     setOpen(!open);
-    //     window.location.reload();
-    //   }, 1000);
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
+      setOpen(false);
+    }, 2000);
   };
 
   return (
     <S.Container>
       <S.Progress>
-        <S.closeBtn onClick={() => setOpen(!open)}>
+        <S.closeBtn onClick={ () => setOpen(!open) }>
           <svg
             fill="#000000"
             height="20px"
@@ -103,43 +120,44 @@ export const MyProgress: React.FC<Props> = ({
 
           </svg>
         </S.closeBtn>
-        {okPopupOpen ? (
+        { okPopupOpen ? (
           <Popup text="Ваш прогресс засчитан!" />
         ) : (
           <>
             <S.ProgressTitle>Мой прогресс</S.ProgressTitle>
-            {exercises
-              ? <>
-                <S.ProgressForm>
-                  {exercises?.map((item, index) => (
-                    <S.li key={index}>
+            { exercises
+              ? (
+                <S.ProgressForm id="form" onSubmit={ handleSubmit }>
+                  { exercises?.map((item) => (
+                    <S.li key={ item.name }>
                       <S.ProgressText>
-                        {`Сколько раз вы сделали упражнение ${item.workout} ?`}
+                        { `Сколько раз вы сделали упражнение ${item.workout} ?` }
                       </S.ProgressText>
                       <S.ProgressInput
+                        name={ `${item.workout}` }
                         placeholder="Введите числовое значение"
                         type="number"
-                        // @ts-ignore later
-                        onChange={(e) => handleInputChange(item, e.target.value)}
                       />
                     </S.li>
-                  ))}
+                  )) }
+                  { isEmptyField && <S.LoginError>Заполните все поля</S.LoginError> }
+
+                  <S.ProgressForButton>
+                    <S.ProgressButton>
+                      Отправить
+                    </S.ProgressButton>
+                  </S.ProgressForButton>
                 </S.ProgressForm>
-                <S.ProgressForButton>
-                  <S.ProgressButton onClick={handleSendResults}>
-                    Отправить
-                  </S.ProgressButton>
-                </S.ProgressForButton>
-              </>
-              :
-              <S.nullExsecises>
-                Тренировок для выполнения не найдено.
-                <br />
-                Выполняйте упражнения из видео!
-              </S.nullExsecises>
-            }
+              )
+              : (
+                <S.nullExsecises>
+                  Тренировок для выполнения не найдено.
+                  <br />
+                  Выполняйте упражнения из видео!
+                </S.nullExsecises>
+              ) }
           </>
-        )}
+        ) }
       </S.Progress>
     </S.Container>
   );

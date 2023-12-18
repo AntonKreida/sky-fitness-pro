@@ -120,10 +120,17 @@ export const MainContentProgressBarStrip = styled.div`
     height: 36px;
     border-radius: 22px;
     margin-right: 55px;
-    border: 2px solid rgb(86, 94, 239);
+    border: 2px solid ${({ color }) => color};
     background: rgb(237, 236, 255);
     flex-shrink: 0;
     margin-left: 15px;
+    overflow-y: hidden;
+`;
+
+export const MainContentProgressBarFulled = styled.div`
+    max-width: inherit;
+    height: 100%;
+    border-radius: 22px;
 `;
 
 export const MainContentProgressBarValue = styled.div`
@@ -142,7 +149,7 @@ export const MainTextPercent = styled.p`
   letter-spacing: -0.05px;
   margin: 0px;
   padding: 0px;
-  text-align: right;
+  text-align: center;
   padding-right: 10px;
   padding-left: 10px;
 `;

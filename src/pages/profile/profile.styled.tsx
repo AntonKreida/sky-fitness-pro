@@ -36,8 +36,8 @@ export const ProfileCourses = styled.div`
     gap: 60px;
 `;
 export const ProfileCoursesList = styled.ul`
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 40px;
 `;
 export const ProfileCourseItem = styled.li`
@@ -71,4 +71,18 @@ export const ProfileCourseItemButton = styled.div`
     position: absolute;
     bottom: 45px;
     left: 45px;
+`;
+
+export const ProfileContainerForLink = styled.div`
+    display: flex
+`;
+
+export const ProfileLink = styled.div`
+    font-size: 40px;
+    color: rgb(88, 14, 162);
+    cursor: pointer;
+
+    &:hover {
+        color: rgb(39, 5, 73);
+    }
 `;

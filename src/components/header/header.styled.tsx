@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
+import { ReactComponent as Arrow } from '@assets/icons/arrow.svg';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
 import { ReactComponent as LogoHomePage } from '@assets/icons/logo-home-page.svg';
-import { ReactComponent as Arrow } from '@assets/icons/profile-opener.svg';
 
 
 export const Header = styled.header`

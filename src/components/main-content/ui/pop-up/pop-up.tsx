@@ -7,11 +7,10 @@ interface IProps {
   text: string;
 }
 
-
 export const Popup: React.FC<IProps> = ({ text }) => (
   <S.Container>
     <S.ProgressPopup>
-      <S.ProgressPopupTitle>{text}</S.ProgressPopupTitle>
+      <S.ProgressPopupTitle>{ text }</S.ProgressPopupTitle>
       <Ok />
     </S.ProgressPopup>
   </S.Container>

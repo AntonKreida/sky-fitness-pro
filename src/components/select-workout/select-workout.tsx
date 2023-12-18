@@ -1,18 +1,40 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
+// import { ReactComponent as IconStatusOk } from '@assets/icons/status-ok.svg';
+import { useNavigate } from 'react-router-dom';
+
+import { IWorkout } from '@interface/';
+import { getStateUser, useGetAllAddedWorkoutsQuery, useGetAllWorkoutsQuery } from '@redux/';
+import { useAppSelector } from '@hook/';
 
 import * as S from './select-workout.styled';
-import { WORKOUTS } from './lib/MockData';
+import { LoaderSmall } from '../loader';
 
 
 interface ISelect {
   // @ts-ignore later
   setOpen: (prev) => void;
+  selectedCourse: string[] | undefined;
 }
 
+export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
+  const userName = useAppSelector(getStateUser);
+  const { data: myWorkouts, isLoading } = useGetAllAddedWorkoutsQuery(userName.id as string);
 
-export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
+  const navigate = useNavigate();
+  const [workouts, setWorkouts] = useState<IWorkout[]>([]);
+
+  useEffect(() => {
+    if (myWorkouts) {
+      const keys = Object.keys(myWorkouts);
+      keys.forEach((key: string) => {
+        setWorkouts((prev) => prev.concat(myWorkouts[key]));
+      });
+    }
+  }, [myWorkouts]);
+
+  const selectedWorkout = workouts?.filter((i) => selectedCourse?.includes(i._id));
+
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
   };
@@ -21,7 +43,7 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
     <S.Select>
       <S.Progress>
         <S.SelectTitle>Выберите тренировку</S.SelectTitle>
-        <S.closeBtn onClick={toggleClose}>
+        <S.closeBtn onClick={ toggleClose }>
           <svg
             fill="#000000"
             height="20px"
@@ -63,23 +85,44 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen }) => {
           </svg>
         </S.closeBtn>
 
-        <S.SelectList>
-          {WORKOUTS.map(({
-            id, title, text, isCompleted
-          }) => (
-            <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
-              <S.SelectItemContent>
-                <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
-                  {title}
-                  {isCompleted && <IconStatusOk />}
-                </S.SelectItemContentTitle>
-                <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
-                  {text}
-                </S.SelectItemContentText>
-              </S.SelectItemContent>
-            </S.SelectItem>
-          ))}
-        </S.SelectList>
+        { isLoading
+          ? <LoaderSmall />
+          : (
+            <S.SelectList>
+              { selectedWorkout.map(({
+                course, name, _id
+              }) => (
+                <S.SelectItem
+                  key={ _id }
+                  $color="#000"
+                  onClick={ () => navigate(`/sky-fitness-pro/workout/${_id}`) }
+                >
+                  <S.SelectItemContent>
+                    <S.SelectItemContentTitle $color="#000">
+                      { name }
+                      { /* {isCompleted && <IconStatusOk />} */ }
+                    </S.SelectItemContentTitle>
+                    <S.SelectItemContentText $color="#000">
+                      { course }
+                    </S.SelectItemContentText>
+                  </S.SelectItemContent>
+                </S.SelectItem>
+
+                //   <S.SelectItem key={String(id)} $color={isCompleted ? '#06b16e' : '#000'}>
+                //   <S.SelectItemContent>
+                //     <S.SelectItemContentTitle $color={isCompleted ? '#06b16e' : '#000'}>
+                //       {title}
+                //       { /* {isCompleted && <IconStatusOk />} */}
+                //     </S.SelectItemContentTitle>
+                //     <S.SelectItemContentText $color={isCompleted ? '#06b16e' : '#000'}>
+                //       {text}
+                //     </S.SelectItemContentText>
+                //   </S.SelectItemContent>
+                // </S.SelectItem>
+              )) }
+            </S.SelectList>
+          ) }
+
 
       </S.Progress>
     </S.Select>

@@ -1,15 +1,14 @@
+import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { useState } from 'react';
 
 import { FormAuth } from '@components/';
 import { ContainerAuth } from '@layouts/';
 import { ReactComponent as Logo } from '@assets/images/logo-black.svg';
-import { Button } from '@shared/';
+import { Button, Input } from '@shared/';
+import { useAppDispatch } from '@hook/';
+import { setUser } from '@redux/';
 
-import { useAppDispatch } from '../../hooks/api';
-import { setUser } from '../../redux/user-api/userSlice';
-import { Input } from '../../shared/input/input';
 import * as Styled from '../login/login.styled';
 
 
@@ -32,7 +31,7 @@ export const Register = () => {
           dispatch(
             setUser({
               email: user.email,
-              id: user.uid
+              id: user.uid,
             }),
           );
         });
@@ -71,27 +70,27 @@ export const Register = () => {
         <Input
           placeholder="Логин"
           type="text"
-          onChange={(event) => {
+          onChange={ (event) => {
             setEmail(event.target.value);
-          }}
+          } }
         />
         <Input
           placeholder="Пароль"
           type="password"
-          onChange={(event) => {
+          onChange={ (event) => {
             setPassword(event.target.value);
-          }}
+          } }
         />
         <Input
           placeholder="Повторите пароль"
           type="password"
-          onChange={(event) => {
+          onChange={ (event) => {
             setRepeatPassword(event.target.value);
-          }}
+          } }
         />
       </FormAuth>
-      <Button text="Зарегистрироваться" type="button" onClick={() => handleRegister()} />
-      {error && <Styled.LoginError>Произошла ошибка: {error}</Styled.LoginError>}
+      <Button text="Зарегистрироваться" type="button" onClick={ () => handleRegister() } />
+      { error && <Styled.LoginError>Произошла ошибка: { error }</Styled.LoginError> }
 
 
     </ContainerAuth>

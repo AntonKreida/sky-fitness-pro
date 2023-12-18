@@ -7,11 +7,9 @@ import { userSlice } from '../user-api';
 export const store = configureStore({
   reducer: {
     user: userSlice.reducer,
-    [coursesApi.reducerPath]: coursesApi.reducer
+    [coursesApi.reducerPath]: coursesApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(
-    coursesApi.middleware
-  ),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(coursesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
