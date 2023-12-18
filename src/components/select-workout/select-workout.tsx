@@ -33,8 +33,6 @@ export const SelectWorkout: FC<ISelect> = ({ setOpen, selectedCourse }) => {
     }
   }, [myWorkouts, selectedCourse]);
 
-  console.log(workouts);
-
 
   const toggleClose = () => {
     setOpen((prev: boolean) => !prev);
