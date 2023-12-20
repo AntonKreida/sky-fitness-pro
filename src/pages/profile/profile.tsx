@@ -38,6 +38,8 @@ export const Profile = () => {
   const [selectedCourse, setSelectedCourse] = useState<string[] | undefined>();
   const [coursesData, setCoursesData] = useState<AddedCourse[]>([]);
 
+  console.log(coursesData);
+
   useEffect(() => {
     if (userCourses) {
       const result = Object.values(userCourses);

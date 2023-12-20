@@ -38,10 +38,6 @@ export const coursesApi = createApi({
     }),
     getAllAddedCourses: builder.query<IResponseCourse, string>({
       query: (id: string) => `usersActiveCourse/${id}.json`,
-      merge: (currentCacheData, responseDate) => ({
-        ...currentCacheData,
-        ...responseDate,
-      }),
       providesTags: ['Course'],
     }),
     getAllAddedWorkouts: builder.query<IResponseWorkout, string>({
